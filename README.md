@@ -8,13 +8,13 @@ frontend for beyond sky catalog web app
 
 This folder is used for storing globals like images, .svgs, global css, etc.
 
+### images
+
+This subfolder is used to store any images, logos, etc.
+
 ## hooks
 
 This folder is used for organizing any custom hooks created by the team.
-
-## images
-
-This folder is used to store any images, logos, etc.
 
 ## components
 
