@@ -2,7 +2,7 @@
 
 frontend for beyond sky catalog web app
 
-# Folder Structure
+# Potential Folder Structure
 
 ## assets
 
