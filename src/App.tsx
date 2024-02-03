@@ -1,6 +1,6 @@
-import "./App.css";
-import lightLogo from "./BEYOND Light Mode.png";
-import darkLogo from "./BEYOND Dark Mode.png";
+import "./assets/App.css";
+import lightLogo from "./assets/images/BEYOND Light Mode.png";
+import darkLogo from "./assets/images/BEYOND Dark Mode.png";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useState } from "react";
