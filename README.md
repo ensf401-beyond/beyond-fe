@@ -3,6 +3,7 @@
 frontend for beyond sky catalog web app
 
 # Potential Folder Structure
+https://www.youtube.com/watch?v=UUga4-z7b6s&ab_channel=WebDevSimplified 
 
 ## assets
 
