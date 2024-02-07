@@ -45,8 +45,10 @@ function Layout({ children }: LayoutProps) {
             </button>
           </div>
         </div>
-        <Navbar />
-        <main id="content">{children}</main>
+        <div className="main">
+          <Navbar />
+          <main id="content">{children}</main>
+        </div>
       </div>
     </ThemeContext.Provider>
   );
