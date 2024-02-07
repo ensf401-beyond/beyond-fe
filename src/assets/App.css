@@ -66,6 +66,7 @@ body {
 
 .row-name {
   font-size: large;
+  text-shadow: 2px 2px 2px lightgray;
 }
 
 .row-name:hover {
