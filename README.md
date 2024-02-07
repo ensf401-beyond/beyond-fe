@@ -1,4 +1,4 @@
-# Beyond Frontend Repo
+# Beyond Frontend Repository
 
 frontend for beyond sky catalog web app
 
@@ -6,7 +6,7 @@ frontend for beyond sky catalog web app
 
 ### assets
 
-This folder is used for storing globals like images, .svgs, global css, etc.
+This folder is used for storing globals like images, .svgs, global CSS, etc.
 
 ### images
 
