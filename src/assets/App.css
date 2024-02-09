@@ -1,6 +1,6 @@
 .app {
   font-family:
-    'Orbitron',
+    Orbitron,
     sans-serif;
   width: 100vw;
   height: 100vh;
@@ -98,7 +98,7 @@ body {
   cursor: pointer;
   transition: 0.3s ease-in-out;
   font-family:
-    'Orbitron',
+    Orbitron,
     sans-serif;
   font-weight: bold;
   font-style: oblique;
