@@ -102,6 +102,7 @@ body {
     sans-serif;
   font-weight: bold;
   font-style: oblique;
+  box-shadow: 0 4px 6px 0 gray;
 }
 
 .navbar-button:hover {
