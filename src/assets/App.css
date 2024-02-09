@@ -1,6 +1,6 @@
 .app {
   font-family:
-    Ubuntu,
+    'Orbitron',
     sans-serif;
   width: 100vw;
   height: 100vh;
@@ -66,15 +66,6 @@ body {
   cursor: pointer;
 }
 
-.row-name {
-  font-size: large;
-  text-shadow: 2px 2px 2px lightgray;
-}
-
-.row-name:hover {
-  font-size: x-large;
-}
-
 #dark .row {
   color: #f8fafd;
 }
@@ -93,4 +84,28 @@ body {
 
 #light .page-title {
   color: #1b1b1b;
+}
+
+.navbar-button {
+  border-radius: 40px;
+  border: none;
+  padding: 20px;
+  width: 160px;
+  font-size: large;
+  text-align: center;
+  background-color: lightgrey;
+  margin: auto;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  font-family:
+    'Orbitron',
+    sans-serif;
+  font-weight: bold;
+  font-style: oblique;
+}
+
+.navbar-button:hover {
+  background-color: #e7d0ab;
+  box-shadow: 0 8px 12px 0 gray, 0 8px 50px 0 gray;
+  font-size: x-large;
 }

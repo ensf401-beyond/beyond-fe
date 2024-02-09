@@ -1,5 +1,6 @@
 import { NavbarData } from "../data/NavBarData";
 import { useNavigate, useLocation } from "react-router-dom";
+import NavbarButton from "./ui/NavbarButton";
 
 type NavbarItem = {
   name: string;
@@ -25,7 +26,7 @@ function Navbar() {
               key={key}
               onClick={() => handleNavigate(val.path)}
             >
-              <div className="row-name">{val.name}</div>
+              <NavbarButton name={val.name} path={val.path}/>
             </li>
           ))}
         </ul>
