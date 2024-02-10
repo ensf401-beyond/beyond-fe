@@ -1,7 +1,9 @@
 .app {
-  font-family: "Ubuntu", sans-serif;
-  width: 100vw;
-  height: 100vh;
+  font-family:
+    Orbitron,
+    sans-serif;
+  width: 100%;
+  min-height: 100vh;
 }
 
 body {
@@ -25,7 +27,7 @@ body {
 #header {
   display: flex;
   justify-content: space-between;
-  padding: 16px 16px;
+  padding: 16px;
 }
 
 #logo {
@@ -39,7 +41,7 @@ body {
   justify-content: end;
   background: none;
   border: none;
-  padding: 0;
+  padding: 10px;
   cursor: pointer;
   margin-left: auto;
 }
@@ -56,20 +58,12 @@ body {
   display: flex;
   justify-content: center;
   list-style: none;
-  padding: 10px;
+  padding: 15px 10px;
 }
 
 .row {
   margin: auto;
   cursor: pointer;
-}
-
-.row-name {
-  font-size: large;
-}
-
-.row-name:hover {
-  font-size: x-large;
 }
 
 #dark .row {
@@ -80,8 +74,35 @@ body {
   color: #1b1b1b;
 }
 
-#content {
+.page-header {
   display: flex;
+  justify-content: space-between;
+}
+
+.search-bar-container {
+  display: flex;
+  padding-top: 23px;
+}
+
+.page-search {
+  justify-content: end;
+  border-radius: 60px;
+  margin-left: auto;
+  width: 20%;
+  height: 50px;
+  border: none;
+}
+
+.search-input {
+  border-radius: 60px;
+  width: 250px;
+  height: 30px;
+  padding-left: 10px;
+  font-size: large;
+}
+
+.page-title {
+  padding-left: 30px;
 }
 
 #dark .page-title {
@@ -90,4 +111,71 @@ body {
 
 #light .page-title {
   color: #1b1b1b;
+}
+
+.navbar-button {
+  border-radius: 40px;
+  border: none;
+  padding: 20px;
+  width: 160px;
+  font-size: large;
+  text-align: center;
+  background-color: lightgrey;
+  margin: auto;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  font-family:
+    Orbitron,
+    sans-serif;
+  font-weight: bold;
+  font-style: oblique;
+  box-shadow: 0 4px 6px 0 gray;
+}
+
+.navbar-button:hover {
+  background-color: #e7d0ab;
+  box-shadow: 0 8px 12px 0 gray, 0 8px 50px 0 gray;
+  font-size: x-large;
+}
+
+#grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
+  padding: 30px;
+  transition: 0.3s ease-in-out;
+}
+
+.grid-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: lightgray;
+  min-height: 200px;
+  max-height: 400px;
+  border-radius: 10px;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.grid-card:hover {
+  box-shadow: 8px 8px 8px lightgray;
+  translate: -10px -10px;
+}
+
+.sky-object-image {
+  min-height: 80%;
+  max-height: 80%;
+  translate: 0 -12px;
+}
+
+.sky-object-name {
+  text-align: center;
+  font-weight: bold;
+  margin: auto;
+}
+
+.sky-object-description {
+  text-align: center;
+  margin: auto;
 }
