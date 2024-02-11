@@ -39,6 +39,24 @@ function Layout({ children }: LayoutProps) {
               nav("/");
             }}
           ></img>
+          <div id="profile">
+            <button
+              className="profile-button"
+              onClick={() => {
+                nav("/profile");
+              }}
+            >
+              <img
+                id="profile-pic"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Tate_McRae_on_iHeartRadio_Canada_in_2023_%281%29.png/1200px-Tate_McRae_on_iHeartRadio_Canada_in_2023_%281%29.png"
+                alt="PFP"
+                ></img>
+              <div className="profile-text">
+                <p id="profile-username">Username</p>
+                <p id="profile-small">Edit Profile</p>
+              </div>
+            </button>
+          </div>
           <div id="theme-switch">
             <button className="mode-button" onClick={toggleTheme}>
               {theme === "light" ? <DarkModeIcon /> : <LightModeIcon />}
