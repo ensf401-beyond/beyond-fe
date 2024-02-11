@@ -234,7 +234,6 @@ body {
   padding: 0;
 }
 
-
 .profile-page {
   display: flex;
   flex-direction: row;
@@ -242,7 +241,6 @@ body {
   align-items: center;
   padding: 30px;
 }
-
 
 .profile-pfp {
   width: 400px;
@@ -258,7 +256,6 @@ body {
   font-size: small;
   text-align: center;
   background-color: lightgrey;
-  margin: auto;
   cursor: pointer;
   transition: 0.3s ease-in-out;
   font-family:
