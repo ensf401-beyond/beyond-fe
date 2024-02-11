@@ -6,6 +6,7 @@ import Galaxies from "./pages/Galaxies/Galaxies";
 import Nebulae from "./pages/Nebulae/Nebulae";
 import Clusters from "./pages/Clusters/Clusters";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login/Login";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/stars" element={<Stars />} />
             <Route path="/galaxies" element={<Galaxies />} />
             <Route path="/clusters" element={<Clusters />} />
