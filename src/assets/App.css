@@ -179,3 +179,56 @@ body {
   text-align: center;
   margin: auto;
 }
+
+.profile-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  height: 45px;
+  width: 130px;
+  margin-right: 10px;
+  cursor: pointer;
+
+  border-radius: 40px;
+  border: none;
+  background-color: darkgray;
+}
+
+.profile-button:hover{
+  background-color: #e7d0ab;
+  box-shadow: 0 2px 3px 0 gray, 0 1px 5px 0 gray;
+}
+
+#profile-pic{
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  margin: 10px;
+  margin: 0;
+  margin-right: 5px;
+}
+
+#profile-username{
+  font-weight: 900;
+}
+
+#profile-small{
+  font-weight: 100;
+  font-size: 12px;
+}
+
+.profile-text{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+}
+
+.profile-text p{
+  margin: 0;
+  padding: 0;
+}
