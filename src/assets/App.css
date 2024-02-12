@@ -76,21 +76,10 @@ body {
 
 .page-header {
   display: flex;
-  justify-content: space-between;
 }
 
 .search-bar-container {
-  display: flex;
-  padding-top: 23px;
-}
-
-.page-search {
-  justify-content: end;
-  border-radius: 60px;
-  margin-left: auto;
-  width: 20%;
-  height: 50px;
-  border: none;
+  padding-top: 20px;
 }
 
 .search-input {
@@ -103,6 +92,7 @@ body {
 
 .page-title {
   padding-left: 30px;
+  padding-right: 30px;
 }
 
 #dark .page-title {
@@ -159,7 +149,7 @@ body {
 }
 
 .grid-card:hover {
-  box-shadow: 8px 8px 8px lightgray;
+  box-shadow: 8px 8px 8px gray;
   translate: -10px -10px;
 }
 
@@ -178,4 +168,5 @@ body {
 .sky-object-description {
   text-align: center;
   margin: auto;
+  padding-bottom: 5px;
 }
