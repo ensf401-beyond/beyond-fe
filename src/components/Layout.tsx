@@ -3,11 +3,14 @@ import lightLogo from "../assets/images/BEYOND Light Mode.png";
 import darkLogo from "../assets/images/BEYOND Dark Mode.png";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import React, { useState, createContext, ReactNode } from "react";
+import React, { useState, createContext, ReactNode, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 
 export const ThemeContext = createContext<ThemeContextType | null>(null);
+
+
+
 
 type ThemeContextType = {
   theme: string;
@@ -18,6 +21,8 @@ type LayoutProps = {
   children: ReactNode;
 };
 
+
+
 function Layout({ children }: LayoutProps) {
   const [theme, setTheme] = useState("dark");
 
@@ -26,6 +31,19 @@ function Layout({ children }: LayoutProps) {
   const toggleTheme = () => {
     setTheme((curr) => (curr === "light" ? "dark" : "light"));
   };
+
+  const [name, setName] = useState<string>("");
+  const [pfp, setPfp] = useState<string>("");
+
+  const getInfo = () => {
+    setName(localStorage.getItem("Name") || "");
+    setPfp(localStorage.getItem("PFP") || "");
+  }
+
+
+  useEffect(() => {
+    getInfo();
+  }, []);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
@@ -48,11 +66,11 @@ function Layout({ children }: LayoutProps) {
             >
               <img
                 id="profile-pic"
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Tate_McRae_on_iHeartRadio_Canada_in_2023_%281%29.png/1200px-Tate_McRae_on_iHeartRadio_Canada_in_2023_%281%29.png"
+                src={pfp}
                 alt="PFP"
                 ></img>
               <div className="profile-text">
-                <p id="profile-username">Username</p>
+                <p id="profile-username">{name}</p>
                 <p id="profile-small">Edit Profile</p>
               </div>
             </button>
