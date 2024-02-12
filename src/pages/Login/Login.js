@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Video from './galaxy.mp4';
+import LoginButton from './LoginButton';
 
 const Login = () => {
   const [user, setUser] = useState('');
@@ -41,6 +42,7 @@ const Login = () => {
             required
           />
           <button>Log In</button>
+          <LoginButton />
         </form>
         <p>
           <a href="home">Continue as Guest</a>
