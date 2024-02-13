@@ -51,8 +51,7 @@ function Layout({ children }: LayoutProps) {
   const getInfo = () => {
     setName(localStorage.getItem("Name") || "");
     setPfp(localStorage.getItem("PFP") || "");
-  }
-
+  };
 
   useEffect(() => {
     getInfo();
@@ -70,25 +69,21 @@ function Layout({ children }: LayoutProps) {
               nav("/");
             }}
           ></img>
-          <div id="profile">
-            <button
-              className="profile-button"
-              onClick={() => {
-                nav("/profile");
-              }}
-            >
-              <img
-                id="profile-pic"
-                src={pfp}
-                alt="PFP"
-                ></img>
-              <div className="profile-text">
-                <p id="profile-username">{name}</p>
-                <p id="profile-small">Edit Profile</p>
-              </div>
-            </button>
-          </div>
-          <div id="theme-switch">
+          <div className="button-group">
+            <div id="profile">
+              <button
+                className="profile-button"
+                onClick={() => {
+                  nav("/profile");
+                }}
+              >
+                <img id="profile-pic" src={pfp} alt="PFP"></img>
+                <div className="profile-text">
+                  <p id="profile-username">{name}</p>
+                  <p id="profile-small">Edit Profile</p>
+                </div>
+              </button>
+            </div>
             <button className="mode-button" onClick={toggleTheme}>
               {theme === "light" ? <DarkModeIcon /> : <LightModeIcon />}
             </button>

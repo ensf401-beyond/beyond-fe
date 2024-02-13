@@ -29,13 +29,23 @@ body {
 #header {
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 16px;
+  position: relative;
 }
 
 #logo {
   max-width: 18%;
   max-height: 18%;
   cursor: pointer;
+}
+
+.button-group {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  display: flex;
+  align-items: center;
 }
 
 #title-sticker {
@@ -46,7 +56,6 @@ body {
 }
 
 .mode-button {
-  justify-content: end;
   background: none;
   border: none;
   padding: 10px;
@@ -171,12 +180,14 @@ body {
   text-align: center;
   font-weight: bold;
   margin: auto;
+  color: #1b1b1b;
 }
 
 .sky-object-description {
   text-align: center;
   margin: auto;
   padding-bottom: 5px;
+  color: #1b1b1b;
 }
 
 .profile-button {
