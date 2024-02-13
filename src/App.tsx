@@ -8,18 +8,43 @@ import Clusters from "./pages/Clusters/Clusters";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Profile from "./pages/Profile/Profile";
 import{ useEffect } from "react";
+import { getUsername } from "./utils/API_calls";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Login/Register";
+import { gapi } from "gapi-script";
+
+
+const clientID =
+  "138234664993-d0mvhfhmbq2vh2877oq6ub1v6ie1hbj9.apps.googleusercontent.com";
 
 function App() {
 
 
   // a function to load things in the local storage for testing, this should be removed when the backend is implemented
-  const loadFakeDataToLS = () => {
-    localStorage.setItem("Name", "Tate McRae");
+  const loadFakeDataToLS = async () => {
+
+    let name = await getUsername(localStorage.getItem("Email") || "").then((data : any) => {
+      console.log(data)
+      localStorage.setItem("Name", data);
+       return data; });
+
+
     localStorage.setItem("Email", "tate@mcrae.com");
     localStorage.setItem("Location", "Canada");
     localStorage.setItem("PFP", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Tate_McRae_on_iHeartRadio_Canada_in_2023_%281%29.png/1200px-Tate_McRae_on_iHeartRadio_Canada_in_2023_%281%29.png");
   
   }
+
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: clientID,
+        scope: "",
+      });
+    }
+
+    gapi.load("client:auth2", start);
+  });
 
   useEffect(() => {
     loadFakeDataToLS();
@@ -37,6 +62,7 @@ function App() {
             <Route path="/clusters" element={<Clusters />} />
             <Route path="/nebulae" element={<Nebulae />} />
             <Route path="/profile" element={<Profile/>} />
+            <Route path="/login" element={<Login />} />
             <Route path="*" element={<h1>Not Found</h1>} />
           </Routes>
         </Layout>
