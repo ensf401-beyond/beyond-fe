@@ -6,6 +6,8 @@ import DarkModeIcon from "@mui/icons-material/DarkMode"; // Material UI icon for
 import React, { useState, createContext, ReactNode, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
+import LoginForm from "../pages/Login/Login";
+import { useAuth } from "../contexts/AuthContext";
 
 export const ThemeContext = createContext<ThemeContextType | null>(null);
 
@@ -37,7 +39,7 @@ type LayoutProps = {
  */
 function Layout({ children }: LayoutProps) {
   const [theme, setTheme] = useState("dark");
-
+  const { isLoggedIn } = useAuth();
   const nav = useNavigate();
 
   // Toggles the current theme between 'light' and 'dark' modes and updates the application state accordingly.
@@ -58,43 +60,49 @@ function Layout({ children }: LayoutProps) {
   }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <div id={theme} className="app">
-        <div id="header">
-          <img
-            id="logo"
-            src={theme === "light" ? lightLogo : darkLogo}
-            alt="logo"
-            onClick={() => {
-              nav("/");
-            }}
-          ></img>
-          <div className="button-group">
-            <div id="profile">
-              <button
-                className="profile-button"
+    <>
+      {!isLoggedIn ? (
+        <LoginForm />
+      ) : (
+        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+          <div id={theme} className="app">
+            <div id="header">
+              <img
+                id="logo"
+                src={theme === "light" ? lightLogo : darkLogo}
+                alt="logo"
                 onClick={() => {
-                  nav("/profile");
+                  nav("/");
                 }}
-              >
-                <img id="profile-pic" src={pfp} alt="PFP"></img>
-                <div className="profile-text">
-                  <p id="profile-username">{name}</p>
-                  <p id="profile-small">Edit Profile</p>
+              ></img>
+              <div className="button-group">
+                <div id="profile">
+                  <button
+                    className="profile-button"
+                    onClick={() => {
+                      nav("/profile");
+                    }}
+                  >
+                    <img id="profile-pic" src={pfp} alt="PFP"></img>
+                    <div className="profile-text">
+                      <p id="profile-username">{name}</p>
+                      <p id="profile-small">Edit Profile</p>
+                    </div>
+                  </button>
                 </div>
-              </button>
+                <button className="mode-button" onClick={toggleTheme}>
+                  {theme === "light" ? <DarkModeIcon /> : <LightModeIcon />}
+                </button>
+              </div>
             </div>
-            <button className="mode-button" onClick={toggleTheme}>
-              {theme === "light" ? <DarkModeIcon /> : <LightModeIcon />}
-            </button>
+            <div className="main">
+              <Navbar />
+              <main id="content">{children}</main>
+            </div>
           </div>
-        </div>
-        <div className="main">
-          <Navbar />
-          <main id="content">{children}</main>
-        </div>
-      </div>
-    </ThemeContext.Provider>
+        </ThemeContext.Provider>
+      )}
+    </>
   );
 }
 
