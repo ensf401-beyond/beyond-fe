@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
-import {
-  faCheck,
-  faTimes,
-  faInfoCircle,
-} from "@fortawesome/free-solid-svg-icons";
+// @ts-ignore
+import {faCheck, faTimes, faInfoCircle} from "@fortawesome/free-solid-svg-icons";
+// @ts-ignore
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const USERNAME = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/; // must start with lower/uppercase character, then can follow with any upper/lowercase characters, digits, -, or _. 4-24 character username
@@ -48,7 +46,7 @@ const Register = () => {
     setErrMessage("");
   }, [user, password, matchPassword]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const v1 = USERNAME.test(user);
     const v2 = PASSWORD.test(password);

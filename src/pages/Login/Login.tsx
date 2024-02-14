@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+// @ts-ignore
 import Video from "./galaxy.mp4";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
@@ -15,7 +16,7 @@ const Login = () => {
     setErrMessage("");
   }, [user, password]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
 
@@ -66,12 +67,6 @@ const Login = () => {
             <LogoutButton handleLogout={handleLogout} />
           </div>
         </form>
-        <p>
-          <a className="guest-link" href="/">
-            {/**Need to add functionality to guest */}
-            Continue as Guest
-          </a>
-        </p>
       </section>
     </div>
   );

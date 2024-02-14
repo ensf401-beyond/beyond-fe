@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 const clientID =
   "138234664993-d0mvhfhmbq2vh2877oq6ub1v6ie1hbj9.apps.googleusercontent.com";
 
-function LogoutButton({ handleLogout }) {
+function LogoutButton({ handleLogout }: any) {
   const navigate = useNavigate();
-  const onSuccess = (response) => {
+  const onSuccess = () => {
     console.log("Successfully Logged Out!");
     handleLogout();
     navigate("/");
