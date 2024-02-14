@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import LogoutButton from "../Login/LogoutButton";
 
 function Profile() {
   const [name, setName] = useState<string>("");
@@ -92,6 +93,7 @@ function Profile() {
           >
             Logout
           </button>
+          <LogoutButton handleLogout={handleLogout} />
         </div>
       </div>
     </>

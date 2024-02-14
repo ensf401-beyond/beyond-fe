@@ -1,12 +1,16 @@
 import { GoogleLogin } from "react-google-login";
+import { useNavigate } from "react-router-dom";
 
 const clientID =
   "138234664993-d0mvhfhmbq2vh2877oq6ub1v6ie1hbj9.apps.googleusercontent.com";
 
 function LoginButton({ handleLogin }) {
+  const navigate = useNavigate();
   const onSuccess = (response) => {
     console.log("Successfully Logged In! Current User: ", response.profileObj);
     window.localStorage.setItem("Email", response.profileObj.email);
+    handleLogin();
+    navigate("/");
   };
 
   const onFailure = (response) => {

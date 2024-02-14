@@ -9,7 +9,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [errMessage, setErrMessage] = useState("");
 
-  const { handleLogin } = useAuth();
+  const { handleLogin, handleLogout } = useAuth();
 
   useEffect(() => {
     setErrMessage("");
@@ -63,7 +63,7 @@ const Login = () => {
           </button>
           <div className="google-buttons">
             <LoginButton handleLogin={handleLogin} />
-            <LogoutButton />
+            <LogoutButton handleLogout={handleLogout} />
           </div>
         </form>
         <p>
