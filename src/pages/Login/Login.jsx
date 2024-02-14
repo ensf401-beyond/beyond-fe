@@ -3,7 +3,6 @@ import Video from "./galaxy.mp4";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 import { useAuth } from "../../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [user, setUser] = useState("");
@@ -11,8 +10,6 @@ const Login = () => {
   const [errMessage, setErrMessage] = useState("");
 
   const { handleLogin } = useAuth();
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     setErrMessage("");
@@ -60,18 +57,18 @@ const Login = () => {
             className="login-button"
             onClick={() => {
               handleLogin();
-              navigate("/");
             }}
           >
             Log In
           </button>
           <div className="google-buttons">
-            <LoginButton />
+            <LoginButton handleLogin={handleLogin} />
             <LogoutButton />
           </div>
         </form>
         <p>
-          <a className="guest-link" href="home">
+          <a className="guest-link" href="/">
+            {/**Need to add functionality to guest */}
             Continue as Guest
           </a>
         </p>

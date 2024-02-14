@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 
 function Profile() {
@@ -9,6 +9,7 @@ function Profile() {
   const [pfp, setPfp] = useState<string>("");
 
   const { handleLogout } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -82,7 +83,13 @@ function Profile() {
               Go to Favorites
             </Link>
           </button>
-          <button className="small-button" onClick={handleLogout}>
+          <button
+            className="small-button"
+            onClick={() => {
+              handleLogout();
+              navigate("/");
+            }}
+          >
             Logout
           </button>
         </div>
