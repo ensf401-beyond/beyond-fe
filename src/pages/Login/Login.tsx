@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 // @ts-ignore
 import Video from "./galaxy.mp4";
 import LoginButton from "./LoginButton";
-import LogoutButton from "./LogoutButton";
 import { useAuth } from "../../contexts/AuthContext";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [errMessage, setErrMessage] = useState("");
 
-  const { handleLogin, handleLogout } = useAuth();
+  const { handleLogin } = useAuth();
 
   useEffect(() => {
     setErrMessage("");
@@ -64,7 +64,10 @@ const Login = () => {
           </button>
           <div className="google-buttons">
             <LoginButton handleLogin={handleLogin} />
-            <LogoutButton handleLogout={handleLogout} />
+          </div>
+          <div className="register-link">
+            <p>Don't have an account?</p>
+            <Link to="/register">Register here.</Link>
           </div>
         </form>
       </section>

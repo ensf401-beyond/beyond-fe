@@ -3,10 +3,9 @@ import lightLogo from "../assets/images/BEYOND Light Mode.png";
 import darkLogo from "../assets/images/BEYOND Dark Mode.png";
 import LightModeIcon from "@mui/icons-material/LightMode"; // Material UI icon for light mode
 import DarkModeIcon from "@mui/icons-material/DarkMode"; // Material UI icon for dark mode
-import React, { useState, createContext, ReactNode, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, createContext, useEffect } from "react";
+import { useNavigate, Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
-import LoginForm from "../pages/Login/Login";
 import { useAuth } from "../contexts/AuthContext";
 
 export const ThemeContext = createContext<ThemeContextType | null>(null);
@@ -15,11 +14,6 @@ export const ThemeContext = createContext<ThemeContextType | null>(null);
 type ThemeContextType = {
   theme: string; // The current theme ('light' or 'dark').
   toggleTheme: () => void; // Function to toggle the application's theme.
-};
-
-// Props for the Layout component, specifying the types of children it can receive.
-type LayoutProps = {
-  children: ReactNode; // Child components to render within the layout.
 };
 
 /**
@@ -37,7 +31,7 @@ type LayoutProps = {
  * Functions:
  * - toggleTheme: () => void - Toggles the theme between 'light' and 'dark' modes.
  */
-function Layout({ children }: LayoutProps) {
+function Layout() {
   const [theme, setTheme] = useState("dark");
   const { isLoggedIn } = useAuth();
   const nav = useNavigate();
@@ -62,7 +56,13 @@ function Layout({ children }: LayoutProps) {
   return (
     <>
       {!isLoggedIn ? (
-        <LoginForm />
+        <button
+          onClick={() => {
+            nav("/login");
+          }}
+        >
+          Log in here.
+        </button>
       ) : (
         <ThemeContext.Provider value={{ theme, toggleTheme }}>
           <div id={theme} className="app">
@@ -97,7 +97,7 @@ function Layout({ children }: LayoutProps) {
             </div>
             <div className="main">
               <Navbar />
-              <main id="content">{children}</main>
+              <Outlet />
             </div>
           </div>
         </ThemeContext.Provider>

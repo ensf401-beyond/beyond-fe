@@ -11,6 +11,16 @@ import { useEffect } from "react";
 import { getUsername } from "./utils/API_calls";
 import { gapi } from "gapi-script";
 import { AuthProvider } from "./contexts/AuthContext";
+import Register from "./pages/Login/Register";
+import Login from "./pages/Login/Login";
+
+interface userRegisterData {
+  firstName: string;
+  lastName: string;
+  username: string;
+  email: string;
+  password: string;
+}
 
 const clientID =
   "138234664993-d0mvhfhmbq2vh2877oq6ub1v6ie1hbj9.apps.googleusercontent.com";
@@ -21,6 +31,7 @@ function App() {
     let name = await getUsername(localStorage.getItem("Email") || "").then(
       (data: any) => {
         console.log(data);
+        console.log(name);
         localStorage.setItem("Name", data);
         return data;
       }
@@ -49,21 +60,33 @@ function App() {
     loadFakeDataToLS();
   }, []);
 
+  const handleRegister = (userData: userRegisterData) => {
+    const jsonUserData = JSON.stringify(userData);
+    window.localStorage.setItem("usersData", jsonUserData);
+  };
+
   return (
     <>
       <AuthProvider>
         <BrowserRouter>
-          <Layout>
-            <Routes>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/register"
+              element={<Register onRegister={handleRegister} />}
+            />
+
+            <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
               <Route path="/stars" element={<Stars />} />
               <Route path="/galaxies" element={<Galaxies />} />
               <Route path="/clusters" element={<Clusters />} />
               <Route path="/nebulae" element={<Nebulae />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="*" element={<h1>Not Found</h1>} />
-            </Routes>
-          </Layout>
+            </Route>
+
+            <Route path="*" element={<h1>Not Found</h1>} />
+          </Routes>
         </BrowserRouter>
       </AuthProvider>
     </>
