@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
-import LogoutButton from "../Login/LogoutButton";
+import LogoutButton from "../UserAuthentication/Login/LogoutButton";
+import "./Profile.css";
 
 function Profile() {
   const [name, setName] = useState<string>("");
@@ -30,6 +31,7 @@ function Profile() {
   useEffect(() => {
     getInfo();
   }, []);
+
   return (
     <>
       <div className="profile-page">

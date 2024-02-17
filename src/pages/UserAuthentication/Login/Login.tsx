@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-// @ts-ignore
-import Video from "./galaxy.mp4";
 import LoginButton from "./LoginButton";
-import { useAuth } from "../../contexts/AuthContext";
+import { useAuth } from "../../../contexts/AuthContext";
 import { Link } from "react-router-dom";
+import "./Login.css";
 
 const Login = () => {
   const [user, setUser] = useState("");
@@ -22,8 +21,6 @@ const Login = () => {
 
   return (
     <div className="mainbg">
-      <video className="login-video" src={Video} autoPlay loop muted />
-      <div className="overlay"></div>
       <section className="login-form-content">
         <p
           className={errMessage ? "errmsg" : "offscreen"}
@@ -31,19 +28,21 @@ const Login = () => {
         >
           {errMessage}
         </p>
-        <h1 className="login-header">Login</h1>
         <form className="login-form" onSubmit={handleSubmit}>
-          <label htmlFor="username">Username:</label>
+          <h1 className="login-header">Login</h1>
+          <label className="login-form-label" htmlFor="username">
+            Username:
+          </label>
           <input
             type="text"
             id="username"
             className="login-input"
-            autoComplete="off"
+            autoComplete="username"
             onChange={(e) => setUser(e.target.value)}
             value={user}
             required
           />
-          <label className="password-label" htmlFor="password">
+          <label className="login-form-label" htmlFor="password">
             Password:
           </label>
           <input
@@ -51,23 +50,26 @@ const Login = () => {
             id="password"
             className="login-input"
             onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
             value={password}
             required
           />
-          <button
-            className="login-button"
-            onClick={() => {
-              handleLogin();
-            }}
-          >
-            Log In
-          </button>
-          <div className="google-buttons">
+          <div className="login-buttons-container">
+            <button
+              className="login-button"
+              onClick={() => {
+                handleLogin();
+              }}
+            >
+              Log In
+            </button>
             <LoginButton handleLogin={handleLogin} />
           </div>
-          <div className="register-link">
+          <div className="register-links">
             <p>Don't have an account?</p>
-            <Link to="/register">Register here.</Link>
+            <Link className="register-route" to="/register">
+              Register here.
+            </Link>
           </div>
         </form>
       </section>

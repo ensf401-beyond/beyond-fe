@@ -11,8 +11,8 @@ import { useEffect } from "react";
 import { getUsername } from "./utils/API_calls";
 import { gapi } from "gapi-script";
 import { AuthProvider } from "./contexts/AuthContext";
-import Register from "./pages/Login/Register";
-import Login from "./pages/Login/Login";
+import Register from "./pages/UserAuthentication/Registration/Register";
+import Login from "./pages/UserAuthentication/Login/Login";
 
 interface userRegisterData {
   firstName: string;

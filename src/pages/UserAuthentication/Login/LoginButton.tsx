@@ -1,7 +1,7 @@
 import {
   GoogleLogin,
   GoogleLoginResponse,
-  GoogleLoginResponseOffline
+  GoogleLoginResponseOffline,
 } from "react-google-login";
 
 import { useNavigate } from "react-router-dom";
@@ -42,7 +42,7 @@ function LoginButton({ handleLogin }: LoginButtonProps) {
   };
 
   return (
-    <div id="signinButton">
+    <>
       <GoogleLogin
         clientId={clientID}
         buttonText="Login with Google"
@@ -51,7 +51,7 @@ function LoginButton({ handleLogin }: LoginButtonProps) {
         cookiePolicy={"single_host_origin"}
         isSignedIn={true}
       />
-    </div>
+    </>
   );
 }
 

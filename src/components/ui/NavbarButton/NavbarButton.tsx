@@ -1,5 +1,6 @@
 // Importing the useNavigate hook from react-router-dom to enable navigation.
 import { useNavigate } from "react-router-dom";
+import "./NavbarButton.css";
 
 /**
  * Type definition for the props accepted by the NavbarButton component.

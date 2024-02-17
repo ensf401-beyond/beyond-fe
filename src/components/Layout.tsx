@@ -5,8 +5,9 @@ import LightModeIcon from "@mui/icons-material/LightMode"; // Material UI icon f
 import DarkModeIcon from "@mui/icons-material/DarkMode"; // Material UI icon for dark mode
 import React, { useState, createContext, useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
-import Navbar from "./Navbar";
+import Navbar from "./Navbar/Navbar";
 import { useAuth } from "../contexts/AuthContext";
+import StartPage from "../pages/StartPage/StartPage";
 
 export const ThemeContext = createContext<ThemeContextType | null>(null);
 
@@ -56,13 +57,7 @@ function Layout() {
   return (
     <>
       {!isLoggedIn ? (
-        <button
-          onClick={() => {
-            nav("/login");
-          }}
-        >
-          Log in here.
-        </button>
+        <StartPage />
       ) : (
         <ThemeContext.Provider value={{ theme, toggleTheme }}>
           <div id={theme} className="app">
