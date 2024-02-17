@@ -7,7 +7,7 @@ function StartPage() {
   return (
     <div className="start-page-container">
       <div className="start-page-main">
-        <h1 className="start-header">Welcome to BEYOND</h1>
+        <h1 className="start-header">&#128640; Welcome to BEYOND &#128640;</h1>
         <div className="user-auth-buttons">
           <button className="home-auth-button" onClick={() => nav("/login")}>
             Login
