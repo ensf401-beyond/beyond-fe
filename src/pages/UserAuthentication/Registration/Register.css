@@ -4,7 +4,7 @@ body {
 }
 
 .registration-form-container {
-  background-image: url(https://media.giphy.com/media/xUA7b3mdJsdGrzF6dW/giphy.gif?cid=ecf05e47c0zxenyiskbio8f3yjvk9mnizlb4itqzgrdxqr84&ep=v1_gifs_search&rid=giphy.gif&ct=g);
+  background-image: url("https://media.giphy.com/media/xUA7b3mdJsdGrzF6dW/giphy.gif?cid=ecf05e47c0zxenyiskbio8f3yjvk9mnizlb4itqzgrdxqr84&ep=v1_gifs_search&rid=giphy.gif&ct=g");
   background-size: cover;
   background-repeat: no-repeat;
   font-family: Orbitron, sans-serif;
@@ -27,9 +27,9 @@ body {
 }
 
 .register-header {
-    text-align: center;
-    color: #f0f0f0;
-    text-shadow: 4px 4px 4px black;
+  text-align: center;
+  color: #f0f0f0;
+  text-shadow: 4px 4px 4px black;
 }
 
 .fields {
@@ -78,11 +78,11 @@ body {
 }
 
 .login-links {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    color: #f0f0f0;
-    text-shadow: 4px 4px 4px black;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #f0f0f0;
+  text-shadow: 4px 4px 4px black;
 }
 
 .login-route {

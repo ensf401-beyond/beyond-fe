@@ -6,7 +6,7 @@
   align-items: center;
   flex-direction: column;
   font-family: Orbitron, sans-serif;
-  background-image: url(https://media.giphy.com/media/xUA7b3mdJsdGrzF6dW/giphy.gif?cid=ecf05e47c0zxenyiskbio8f3yjvk9mnizlb4itqzgrdxqr84&ep=v1_gifs_search&rid=giphy.gif&ct=g);
+  background-image: url("https://media.giphy.com/media/xUA7b3mdJsdGrzF6dW/giphy.gif?cid=ecf05e47c0zxenyiskbio8f3yjvk9mnizlb4itqzgrdxqr84&ep=v1_gifs_search&rid=giphy.gif&ct=g");
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -94,6 +94,6 @@
 }
 
 .register-route {
-    font-size: large;
-    font-weight: bold;
+  font-size: large;
+  font-weight: bold;
 }
