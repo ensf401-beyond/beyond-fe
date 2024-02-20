@@ -1,3 +1,6 @@
+import mars from "../../assets/images/mars.png";
+import "./Home.css";
+
 /**
  * Home Component
  *
@@ -12,8 +15,16 @@
 function Home() {
   return (
     <>
-      <div className="page-header">
-        <h1 className="page-title">Home</h1>
+      <div className="page-container">
+        <div className="first-page-container">
+          <div className="text-container">
+            <p className="home-text">
+              Have you ever wondered what lies beyond?
+            </p>
+            <button className="home-button">Explore the Cosmos</button>
+          </div>
+          <img alt="mars" src={mars} className="mars" />
+        </div>
       </div>
     </>
   );

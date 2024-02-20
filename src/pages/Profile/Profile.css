@@ -1,0 +1,61 @@
+.profile-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.profile-pfp {
+  width: 400px;
+  height: 400px;
+  border-radius: 40px;
+  margin: 15px;
+}
+
+.small-button {
+  border-radius: 40px;
+  border: none;
+  padding: 5px;
+  font-size: small;
+  text-align: center;
+  background-color: lightgrey;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  font-family: Orbitron, sans-serif;
+  font-weight: bold;
+  font-style: oblique;
+  box-shadow: 0 2px 3px 0 gray;
+  text-decoration: none;
+  margin: 8px;
+}
+
+.small-button:hover {
+  background-color: #e7d0ab;
+  box-shadow: 0 2px 3px 0 gray, 0 1px 5px 0 gray;
+  font-weight: 900;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.profile-feild {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.profile-submit {
+  margin-top: 24px;
+}

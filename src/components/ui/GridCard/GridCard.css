@@ -1,0 +1,36 @@
+.grid-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: lightgray;
+  min-height: 200px;
+  max-height: 400px;
+  border-radius: 10px;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.grid-card:hover {
+  box-shadow: 8px 8px 8px gray;
+  translate: -10px -10px;
+}
+
+.sky-object-image {
+  min-height: 80%;
+  max-height: 80%;
+  translate: 0 -12px;
+}
+
+.sky-object-name {
+  text-align: center;
+  font-weight: bold;
+  margin: auto;
+  color: #1b1b1b;
+}
+
+.sky-object-description {
+  text-align: center;
+  margin: auto;
+  padding-bottom: 5px;
+  color: #1b1b1b;
+}

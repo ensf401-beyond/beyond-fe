@@ -1,3 +1,5 @@
+import "./GridCard.css";
+
 /**
  * Type definition for the properties accepted by the GridCard component.
  * These properties define the content displayed for each sky object in the grid.

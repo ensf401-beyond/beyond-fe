@@ -1,0 +1,46 @@
+.page-container {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.mars {
+  position: relative;
+  max-width: 1000px;
+  max-height: 1000px;
+  right: 180px;
+}
+
+.first-page-container {
+  display: flex;
+  position: relative;
+  left: 100px;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.home-text {
+  font-size: 50px;
+  text-shadow: 4px 4px 4px gray;
+}
+
+.home-button {
+  width: 340px;
+  height: 120px;
+  font-size: 25px;
+  background-color: #e1895f;
+  font-family: Orbitron, sans-serif;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.home-button:hover {
+  box-shadow: 10px 10px 10px gray;
+  translate: -5px -5px;
+}

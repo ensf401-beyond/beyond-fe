@@ -1,7 +1,7 @@
 // Import statements to include necessary data and components.
-import { DummyData } from "../data/DummyData"; // Importing the dataset that contains information about sky objects.
-import GridCard from "./ui/GridCard"; // Importing the GridCard component used to display each sky object.
-
+import { DummyData } from "../../data/DummyData"; // Importing the dataset that contains information about sky objects.
+import GridCard from "../ui/GridCard/GridCard"; // Importing the GridCard component used to display each sky object.
+import "./Grid.css";
 /**
  * Type definition for items within the DummyData array representing sky objects.
  *
