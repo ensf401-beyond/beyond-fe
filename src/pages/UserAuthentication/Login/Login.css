@@ -97,3 +97,40 @@
   font-size: large;
   font-weight: bold;
 }
+
+.flex-body {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+}
+
+#customBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #444;
+  border: none;
+  border-radius: 4px;
+  width: 160px;
+  height: 44px;
+  padding: 10px;
+  transition: all 0.1s ease-in-out;
+}
+#customBtn:hover {
+  cursor: pointer;
+  background-color: #e7d0ab;
+  box-shadow: 0 2px 3px 0, 0 1px 5px 0;
+}
+.googleIcon {
+  background: url('/src/assets/images/google-icon.png') transparent 0px center/50% no-repeat;
+  background-size: 60%;
+  width: 42px;
+  height: 42px;
+}
+span.buttonText {
+  padding: 10px;
+  font-family: Orbitron, sans-serif;
+  font-size: small;
+  font-weight: bold;
+}
