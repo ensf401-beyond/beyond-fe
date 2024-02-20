@@ -13,11 +13,11 @@ function LogoutButton({ handleLogout }: any) {
 
   return (
     <div className="flex-body">
-      <button id="customBtn" onClick={() => {
+      <button id="custom-btn" onClick={() => {
         googleLogout();
         onSuccess();
       }}>
-        <span className="buttonText">Log Out </span>
+        <span className="button-text">Log Out </span>
         <span className="googleIcon"></span>
       </button>
     </div>

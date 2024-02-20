@@ -39,8 +39,8 @@ function LoginButton({ handleLogin }: LoginButtonProps) {
   return (
     <>
       <div className="flex-body">
-        <button id="customBtn" onClick={() => login()}>
-          <span className="buttonText">Sign in with Google </span>
+        <button id="custom-btn" onClick={() => login()}>
+          <span className="button-text">Sign in with Google </span>
           <span className="googleIcon"></span>
         </button>
       </div>
