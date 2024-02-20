@@ -1,4 +1,4 @@
-import {useGoogleLogin, GoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
