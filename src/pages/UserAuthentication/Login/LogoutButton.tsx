@@ -6,6 +6,7 @@ function LogoutButton({ handleLogout }: any) {
 
   const onSuccess = () => {
     console.log("Successfully Logged Out!");
+    window.localStorage.setItem("Email", "");
     handleLogout();
     navigate("/");
   };
