@@ -18,7 +18,7 @@ function LogoutButton({ handleLogout }: any) {
         onSuccess();
       }}>
         <span className="button-text">Log Out </span>
-        <span className="googleIcon"></span>
+        <span className="google-icon"></span>
       </button>
     </div>
   );
