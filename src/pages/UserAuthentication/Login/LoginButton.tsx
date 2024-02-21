@@ -1,56 +1,49 @@
-import {
-  GoogleLogin,
-  GoogleLoginResponse,
-  GoogleLoginResponseOffline,
-} from "react-google-login";
-
+import { useGoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
 interface LoginButtonProps {
   handleLogin: () => void;
 }
 
-interface GoogleLoginResponseError {
-  error: string;
-  details: string;
-}
-
-const clientID =
-  "138234664993-d0mvhfhmbq2vh2877oq6ub1v6ie1hbj9.apps.googleusercontent.com";
-
 function LoginButton({ handleLogin }: LoginButtonProps) {
-  const navigate = useNavigate();
-  const onSuccess = (
-    response: GoogleLoginResponse | GoogleLoginResponseOffline
-  ) => {
-    if ("profileObj" in response) {
-      console.log(
-        "Successfully Logged In! Current User: ",
-        response.profileObj
-      );
-      window.localStorage.setItem("Email", response.profileObj.email);
-      handleLogin();
-      navigate("/");
-    }
-  };
 
-  const onFailure = (response: GoogleLoginResponseError) => {
-    console.log(
-      "Login failed! Please try again (womp womp). Error: ",
-      response
-    );
-  };
+  const navigate = useNavigate();
+
+  const login = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      console.log('Successfully Logged In!', tokenResponse);
+
+      const accessToken = tokenResponse.access_token;
+
+      try {
+        const res = await axios.get(`https://www.googleapis.com/oauth2/v3/userinfo`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        const userProfile = res.data;
+        window.localStorage.setItem("Email", userProfile.email);
+        handleLogin();
+        navigate('/');
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    onError: error => {
+      console.log('Login failed! Please try again (womp womp). Error: ', error);
+    }
+  });
 
   return (
     <>
-      <GoogleLogin
-        clientId={clientID}
-        buttonText="Login with Google"
-        onSuccess={onSuccess}
-        onFailure={onFailure}
-        cookiePolicy={"single_host_origin"}
-        isSignedIn={true}
-      />
+      <div className="flex-body">
+        <button id="custom-btn" onClick={() => login()}>
+          <span className="button-text">Sign in with Google </span>
+          <span className="google-icon"></span>
+        </button>
+      </div>
     </>
   );
 }

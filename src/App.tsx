@@ -13,6 +13,7 @@ import { gapi } from "gapi-script";
 import { AuthProvider } from "./contexts/AuthContext";
 import Register from "./pages/UserAuthentication/Registration/Register";
 import Login from "./pages/UserAuthentication/Login/Login";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 interface userRegisterData {
   firstName: string;
@@ -22,8 +23,8 @@ interface userRegisterData {
   password: string;
 }
 
-const clientID =
-  "138234664993-d0mvhfhmbq2vh2877oq6ub1v6ie1hbj9.apps.googleusercontent.com";
+// const clientID =
+//   "138234664993-d0mvhfhmbq2vh2877oq6ub1v6ie1hbj9.apps.googleusercontent.com";
 
 function App() {
   // a function to load things in the local storage for testing, this should be removed when the backend is implemented
@@ -45,16 +46,16 @@ function App() {
     );
   };
 
-  useEffect(() => {
-    function start() {
-      gapi.client.init({
-        clientId: clientID,
-        scope: "",
-      });
-    }
+  // useEffect(() => {
+  //   function start() {
+  //     gapi.client.init({
+  //       clientId: clientID,
+  //       scope: "",
+  //     });
+  //   }
 
-    gapi.load("client:auth2", start);
-  });
+  //   gapi.load("client:auth2", start);
+  // });
 
   useEffect(() => {
     loadFakeDataToLS();
@@ -68,26 +69,28 @@ function App() {
   return (
     <>
       <AuthProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route
-              path="/register"
-              element={<Register onRegister={handleRegister} />}
-            />
+        <GoogleOAuthProvider clientId="506254149863-35nrqod449j7jt5kgrfp6b3iir8ps9b1.apps.googleusercontent.com">
+          <BrowserRouter>
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route
+                path="/register"
+                element={<Register onRegister={handleRegister} />}
+              />
 
-            <Route element={<Layout />}>
-              <Route path="/" element={<Home />} />
-              <Route path="/stars" element={<Stars />} />
-              <Route path="/galaxies" element={<Galaxies />} />
-              <Route path="/clusters" element={<Clusters />} />
-              <Route path="/nebulae" element={<Nebulae />} />
-              <Route path="/profile" element={<Profile />} />
-            </Route>
+              <Route element={<Layout />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/stars" element={<Stars />} />
+                <Route path="/galaxies" element={<Galaxies />} />
+                <Route path="/clusters" element={<Clusters />} />
+                <Route path="/nebulae" element={<Nebulae />} />
+                <Route path="/profile" element={<Profile />} />
+              </Route>
 
-            <Route path="*" element={<h1>Not Found</h1>} />
-          </Routes>
-        </BrowserRouter>
+              <Route path="*" element={<h1>Not Found</h1>} />
+            </Routes>
+          </BrowserRouter>
+        </GoogleOAuthProvider>
       </AuthProvider>
     </>
   );

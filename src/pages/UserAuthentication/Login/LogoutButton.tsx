@@ -1,24 +1,25 @@
-import { GoogleLogout } from "react-google-login";
 import { useNavigate } from "react-router-dom";
-
-const clientID =
-  "138234664993-d0mvhfhmbq2vh2877oq6ub1v6ie1hbj9.apps.googleusercontent.com";
+import { googleLogout } from '@react-oauth/google';
 
 function LogoutButton({ handleLogout }: any) {
   const navigate = useNavigate();
+
   const onSuccess = () => {
     console.log("Successfully Logged Out!");
+    window.localStorage.setItem("Email", "");
     handleLogout();
     navigate("/");
   };
 
   return (
-    <div id="signoutButton">
-      <GoogleLogout
-        clientId={clientID}
-        buttonText="Logout"
-        onLogoutSuccess={onSuccess}
-      />
+    <div className="flex-body">
+      <button id="custom-btn" onClick={() => {
+        googleLogout();
+        onSuccess();
+      }}>
+        <span className="button-text">Log Out </span>
+        <span className="google-icon"></span>
+      </button>
     </div>
   );
 }
