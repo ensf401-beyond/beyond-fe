@@ -22,6 +22,12 @@ type GridItem = {
  * Props:
  * - name: The name of the sky object.
  * - image: URL to the image of the sky object.
+ * 
+ * State:
+ * - fav: boolean - Tracks the current favourite status (true/false) and adjusts the star icon accordingly.
+ *
+ * Functions:
+ * - toggleFav: () => void - Toggles the theme between true and false.
  *
  * Usage:
  * This component is designed to be used within a grid layout where multiple instances
@@ -29,7 +35,7 @@ type GridItem = {
  * to customize the information presented for each sky object.
  */
 function GridCard({ name, image }: GridItem) {
-  const [fav, setFav] = useState(false);  // fav = set this item as a favourite
+  const [fav, setFav] = useState(false);  // fav = favourite
 
   // Toggles the current favourite state.
   const toggleFav = () => {
