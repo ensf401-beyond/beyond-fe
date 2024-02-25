@@ -21,4 +21,8 @@ export const NavbarData = [
     name: "Nebulae",
     path: "/nebulae",
   },
+  {
+    name: "Favourites",
+    path: "/favourites",
+  },
 ];
