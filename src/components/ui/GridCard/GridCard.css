@@ -21,16 +21,17 @@
   translate: 0 -12px;
 }
 
-.sky-object-name {
+.grid-card-text {
+  color: #1b1b1b;
   text-align: center;
+  padding-bottom: 5px;
+}
+
+.sky-object-name {
   font-weight: bold;
   margin: auto;
-  color: #1b1b1b;
 }
 
 .sky-object-description {
-  text-align: center;
   margin: auto;
-  padding-bottom: 5px;
-  color: #1b1b1b;
 }
