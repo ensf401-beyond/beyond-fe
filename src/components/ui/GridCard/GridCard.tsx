@@ -28,6 +28,10 @@ type GridItem = {
  *
  * Functions:
  * - toggleFav: () => void - Toggles the theme between true and false.
+ * - handleCardClick: (event: React.MouseEvent) => void - Handles the click event on the grid card.
+ * 
+ * @param {React.MouseEvent} event - The click event object.
+ * @returns {void}
  *
  * Usage:
  * This component is designed to be used within a grid layout where multiple instances
@@ -42,8 +46,18 @@ function GridCard({ name, image }: GridItem) {
     setFav((curr) => (curr === true ? false : true));
   };
 
+  // Executes actions when the grid card is clicked.
+  // Checks if the click target is not the favorite button.
+  const handleCardClick = (event: React.MouseEvent) => {
+    const clickedElement = event.target as HTMLElement;
+    if (!clickedElement.classList.contains('fav-button')) {
+      // TODO: change action that happens when the card is clicked
+      console.log("clicked");
+    }
+  };
+
   return (
-    <div className="grid-card">
+    <div className="grid-card" onClick={handleCardClick}>
       <img className="sky-object-image" src={image} alt={name}></img>
       <div className="grid-card-text">
         <p className="sky-object-name">{name}</p>
