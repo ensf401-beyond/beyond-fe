@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import LoginButton from "./LoginButton";
 import { useAuth } from "../../../contexts/AuthContext";
 import { Link } from "react-router-dom";
+import { userLoginData } from "../../../utils/dataClasses";
 import "./Login.css";
 
 const Login = () => {
-  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMessage, setErrMessage] = useState("");
 
@@ -13,10 +14,21 @@ const Login = () => {
 
   useEffect(() => {
     setErrMessage("");
-  }, [user, password]);
+  }, [email, password]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+
+    let userData : userLoginData = {
+      email: email,
+      password: password
+    }
+
+
+    // TODOISAAC: uncomment this when the backend is implemented
+    // const res = await loginUser(userData);
+
   };
 
   return (
@@ -31,15 +43,15 @@ const Login = () => {
         <form className="login-form" onSubmit={handleSubmit}>
           <h1 className="login-header">Login</h1>
           <label className="login-form-label" htmlFor="username">
-            Username:
+            Email:
           </label>
           <input
-            type="text"
+            type="email"
             id="username"
             className="login-input"
-            autoComplete="username"
-            onChange={(e) => setUser(e.target.value)}
-            value={user}
+            autoComplete="email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
             required
           />
           <label className="login-form-label" htmlFor="password">

@@ -25,6 +25,7 @@ function GoogleButton({ handleRegister }: LoginButtonProps) {
           },
         });
         const userProfile = res.data;
+        console.log("USER",  userProfile);
         const userData : userRegisterData = {
           firstName: userProfile.given_name,
           lastName: userProfile.family_name,
@@ -33,9 +34,11 @@ function GoogleButton({ handleRegister }: LoginButtonProps) {
           password: ""
         }
 
-        let apiRes: String = await registerUser(userData);
 
-        console.log(apiRes);
+        // TODOISAAC: uncomment this when the backend is implemented
+        //let apiRes: String = await registerUser(userData);
+
+        //console.log(apiRes);
         
         window.localStorage.setItem("Email", userProfile.email);
         window.localStorage.setItem("Name", userProfile.name);

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
 import "./Register.css";
 import { userRegisterData } from "../../../utils/dataClasses";
+import { registerUser } from "../../../utils/API_calls";
 import GoogleButton from "./GoogleButton";
 
 interface RegisterProps {
@@ -28,6 +29,11 @@ function RegistrationForm({ onRegister }: RegisterProps) {
       email: email,
       password: password,
     };
+
+
+    // TODOISAAC: uncomment this when the backend is implemented
+    //let apiRes: String = await registerUser(userData);
+
     onRegister(userData);
     handleLogin();
 

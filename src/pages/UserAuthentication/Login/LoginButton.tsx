@@ -1,5 +1,7 @@
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
+import { loginUser} from '../../../utils/API_calls';
+import { userLoginData } from '../../../utils/dataClasses';
 import { useNavigate } from "react-router-dom";
 
 interface LoginButtonProps {
@@ -27,6 +29,15 @@ function LoginButton({ handleLogin }: LoginButtonProps) {
         window.localStorage.setItem("Email", userProfile.email);
         window.localStorage.setItem("Name", userProfile.name);
         window.localStorage.setItem("PFP", userProfile.picture);
+
+        let userData : userLoginData = {
+          email: userProfile.email,
+          password: ""
+        }
+
+        //TODOISAAC: uncomment this when the backend is implemented
+        //let apiRes: String = await loginUser(userData);
+
         handleLogin();
         navigate('/');
       } catch (err) {
