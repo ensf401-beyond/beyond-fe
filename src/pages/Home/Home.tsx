@@ -23,7 +23,6 @@ function Home() {
             </p>
             <button className="home-button">Explore the Cosmos</button>
           </div>
-          <img alt="mars" src={mars} className="mars" />
         </div>
       </div>
     </>
