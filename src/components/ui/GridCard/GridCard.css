@@ -35,3 +35,9 @@
 .sky-object-description {
   margin: auto;
 }
+
+#fav-button {
+  font-size: 1.75em;
+  padding-left: 8px;
+  padding-right: 8px;
+}

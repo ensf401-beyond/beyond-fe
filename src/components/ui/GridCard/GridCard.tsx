@@ -1,4 +1,5 @@
 import "./GridCard.css";
+import { useState } from "react";
 
 /**
  * Type definition for the properties accepted by the GridCard component.
@@ -28,13 +29,25 @@ type GridItem = {
  * to customize the information presented for each sky object.
  */
 function GridCard({ name, image }: GridItem) {
+  const [fav, setFav] = useState(false);  // fav = set this item as a favourite
+
+  // Toggles the current favourite state.
+  const toggleFav = () => {
+    setFav((curr) => (curr === true ? false : true));
+  };
+
   return (
     <div className="grid-card">
       <img className="sky-object-image" src={image} alt={name}></img>
       <div className="grid-card-text">
         <p className="sky-object-name">{name}</p>
         <p className="sky-object-description">Click to view more!</p>
+        <span id="fav-button" onClick={toggleFav}>
+          {/* \u2606 is open star icon, \u2605 is closed star icon*/}
+          {fav === false ? '\u2606' : '\u2605'}  
+        </span>
       </div>
+      
     </div>
   );
 }
