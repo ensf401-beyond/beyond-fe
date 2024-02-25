@@ -2,14 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
 import "./Register.css";
-
-interface userRegisterData {
-  firstName: string;
-  lastName: string;
-  username: string;
-  email: string;
-  password: string;
-}
+import { userRegisterData } from "../../../utils/dataClasses";
+import GoogleButton from "./GoogleButton";
 
 interface RegisterProps {
   onRegister: (userRegisterData: userRegisterData) => void;
@@ -115,6 +109,7 @@ function RegistrationForm({ onRegister }: RegisterProps) {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
+              <GoogleButton handleRegister={handleLogin} />
             </div>
           </div>
           <button className="register-button" type="submit">
