@@ -7,24 +7,22 @@ import "./Profile.css";
 function Profile() {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const [location, setLocation] = useState<string>("");
   const [pfp, setPfp] = useState<string>("");
 
   const { handleLogout } = useAuth();
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    console.log(name, email, location);
+    console.log(name, email);
     // TODO: send the data to the backend
     localStorage.setItem("Name", name);
     localStorage.setItem("Email", email);
-    localStorage.setItem("Location", location);
+
   };
 
   const getInfo = () => {
     setName(localStorage.getItem("Name") || "");
     setEmail(localStorage.getItem("Email") || "");
-    setLocation(localStorage.getItem("Location") || "");
     setPfp(localStorage.getItem("PFP") || "");
   };
 
@@ -62,18 +60,6 @@ function Profile() {
                 required
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
-              />
-            </div>
-            <div className="profile-feild">
-              <label htmlFor="location">Country</label>
-              <input
-                type="text"
-                id="Country"
-                name="Country"
-                placeholder="Country"
-                required
-                onChange={(e) => setLocation(e.target.value)}
-                value={location}
               />
             </div>
             <button type="submit" className="profile-submit small-button">
