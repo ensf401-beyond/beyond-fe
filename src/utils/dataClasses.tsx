@@ -9,6 +9,7 @@ interface userRegisterData {
 interface userLoginData {
     email: string;
     password: string;
+    isGoogle: boolean;
 }
 
 export type { userRegisterData, userLoginData };

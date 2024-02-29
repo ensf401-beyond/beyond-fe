@@ -22,7 +22,8 @@ const Login = () => {
 
     let userData : userLoginData = {
       email: email,
-      password: password
+      password: password,
+      isGoogle: false
     }
 
 
