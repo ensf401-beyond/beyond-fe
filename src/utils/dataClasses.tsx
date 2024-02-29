@@ -6,4 +6,9 @@ interface userRegisterData {
     password: string;
 }
 
-export type { userRegisterData };
+interface userLoginData {
+    email: string;
+    password: string;
+}
+
+export type { userRegisterData, userLoginData };

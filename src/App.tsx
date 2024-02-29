@@ -9,7 +9,7 @@ import Favourites from "./pages/Favourites/Favourites";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Profile from "./pages/Profile/Profile";
 import { useEffect } from "react";
-import { getUsername } from "./utils/API_calls";
+import { loginUser } from "./utils/API_calls";
 import { AuthProvider } from "./contexts/AuthContext";
 import Register from "./pages/UserAuthentication/Registration/Register";
 import Login from "./pages/UserAuthentication/Login/Login";
@@ -29,7 +29,7 @@ interface userRegisterData {
 function App() {
   // a function to load things in the local storage for testing, this should be removed when the backend is implemented
   const loadFakeDataToLS = async () => {
-    // await getUsername(localStorage.getItem("Email") || "").then(
+    // await loginUser(localStorage.getItem("Email") || "").then(
     //   (data: any) => {
     //     console.log(data);
     //     localStorage.setItem("Name", data);
