@@ -21,16 +21,24 @@
   translate: 0 -12px;
 }
 
-.sky-object-name {
+.grid-card-text {
+  color: #1b1b1b;
   text-align: center;
+  padding-bottom: 5px;
+}
+
+.sky-object-name {
   font-weight: bold;
   margin: auto;
-  color: #1b1b1b;
 }
 
 .sky-object-description {
-  text-align: center;
   margin: auto;
-  padding-bottom: 5px;
-  color: #1b1b1b;
+}
+
+.fav-button {
+  font-size: 1.75em;
+  padding-left: 8px;
+  padding-right: 8px;
+  user-select: none;    /* prevents star from being highlighted */
 }

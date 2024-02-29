@@ -2,14 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
 import "./Register.css";
-
-interface userRegisterData {
-  firstName: string;
-  lastName: string;
-  username: string;
-  email: string;
-  password: string;
-}
+import { userRegisterData } from "../../../utils/dataClasses";
+import { registerUser } from "../../../utils/API_calls";
+import GoogleButton from "./GoogleButton";
 
 interface RegisterProps {
   onRegister: (userRegisterData: userRegisterData) => void;
@@ -34,6 +29,11 @@ function RegistrationForm({ onRegister }: RegisterProps) {
       email: email,
       password: password,
     };
+
+
+    // TODOISAAC: uncomment this when the backend is implemented
+    //let apiRes: String = await registerUser(userData);
+
     onRegister(userData);
     handleLogin();
 
@@ -115,6 +115,7 @@ function RegistrationForm({ onRegister }: RegisterProps) {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
+              <GoogleButton handleRegister={handleLogin} />
             </div>
           </div>
           <button className="register-button" type="submit">

@@ -1,14 +1,14 @@
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
-import { loginUser} from '../../../utils/API_calls';
-import { userLoginData } from '../../../utils/dataClasses';
 import { useNavigate } from "react-router-dom";
+import { userRegisterData } from '../../../utils/dataClasses';
+import { registerUser } from '../../../utils/API_calls';
 
 interface LoginButtonProps {
-  handleLogin: () => void;
+  handleRegister: () => void;
 }
 
-function LoginButton({ handleLogin }: LoginButtonProps) {
+function GoogleButton({ handleRegister }: LoginButtonProps) {
 
   const navigate = useNavigate();
 
@@ -24,22 +24,30 @@ function LoginButton({ handleLogin }: LoginButtonProps) {
             Authorization: `Bearer ${accessToken}`,
           },
         });
-
         const userProfile = res.data;
-        window.localStorage.setItem("Email", userProfile.email);
-        window.localStorage.setItem("Name", userProfile.name);
-        window.localStorage.setItem("PFP", userProfile.picture);
-
-        let userData : userLoginData = {
+        console.log("USER",  userProfile);
+        const userData : userRegisterData = {
+          firstName: userProfile.given_name,
+          lastName: userProfile.family_name,
+          username: userProfile.name,
           email: userProfile.email,
           password: ""
         }
 
-        //TODOISAAC: uncomment this when the backend is implemented
-        //let apiRes: String = await loginUser(userData);
 
-        handleLogin();
-        navigate('/');
+        // TODOISAAC: uncomment this when the backend is implemented
+        //let apiRes: String = await registerUser(userData);
+
+        //console.log(apiRes);
+        
+        window.localStorage.setItem("Email", userProfile.email);
+        window.localStorage.setItem("Name", userProfile.name);
+        window.localStorage.setItem("PFP", userProfile.picture);
+
+
+
+        handleRegister();
+        navigate('/login');
       } catch (err) {
         console.log(err);
       }
@@ -53,7 +61,7 @@ function LoginButton({ handleLogin }: LoginButtonProps) {
     <>
       <div className="flex-body">
         <button id="custom-btn" onClick={() => login()}>
-          <span className="button-text">Sign in with Google </span>
+          <span className="button-text">Register with Google </span>
           <span className="google-icon"></span>
         </button>
       </div>
@@ -61,4 +69,4 @@ function LoginButton({ handleLogin }: LoginButtonProps) {
   );
 }
 
-export default LoginButton;
+export default GoogleButton;
