@@ -70,6 +70,7 @@ function Layout() {
                   nav("/");
                 }}
               ></img>
+              <Navbar />
               <div className="button-group">
                 <div id="profile">
                   <button
@@ -91,7 +92,6 @@ function Layout() {
               </div>
             </div>
             <div className="main">
-              <Navbar />
               <Outlet />
             </div>
           </div>

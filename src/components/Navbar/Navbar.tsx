@@ -45,7 +45,7 @@ function Navbar() {
               key={key} // React key for list items.
               onClick={() => handleNavigate(val.path)} // Click handler to navigate to the item's path.
             >
-              <NavbarButton name={val.name} path={val.path} />{" "}
+              <div>{val.name}</div>
               {/* Render a button for the navbar item. */}
             </li>
           ))}

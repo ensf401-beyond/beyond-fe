@@ -1,4 +1,3 @@
-import mars from "../../assets/images/mars.png";
 import "./Home.css";
 
 /**

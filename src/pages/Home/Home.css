@@ -1,18 +1,16 @@
 .page-container {
   display: flex;
   justify-content: center;
+  background-image: url("../../assets/images/galaxy.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
   overflow: hidden;
 }
 
 .first-page-container {
   display: flex;
-  background-image: url("../../assets/images/galaxy.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
   min-height: 600px;
   border-radius: 10px;
-  margin: 2rem;
-  padding: 20px;
 }
 
 .text-container {

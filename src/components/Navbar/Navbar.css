@@ -23,14 +23,20 @@
 
 #navbar-list {
   display: flex;
-  justify-content: center;
   list-style: none;
-  padding: 15px 10px;
+  gap: 3rem;
+  margin-left: 15px;
 }
 
 .row {
   margin: auto;
   cursor: pointer;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.row:hover {
+  background-color: #2d3139;
 }
 
 #dark .row {
