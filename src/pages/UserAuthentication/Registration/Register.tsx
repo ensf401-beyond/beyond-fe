@@ -28,11 +28,17 @@ function RegistrationForm({ onRegister }: RegisterProps) {
       username: username,
       email: email,
       password: password,
+      isGoogle: false
     };
 
 
-    let apiRes: String = await registerUser(userData);
-    console.log(apiRes);
+    let apiRes = await registerUser(userData);
+    console.log(apiRes.error);
+
+    if (apiRes["error"]) {
+      console.log('Error with registration');
+      return;
+    }
 
     onRegister(userData);
     handleLogin();
@@ -41,7 +47,7 @@ function RegistrationForm({ onRegister }: RegisterProps) {
   };
 
   const navigateToHome = () => {
-    navigate("/");
+    navigate("/login");
   };
 
   return (

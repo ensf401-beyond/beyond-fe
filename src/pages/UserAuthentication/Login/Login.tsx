@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { userLoginData } from "../../../utils/dataClasses";
 import { loginUser } from "../../../utils/userController";
 import "./Login.css";
+import pfp_placeholder from "../../../assets/images/pfp_placeholder.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -25,13 +26,23 @@ const Login = () => {
 
     let userData : userLoginData = {
       email: email,
-      password: password
+      password: password,
+      isGoogle: false
     }
 
 
 
-    const res: String = await loginUser(userData);
+    const res = await loginUser(userData);
     console.log(res);
+    if (res["error"]) {
+      setErrMessage(res["error"]);
+      return;
+    }
+
+    localStorage.setItem("Email", email);
+    localStorage.setItem("Name", res["username"]);
+    localStorage.setItem("PFP", pfp_placeholder);
+
     navigate('/');
   };
 

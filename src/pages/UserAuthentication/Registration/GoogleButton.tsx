@@ -31,13 +31,17 @@ function GoogleButton({ handleRegister }: LoginButtonProps) {
           lastName: userProfile.family_name,
           username: userProfile.name,
           email: userProfile.email,
-          password: ""
+          password: "google",
+          isGoogle: true
         }
 
 
-        let apiRes: String = await registerUser(userData);
+        let apiRes = await registerUser(userData);
 
-        console.log(apiRes);
+        if (apiRes["error"]) {
+          console.log('Error with registration');
+          return;
+        }
         
         window.localStorage.setItem("Email", userProfile.email);
         window.localStorage.setItem("Name", userProfile.name);

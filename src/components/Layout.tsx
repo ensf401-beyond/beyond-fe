@@ -81,7 +81,7 @@ function Layout() {
                     <img id="profile-pic" src={pfp} alt="PFP"></img>
                     <div className="profile-text">
                       <p id="profile-username">{name}</p>
-                      <p id="profile-small">Edit Profile</p>
+                      <p id="profile-small">Profile</p>
                     </div>
                   </button>
                 </div>

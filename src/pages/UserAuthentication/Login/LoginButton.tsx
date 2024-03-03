@@ -32,7 +32,8 @@ function LoginButton({ handleLogin }: LoginButtonProps) {
 
         let userData : userLoginData = {
           email: userProfile.email,
-          password: ""
+          password: "google",
+          isGoogle: true
         }
 
 
