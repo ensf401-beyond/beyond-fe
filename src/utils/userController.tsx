@@ -14,13 +14,13 @@ function loginUser(data : userLoginData) : Promise<any> {
         })
             .then(response => response.json())
             .then(data => {
-                // Process the response data
                 console.log(data);
+                // return the data
                 return data;
             })
             .catch(error => {
-                // Handle any errors
                 console.error(error);
+                // handle any errors
                 throw error;
             });
 }
