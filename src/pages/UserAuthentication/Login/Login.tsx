@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import LoginButton from "./LoginButton";
 import { useAuth } from "../../../contexts/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { userLoginData } from "../../../utils/dataClasses";
+import { loginUser } from "../../../utils/userController";
 import "./Login.css";
 
 const Login = () => {
@@ -11,6 +12,8 @@ const Login = () => {
   const [errMessage, setErrMessage] = useState("");
 
   const { handleLogin } = useAuth();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setErrMessage("");
@@ -26,9 +29,10 @@ const Login = () => {
     }
 
 
-    // TODOISAAC: uncomment this when the backend is implemented
-    // const res = await loginUser(userData);
 
+    const res: String = await loginUser(userData);
+    console.log(res);
+    navigate('/');
   };
 
   return (

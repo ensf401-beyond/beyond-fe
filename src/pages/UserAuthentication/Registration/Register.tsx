@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
 import "./Register.css";
 import { userRegisterData } from "../../../utils/dataClasses";
-import { registerUser } from "../../../utils/API_calls";
+import { registerUser } from "../../../utils/userController";
 import GoogleButton from "./GoogleButton";
 
 interface RegisterProps {
@@ -20,7 +20,7 @@ function RegistrationForm({ onRegister }: RegisterProps) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const userData: userRegisterData = {
       firstName: firstName,
@@ -31,8 +31,8 @@ function RegistrationForm({ onRegister }: RegisterProps) {
     };
 
 
-    // TODOISAAC: uncomment this when the backend is implemented
-    //let apiRes: String = await registerUser(userData);
+    let apiRes: String = await registerUser(userData);
+    console.log(apiRes);
 
     onRegister(userData);
     handleLogin();
