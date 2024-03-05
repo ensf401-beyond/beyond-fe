@@ -11,17 +11,7 @@ import Grid from "../../components/Grid/Grid";
 function Favourites() {
   return (
     <>
-      <div className="page-header">
-        <h1 className="page-title">Stars</h1>
-        <div className="search-bar-container">
-          <input
-            type="text"
-            placeholder="search sky object"
-            className="search-input"
-          ></input>
-        </div>
-      </div>
-      <Grid />
+      <h1>Favourites</h1>
     </>
   );
 }

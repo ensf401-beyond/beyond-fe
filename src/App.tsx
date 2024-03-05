@@ -1,10 +1,8 @@
 import "./assets/App.css";
 import Layout from "./components/Layout";
 import Home from "./pages/Home/Home";
-import Stars from "./pages/Stars/Stars";
-import Galaxies from "./pages/Galaxies/Galaxies";
-import Nebulae from "./pages/Nebulae/Nebulae";
-import Clusters from "./pages/Clusters/Clusters";
+import SkyObjects from "./pages/Clusters/SkyObjects";
+import SkyMap from "./pages/Stars/SkyMap";
 import Favourites from "./pages/Favourites/Favourites";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Profile from "./pages/Profile/Profile";
@@ -13,7 +11,7 @@ import { loginUser } from "./utils/API_calls";
 import { AuthProvider } from "./contexts/AuthContext";
 import Register from "./pages/UserAuthentication/Registration/Register";
 import Login from "./pages/UserAuthentication/Login/Login";
-import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 interface userRegisterData {
   firstName: string;
@@ -36,7 +34,6 @@ function App() {
     //     return data;
     //   }
     // );
-
     // localStorage.setItem("Email", "tate@mcrae.com");
     // localStorage.setItem("Location", "Canada");
     // localStorage.setItem(
@@ -78,10 +75,8 @@ function App() {
               />
               <Route element={<Layout />}>
                 <Route path="/" element={<Home />} />
-                <Route path="/stars" element={<Stars />} />
-                <Route path="/galaxies" element={<Galaxies />} />
-                <Route path="/clusters" element={<Clusters />} />
-                <Route path="/nebulae" element={<Nebulae />} />
+                <Route path="/sky-objects" element={<SkyObjects />} />
+                <Route path="/sky-map" element={<SkyMap />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/favourites" element={<Favourites />} />
               </Route>
