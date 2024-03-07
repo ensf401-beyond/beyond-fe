@@ -1,6 +1,6 @@
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
-import { loginUser} from '../../../utils/API_calls';
+import { loginUser} from '../../../utils/userController';
 import { userLoginData } from '../../../utils/dataClasses';
 import { useNavigate } from "react-router-dom";
 
@@ -32,11 +32,13 @@ function LoginButton({ handleLogin }: LoginButtonProps) {
 
         let userData : userLoginData = {
           email: userProfile.email,
-          password: ""
+          password: "google",
+          isGoogle: true
         }
 
-        //TODOISAAC: uncomment this when the backend is implemented
-        //let apiRes: String = await loginUser(userData);
+
+        let apiRes: String = await loginUser(userData);
+        console.log(apiRes);
 
         handleLogin();
         navigate('/');

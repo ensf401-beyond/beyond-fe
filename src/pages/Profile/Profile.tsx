@@ -11,15 +11,6 @@ function Profile() {
 
   const { handleLogout } = useAuth();
 
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-    console.log(name, email);
-    // TODO: send the data to the backend
-    localStorage.setItem("Name", name);
-    localStorage.setItem("Email", email);
-
-  };
-
   const getInfo = () => {
     setName(localStorage.getItem("Name") || "");
     setEmail(localStorage.getItem("Email") || "");
@@ -37,34 +28,15 @@ function Profile() {
           <img src={pfp} alt="PFP" className="profile-pfp" />
         </div>
         <div className="profile-feilds">
-          <form onSubmit={handleSubmit} className="profile-form">
+          <form className="profile-form">
             <div className="profile-feild">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Name"
-                required
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-              />
+              <span>Name: </span>
+              {name}
             </div>
             <div className="profile-feild">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Email"
-                required
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-              />
+            <span>Email: </span>
+              {email}
             </div>
-            <button type="submit" className="profile-submit small-button">
-              Confirm
-            </button>
           </form>
           <button className="small-button">
             <Link to="/favorites" className="profile-link">

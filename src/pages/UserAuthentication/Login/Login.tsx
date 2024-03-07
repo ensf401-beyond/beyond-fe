@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import LoginButton from "./LoginButton";
 import { useAuth } from "../../../contexts/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { userLoginData } from "../../../utils/dataClasses";
+import { loginUser } from "../../../utils/userController";
 import "./Login.css";
+import pfp_placeholder from "../../../assets/images/pfp_placeholder.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,6 +13,8 @@ const Login = () => {
   const [errMessage, setErrMessage] = useState("");
 
   const { handleLogin } = useAuth();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setErrMessage("");
@@ -22,13 +26,24 @@ const Login = () => {
 
     let userData : userLoginData = {
       email: email,
-      password: password
+      password: password,
+      isGoogle: false
     }
 
 
-    // TODOISAAC: uncomment this when the backend is implemented
-    // const res = await loginUser(userData);
 
+    const res = await loginUser(userData);
+    console.log(res);
+    if (res["error"]) {
+      setErrMessage(res["error"]);
+      return;
+    }
+
+    localStorage.setItem("Email", email);
+    localStorage.setItem("Name", res["username"]);
+    localStorage.setItem("PFP", pfp_placeholder);
+
+    navigate('/');
   };
 
   return (

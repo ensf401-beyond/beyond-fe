@@ -9,7 +9,7 @@ import Favourites from "./pages/Favourites/Favourites";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Profile from "./pages/Profile/Profile";
 import { useEffect } from "react";
-import { loginUser } from "./utils/API_calls";
+import { loginUser } from "./utils/userController";
 import { AuthProvider } from "./contexts/AuthContext";
 import Register from "./pages/UserAuthentication/Registration/Register";
 import Login from "./pages/UserAuthentication/Login/Login";

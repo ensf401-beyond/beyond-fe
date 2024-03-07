@@ -2,7 +2,7 @@ import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { userRegisterData } from '../../../utils/dataClasses';
-import { registerUser } from '../../../utils/API_calls';
+import { registerUser } from '../../../utils/userController';
 
 interface LoginButtonProps {
   handleRegister: () => void;
@@ -31,14 +31,17 @@ function GoogleButton({ handleRegister }: LoginButtonProps) {
           lastName: userProfile.family_name,
           username: userProfile.name,
           email: userProfile.email,
-          password: ""
+          password: "google",
+          isGoogle: true
         }
 
 
-        // TODOISAAC: uncomment this when the backend is implemented
-        //let apiRes: String = await registerUser(userData);
+        let apiRes = await registerUser(userData);
 
-        //console.log(apiRes);
+        if (apiRes["error"]) {
+          console.log('Error with registration');
+          return;
+        }
         
         window.localStorage.setItem("Email", userProfile.email);
         window.localStorage.setItem("Name", userProfile.name);
