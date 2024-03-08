@@ -85,10 +85,6 @@
   max-width: 600px;
 }
 
-#sky-map-text-container {
-  padding: 0;
-}
-
 .home-section-text {
   font-size: 30px;
 }
@@ -96,7 +92,7 @@
 .section-image {
   border-radius: 10px;
   min-height: 500px;
-  min-width: 700px;
+  max-width: 750px;
 }
 
 #sky-map-section {
