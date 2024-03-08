@@ -1,7 +1,6 @@
 // Import statements for necessary hooks and components.
 import { NavbarData } from "../../data/NavBarData"; // Data source for navbar items.
 import { useNavigate, useLocation } from "react-router-dom"; // React Router hooks for navigation and location.
-import NavbarButton from "../ui/NavbarButton/NavbarButton"; // Custom button component used in the navbar.
 import "./Navbar.css";
 /**
  * Type definition for individual items within the NavbarData array.

@@ -46,3 +46,7 @@
 #light .row {
   color: #1b1b1b;
 }
+
+#light .row:hover {
+  background-color: #e1895f;
+}

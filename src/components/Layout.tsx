@@ -103,6 +103,7 @@ function Layout() {
             </main>
             <footer>
               <img id="footer-logo" src={darkLogo} alt="logo" />
+              <p id="copyright-logo">&#169;</p>
               <div className="footer-features">
                 Discover
                 <p className="feature" onClick={handleClick} data-path="/">

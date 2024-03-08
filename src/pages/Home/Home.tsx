@@ -3,6 +3,8 @@ import galaxy from "../../assets/images/galaxy2.jpg";
 import orion from "../../assets/images/orion.jpg";
 import nebula from "../../assets/images/nebula.jpg";
 import astronaut from "../../assets/images/astronaut.jpg";
+import skyMap from "../../assets/images/sky-map.jpg";
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
 
 /**
@@ -17,6 +19,8 @@ import "./Home.css";
  * @returns the view for the main page of the website
  */
 function Home() {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="home-page-container">
@@ -25,11 +29,18 @@ function Home() {
             <p className="home-text">
               Have you ever wondered what lies beyond?
             </p>
-            <button className="home-button">Explore the Cosmos</button>
+            <button
+              className="home-button"
+              onClick={() => {
+                navigate("/sky-objects");
+              }}
+            >
+              Explore the Cosmos
+            </button>
           </div>
           <img alt="mars" src={mars} className="mars" />
         </section>
-        <section className="section-container">
+        <section id="info-section" className="section-container">
           <div id="left-column" className="home-grid-column">
             <p id="galaxy-title" className="image-title">
               Galaxies
@@ -59,14 +70,48 @@ function Home() {
             </p>
           </div>
         </section>
-        <section id="favourites-container" className="section-container">
-          <img id="astronaut-image" src={astronaut} alt="favourites" />
-          <div id="favourites-text-container">
-            <p id="home-favourites-text">
+        <section id="sky-map-section" className="section-container">
+          <div id="sky-map-text-container" className="home-text-container">
+            <p id="sky-map-text" className="home-section-text">
+              Browse our sky map to see where each sky object resides including
+              your favourite stars and galaxies
+            </p>
+            <button
+              id="sky-map-nav-button"
+              className="home-button"
+              onClick={() => {
+                navigate("/sky-map");
+              }}
+            >
+              Browse Sky Map
+            </button>
+          </div>
+          <img
+            id="sky-map-image"
+            className="section-image"
+            src={skyMap}
+            alt="sky map"
+          />
+        </section>
+        <section id="favourites-section" className="section-container">
+          <img
+            id="astronaut-image"
+            className="section-image"
+            src={astronaut}
+            alt="favourites"
+          />
+          <div id="favourites-text-container" className="home-text-container">
+            <p id="home-favourites-text" className="home-section-text">
               Save sky objects to favourites so you can always go back and check
               them out again!
             </p>
-            <button id="favourites-nav-button" className="home-button">
+            <button
+              id="favourites-nav-button"
+              className="home-button"
+              onClick={() => {
+                navigate("/favourites");
+              }}
+            >
               View Collection
             </button>
           </div>

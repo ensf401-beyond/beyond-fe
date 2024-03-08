@@ -66,6 +66,7 @@
   font-size: 30px;
   text-align: center;
   font-weight: bold;
+  text-shadow: 4px 4px 2px gray;
 }
 
 .home-image {
@@ -79,15 +80,26 @@
   text-align: center;
 }
 
-#favourites-text-container {
+.home-text-container {
   padding: 30px;
   max-width: 600px;
 }
 
-#home-favourites-text {
+#sky-map-text-container {
+  padding: 0;
+}
+
+.home-section-text {
   font-size: 30px;
 }
 
-#astronaut-image {
+.section-image {
   border-radius: 10px;
+  min-height: 500px;
+  min-width: 700px;
+}
+
+#sky-map-section {
+  display: flex;
+  align-items: center;
 }
