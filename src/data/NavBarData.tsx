@@ -6,20 +6,12 @@ export const NavbarData = [
     path: "/",
   },
   {
-    name: "Stars",
-    path: "/stars",
+    name: "Sky Objects",
+    path: "/sky-objects",
   },
   {
-    name: "Galaxies",
-    path: "/galaxies",
-  },
-  {
-    name: "Clusters",
-    path: "/clusters",
-  },
-  {
-    name: "Nebulae",
-    path: "/nebulae",
+    name: "Sky Map",
+    path: "/sky-map",
   },
   {
     name: "Favourites",

@@ -42,6 +42,13 @@ function Layout() {
     setTheme((curr) => (curr === "light" ? "dark" : "light"));
   };
 
+  const handleClick = (event: React.MouseEvent<HTMLParagraphElement>) => {
+    const path = event.currentTarget.getAttribute("data-path");
+    if (path) {
+      nav(path);
+    }
+  };
+
   const [name, setName] = useState<string>("");
   const [pfp, setPfp] = useState<string>("");
 
@@ -70,6 +77,7 @@ function Layout() {
                   nav("/");
                 }}
               ></img>
+              <Navbar />
               <div className="button-group">
                 <div id="profile">
                   <button
@@ -90,10 +98,40 @@ function Layout() {
                 </button>
               </div>
             </div>
-            <div className="main">
-              <Navbar />
+            <main>
               <Outlet />
-            </div>
+            </main>
+            <footer>
+              <img id="footer-logo" src={darkLogo} alt="logo" />
+              <p id="copyright-logo">&#169;</p>
+              <div className="footer-features">
+                Discover
+                <p className="feature" onClick={handleClick} data-path="/">
+                  Home
+                </p>
+                <p
+                  className="feature"
+                  onClick={handleClick}
+                  data-path="/sky-objects"
+                >
+                  Sky Objects
+                </p>
+                <p
+                  className="feature"
+                  onClick={handleClick}
+                  data-path="/sky-map"
+                >
+                  Sky Map
+                </p>
+                <p
+                  className="feature"
+                  onClick={handleClick}
+                  data-path="/favourites"
+                >
+                  Favourites
+                </p>
+              </div>
+            </footer>
           </div>
         </ThemeContext.Provider>
       )}
