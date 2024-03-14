@@ -2,36 +2,13 @@
 
 frontend for beyond sky catalog web app
 
-## Potential Folder Structure
+## Features
 
-### assets
+Users are able to browse sky objects such as stars and nebulae, users can favourite sky objects to add to their own personal collection, users can view a sky map that shows the locations of the sky objects.
 
-This folder is used for storing globals like images, .svgs, global CSS, etc.
+## How to run
 
-### images
-
-This subfolder of assets is used to store any images, logos, etc.
-
-### hooks
-
-This folder is used for organizing any custom hooks created by the team.
-
-### components
-
-This folder contains all components used in the application such as NavBar
-
-### ui components
-
-Subfolder for any components that are general and not built off of other components such as buttons, text inputs, etc.
-
-### pages
-
-This folder is used for each individual page in the app such as login pages or home pages
-
-### utils
-
-This folder is used for anything extra like format.js files or any other utilities. Generally very small, simple functions (pure functions)
-
-### data (Optional? Still not too sure how this will look with models, etc.)
-
-This folder to be used for storing any data files like json or other data
+1. clone the repo
+2. run `cd beyond-frontend`
+3. run `npm install`
+4. then finally, `npm start`
