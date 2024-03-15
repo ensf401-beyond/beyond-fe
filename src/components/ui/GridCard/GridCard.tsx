@@ -38,26 +38,17 @@ type GridItem = {
  * are rendered to display a variety of sky objects. It accepts the `name` and `image` props
  * to customize the information presented for each sky object.
  */
-function GridCard({ name, image }: GridItem) {
+function GridCard({ name, image, onCardClick }: GridItem & { onCardClick: () => void }) {
   const [fav, setFav] = useState(false);  // fav = favourite
 
   // Toggles the current favourite state.
-  const toggleFav = () => {
+  const toggleFav = (event: React.MouseEvent) => {
+    event.stopPropagation();  // Prevents overlay from toggling when the favorite is clicked
     setFav((curr) => (curr === true ? false : true));
   };
 
-  // Executes actions when the grid card is clicked.
-  // Checks if the click target is not the favorite button.
-  const handleCardClick = (event: React.MouseEvent) => {
-    const clickedElement = event.target as HTMLElement;
-    if (!clickedElement.classList.contains('fav-button')) {
-      // TODO: change action that happens when the card is clicked
-      console.log("clicked");
-    }
-  };
-
   return (
-    <div className="grid-card" onClick={handleCardClick}>
+    <div className="grid-card" onClick={onCardClick}>
       <img className="sky-object-image" src={image} alt={name}></img>
       <div className="grid-card-text">
         <p className="sky-object-name">{name}</p>
