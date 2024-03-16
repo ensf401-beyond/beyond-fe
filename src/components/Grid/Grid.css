@@ -5,3 +5,70 @@
   padding: 30px;
   transition: 0.3s ease-in-out;
 }
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10; /* Ensure it's above other content */
+}
+
+.overlay-content {
+  width: 60%;
+  height: 75%;
+  background-color: lightgray;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 8px 8px 8px gray;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay-content p {
+  color: black;
+  font-size: 16px;
+}
+
+.sky-object-overlay-image {
+  height: 50%;
+  width: 80%;
+  margin: 0 auto;
+  display: block;
+  box-shadow: 8px 8px 8px gray;
+  translate: -10px -10px;
+}
+
+.overlay-button {
+  font-family: Orbitron, sans-serif;
+  font-size: large;
+  font-weight: bold;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 160px;
+  height: 44px;
+  transition: all 0.1s ease-in-out;
+}
+
+.overlay-button:hover {
+  background-color: #e7d0ab;
+  box-shadow: 0 2px 3px 0, 0 1px 5px 0;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 600px) {
+  .sky-object-overlay-image {
+    min-width: 50%;
+  }
+}
