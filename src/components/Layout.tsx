@@ -34,8 +34,8 @@ type ThemeContextType = {
  */
 function Layout() {
   const [theme, setTheme] = useState("dark");
-  const { isLoggedIn } = useAuth();
   const nav = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(sessionStorage.getItem("isLoggedIn"));
 
   // Toggles the current theme between 'light' and 'dark' modes and updates the application state accordingly.
   const toggleTheme = () => {
