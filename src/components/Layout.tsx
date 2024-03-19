@@ -42,6 +42,20 @@ function Layout() {
     setTheme((curr) => (curr === "light" ? "dark" : "light"));
   };
 
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setIsLoggedIn(sessionStorage.getItem("isLoggedIn"));
+    };
+
+    window.addEventListener("storage", handleStorageChange); // This will catch changes in sessionStorage across tabs.
+    window.addEventListener("loginEvent", handleStorageChange); // This will catch our custom login/logout events.
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("loginEvent", handleStorageChange);
+    };
+  }, []);
+
   const handleClick = (event: React.MouseEvent<HTMLParagraphElement>) => {
     const path = event.currentTarget.getAttribute("data-path");
     if (path) {
