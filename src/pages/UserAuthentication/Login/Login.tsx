@@ -4,7 +4,6 @@ import { useAuth } from "../../../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { userLoginData } from "../../../utils/dataClasses";
 import { loginUser } from "../../../utils/userController";
-import { getFavourites } from "../../../utils/favController";
 import "./Login.css";
 import pfp_placeholder from "../../../assets/images/pfp_placeholder.png";
 
@@ -42,9 +41,6 @@ const Login = () => {
     localStorage.setItem("Name", res["username"]);
     localStorage.setItem("PFP", pfp_placeholder);
     sessionStorage.setItem("isLoggedIn", 'true');
-    
-    const fav_res = await getFavourites(email);
-    localStorage.setItem("Favourites", JSON.stringify(fav_res['favourites']));
 
     navigate('/');
   };

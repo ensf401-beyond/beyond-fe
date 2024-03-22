@@ -3,7 +3,6 @@ import axios from 'axios';
 import { loginUser} from '../../../utils/userController';
 import { userLoginData } from '../../../utils/dataClasses';
 import { useNavigate } from "react-router-dom";
-import { getFavourites } from "../../../utils/favController";
 
 interface LoginButtonProps {
   handleLogin: () => void;
@@ -30,9 +29,6 @@ function LoginButton({ handleLogin }: LoginButtonProps) {
         window.localStorage.setItem("Email", userProfile.email);
         window.localStorage.setItem("Name", userProfile.name);
         window.localStorage.setItem("PFP", userProfile.picture);
-
-        const fav_res = await getFavourites(userProfile.email);
-        localStorage.setItem("Favourites", JSON.stringify(fav_res['favourites']));
 
         let userData : userLoginData = {
           email: userProfile.email,
