@@ -6,6 +6,8 @@ import astronaut from "../../assets/images/astronaut.jpg";
 import skyMap from "../../assets/images/sky-map.jpg";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
+import { useEffect } from "react";
+import { getFavourites } from "../../utils/favController";
 
 /**
  * Home Component
@@ -19,6 +21,21 @@ import "./Home.css";
  * @returns the view for the main page of the website
  */
 function Home() {
+  useEffect(() => {
+    async function loadFavs() {
+      if (!localStorage.hasOwnProperty('Favourites')) {
+        const email = localStorage.getItem("Email") || '{}';
+        if (email == '{}') {
+          throw new Error("No email in localStorage");
+        }
+        const fav_res = await getFavourites(email);
+        localStorage.setItem("Favourites", JSON.stringify(fav_res['favourites']));
+      }
+    }
+
+    loadFavs();
+  }, []);
+
   const navigate = useNavigate();
 
   return (

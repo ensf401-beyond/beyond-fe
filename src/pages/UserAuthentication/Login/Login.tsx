@@ -30,10 +30,7 @@ const Login = () => {
       isGoogle: false
     }
 
-
-
     const res = await loginUser(userData);
-    console.log(res);
     if (res["error"]) {
       setErrMessage(res["error"]);
       return;

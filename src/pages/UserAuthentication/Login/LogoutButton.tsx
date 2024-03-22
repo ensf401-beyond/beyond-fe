@@ -7,6 +7,7 @@ function LogoutButton({ handleLogout }: any) {
   const onSuccess = () => {
     console.log("Successfully Logged Out!");
     window.localStorage.setItem("Email", "");
+    localStorage.removeItem("Favourites");
     sessionStorage.removeItem("isLoggedIn");
     handleLogout();
     window.dispatchEvent(new Event("loginEvent"));

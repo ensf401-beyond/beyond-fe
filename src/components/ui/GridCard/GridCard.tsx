@@ -45,8 +45,8 @@ function GridCard({ name, image, fav, onToggleFav, onCardClick }: GridItem & { o
         <p className="sky-object-name">{name}</p>
         <p className="sky-object-description">Click to view more!</p>
         <span className="fav-button" onClick={(e) => { e.stopPropagation(); onToggleFav(); }}>
-          {/* \u2606 is open star icon, \u2605 is closed star icon*/}
-          {fav === false ? '\u2606' : '\u2605'}  
+          {/* \u2605 is closed star icon, \u2606 is open star icon */}
+          {fav ? '\u2605' : '\u2606'} 
         </span>
       </div>
       

@@ -2,7 +2,8 @@
 import { DummyData } from "../../data/DummyData"; // Importing the dataset that contains information about sky objects.
 import GridCard from "../ui/GridCard/GridCard"; // Importing the GridCard component used to display each sky object.
 import "./Grid.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { addFavourite, deleteFavourite } from "../../utils/favController";
 
 /**
  * Defines the structure of each sky object item.
@@ -30,19 +31,43 @@ import { useState } from "react";
  * each representing a different sky object with a name and an image.
  */
 function Grid() {
-  const [data, setData] = useState(DummyData.map(item => ({ ...item, fav: false })));
-  const [overlayInfo, setOverlayInfo] = useState({ isVisible: false, name: "", image: "", fav: false });
+  const [favArray, setfavArray] = useState(JSON.parse(localStorage.getItem('Favourites') || '[]'));
+  const [data, setData] = useState(DummyData.map(item => ({ ...item, fav: favArray.includes(item.ngc) ? true : false })));
+  const [overlayInfo, setOverlayInfo] = useState({ isVisible: false, name: "", image: "", ngc: 0, fav: false });
 
-  const toggleFav = (name: string) => {
-    const newData = data.map(item => 
-      item.name === name ? { ...item, fav: !item.fav } : item
-    );
-    setData(newData);
-    // Update overlayInfo if it is visible and the item is the same as in the overlay
-    if (overlayInfo.isVisible && overlayInfo.name === name) {
-      setOverlayInfo({ ...overlayInfo, fav: !overlayInfo.fav });
+  useEffect(() => {
+    updateLocalStorage(); // This will be executed when the state changes
+  }, [favArray]);
+  
+  function updateLocalStorage() {
+    localStorage.setItem('Favourites', JSON.stringify(favArray));
+  }
+
+  // 'name' is the item name
+  const toggleFav = async (name: string, ngc: number) => {
+    const email = localStorage.getItem("Email") || '{}';
+    if (email == '{}') {
+      throw new Error("No email in localStorage");
     }
-  };
+
+    if (!(favArray.includes(ngc))) {   // Add ngc to the favourite array
+      setfavArray( [ ...favArray, ngc  ] );
+      const status = await addFavourite(email, ngc);
+      console.log(status);
+    } else {    // Remove ngc from the favourite array
+      setfavArray( favArray.filter((element: number) => element !== ngc) );
+      const status = await deleteFavourite(email, ngc);
+      console.log(status);
+    }
+
+    setData(prevData =>
+      prevData.map(item => ({
+        ...item,
+        fav: favArray.includes(item.ngc) ? true : false
+      }))
+    );
+    setOverlayInfo({ ...overlayInfo, fav: favArray.includes(ngc) ? true : false });
+  }
 
   return (
     <>
@@ -55,9 +80,9 @@ function Grid() {
               <p className="sky-object-description">More information about the sky object...</p>
               <span className="fav-button" onClick={(e) => { 
                   e.stopPropagation(); // Prevent overlay from closing
-                  toggleFav(overlayInfo.name); 
+                  toggleFav(overlayInfo.name, overlayInfo.ngc); 
               }}>
-                {overlayInfo.fav ? '\u2605' : '\u2606'} {/* Corrected the condition to use overlayInfo */}
+                {overlayInfo.fav ? '\u2606' : '\u2605'} 
               </span>
             </div>
             <button className="overlay-button" onClick={(e) => { 
@@ -74,8 +99,8 @@ function Grid() {
             key={index}
             name={item.name}
             image={item.image}
-            fav={item.fav}
-            onToggleFav={() => toggleFav(item.name)}
+            fav={ favArray.includes(item.ngc) ? true : false }
+            onToggleFav={() => toggleFav(item.name, item.ngc)}
             onCardClick={() => setOverlayInfo({ ...item, isVisible: true })}
           />
         ))}
