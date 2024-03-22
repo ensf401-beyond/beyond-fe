@@ -45,7 +45,7 @@ function addFavourite(email : string, ngc : number) : Promise<any> {
 }
 
 function deleteFavourite(email : string, ngc : number) : Promise<any> {
-    console.log('getting favourites');
+    console.log('deleting favourite');
 
     return fetch(`https://log7pdtoidp72cwxjkvdxqrou40sqita.lambda-url.ca-central-1.on.aws/?email=${email}&ngc=${ngc}`, {
         method: 'DELETE',
