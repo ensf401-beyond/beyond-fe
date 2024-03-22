@@ -3,6 +3,7 @@ import { DummyData } from "../../data/DummyData"; // Importing the dataset that 
 import GridCard from "../ui/GridCard/GridCard"; // Importing the GridCard component used to display each sky object.
 import "./Grid.css";
 import { useState } from "react";
+import { addFavourite, deleteFavourite } from "../../utils/favController";
 
 /**
  * Defines the structure of each sky object item.
@@ -31,13 +32,39 @@ import { useState } from "react";
  */
 function Grid() {
   const [data, setData] = useState(DummyData.map(item => ({ ...item, fav: false })));
-  const [overlayInfo, setOverlayInfo] = useState({ isVisible: false, name: "", image: "", fav: false });
+  const [overlayInfo, setOverlayInfo] = useState({ isVisible: false, name: "", image: "", ngc: 0, fav: false });
 
-  const toggleFav = (name: string) => {
+  // 'name' is the item name
+  const toggleFav = async (name: string, ngc: number) => {
+    // Toggle the fav boolean in the selected item
     const newData = data.map(item => 
       item.name === name ? { ...item, fav: !item.fav } : item
     );
     setData(newData);
+
+    // Get fav value (true/false) for this item
+    const favBool = newData.find(item => item.name === name)?.fav;
+    var currentArray = JSON.parse(localStorage.getItem('Favourites') || '{}');    
+    
+    const email = localStorage.getItem("Email") || '{}';
+    if (email == '{}') {
+      throw new Error("No email in localStorage");
+    }
+
+    if (favBool) {
+      currentArray.push(ngc);
+      localStorage.setItem('Favourites', JSON.stringify(currentArray));
+      const status = await addFavourite(email, ngc);
+      console.log(status);
+    } else {
+      if (currentArray.includes(ngc)) {
+        currentArray.splice(currentArray.indexOf(ngc), 1);
+        localStorage.setItem('Favourites', JSON.stringify(currentArray));
+        const status = await deleteFavourite(email, ngc);
+        console.log(status);
+      }
+    }
+    
     // Update overlayInfo if it is visible and the item is the same as in the overlay
     if (overlayInfo.isVisible && overlayInfo.name === name) {
       setOverlayInfo({ ...overlayInfo, fav: !overlayInfo.fav });
@@ -55,7 +82,7 @@ function Grid() {
               <p className="sky-object-description">More information about the sky object...</p>
               <span className="fav-button" onClick={(e) => { 
                   e.stopPropagation(); // Prevent overlay from closing
-                  toggleFav(overlayInfo.name); 
+                  toggleFav(overlayInfo.name, overlayInfo.ngc); 
               }}>
                 {overlayInfo.fav ? '\u2605' : '\u2606'} {/* Corrected the condition to use overlayInfo */}
               </span>
@@ -75,7 +102,7 @@ function Grid() {
             name={item.name}
             image={item.image}
             fav={item.fav}
-            onToggleFav={() => toggleFav(item.name)}
+            onToggleFav={() => toggleFav(item.name, item.ngc)}
             onCardClick={() => setOverlayInfo({ ...item, isVisible: true })}
           />
         ))}
