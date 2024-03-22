@@ -44,8 +44,25 @@ function addFavourite(email : string, ngc : number) : Promise<any> {
         });
 }
 
-// 
-// https://log7pdtoidp72cwxjkvdxqrou40sqita.lambda-url.ca-central-1.on.aws/
-// (takes in  email and ngc as query parameters, uses http DELETE method, returns status 200 and "Favourite deleted successfully" if successful.)
+function deleteFavourite(email : string, ngc : number) : Promise<any> {
+    console.log('getting favourites');
 
-export { getFavourites, addFavourite };
+    return fetch(`https://log7pdtoidp72cwxjkvdxqrou40sqita.lambda-url.ca-central-1.on.aws/?email=${email}&ngc=${ngc}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(async response => {
+            console.log(await response.json());
+            return response.status;
+        })
+        .catch(error => {
+            console.error(error);
+            // handle any errors
+            throw error;
+        });
+}
+ 
+
+export { getFavourites, addFavourite, deleteFavourite };
