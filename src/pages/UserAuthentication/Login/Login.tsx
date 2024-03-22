@@ -31,7 +31,6 @@ const Login = () => {
     }
 
     const res = await loginUser(userData);
-    console.log(res);
     if (res["error"]) {
       setErrMessage(res["error"]);
       return;
