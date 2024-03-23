@@ -92,9 +92,9 @@ function Profile() {
       <div className="profile-page">
         <div className="profile-image-and-links">
           {editMode ? (
-              <img src={pfp} alt="Profile" className="profile-pfp" />
+              <img src={pfp || pfp_placeholder} alt="Profile" className="profile-pfp" />
             ) : (
-              <img src={confirmedPfp} alt="Profile" className="profile-pfp" />
+              <img src={confirmedPfp || pfp_placeholder} alt="Profile" className="profile-pfp" />
             )}
         </div>
         <div className="profile-fields">
