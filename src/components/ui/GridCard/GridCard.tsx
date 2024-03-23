@@ -6,15 +6,11 @@ import { useState } from "react";
  * These properties define the content displayed for each sky object in the grid.
  *
  * @property {string} name - The name of the sky object to be displayed on the card.
- * @property {string} mag - The magnitude of the sky object to be displayed on the card.
- * @property {string} constellation - The constellation of the sky object to be displayed on the card.
  * @property {string} image - The URL of the image representing the sky object.
  * @property {boolean} fav - Indicates whether the sky object is marked as a favorite.
  */
 type GridItem = {
   name: string;
-  mag: string;
-  constellation: string;
   image: string;
   fav: boolean;
 };
@@ -40,14 +36,14 @@ type GridItem = {
  * The onToggleFav and onCardClick props are functions provided by the parent component 
  * (Grid) to handle user interactions.
  */
-function GridCard({ name, image, fav, mag, constellation, onToggleFav, onCardClick }: GridItem & { onCardClick: () => void, onToggleFav: () => void; }) {
+function GridCard({ name, image, fav, onToggleFav, onCardClick }: GridItem & { onCardClick: () => void, onToggleFav: () => void; }) {
 
   return (
     <div className="grid-card" onClick={() => onCardClick()}>
       <img className="sky-object-image" src={image} alt={name}></img>
       <div className="grid-card-text">
         <p className="sky-object-name">{name}</p>
-        <p className="sky-object-name"><span>M: {mag}</span>&nbsp;&nbsp;&nbsp;<span>C: {constellation}</span> </p>
+        <p className="sky-object-description">Click to view more!</p>
         <span className="fav-button" onClick={(e) => { e.stopPropagation(); onToggleFav(); }}>
           {/* \u2605 is closed star icon, \u2606 is open star icon */}
           {fav ? '\u2605' : '\u2606'} 

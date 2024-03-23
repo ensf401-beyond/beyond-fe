@@ -13,10 +13,14 @@ function SkyObjects() {
       <div className="page-header">
         <h1 className="page-title">SkyObjects</h1>
         <div className="search-bar-container">
-          
+          <input
+            type="text"
+            placeholder="search sky object"
+            className="search-input"
+          ></input>
         </div>
       </div>
-      <Grid isFavPage={false}/>
+      <Grid />
     </>
   );
 }

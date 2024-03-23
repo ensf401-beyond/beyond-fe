@@ -17,8 +17,4 @@ export const NavbarData = [
     name: "Favourites",
     path: "/favourites",
   },
-  {
-    name: "Create",
-    path: "/create",
-  },
 ];
