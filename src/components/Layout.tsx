@@ -8,6 +8,7 @@ import { useNavigate, Outlet } from "react-router-dom";
 import Navbar from "./Navbar/Navbar";
 import { useAuth } from "../contexts/AuthContext";
 import StartPage from "../pages/StartPage/StartPage";
+import pfp_placeholder from "../assets/images/pfp_placeholder.png";
 
 export const ThemeContext = createContext<ThemeContextType | null>(null);
 
@@ -45,6 +46,8 @@ function Layout() {
   useEffect(() => {
     const handleStorageChange = () => {
       setIsLoggedIn(sessionStorage.getItem("isLoggedIn"));
+      setName(localStorage.getItem("Name") || "");
+      setPfp(localStorage.getItem("PFP") || "");
     };
 
     window.addEventListener("storage", handleStorageChange); // This will catch changes in sessionStorage across tabs.
@@ -100,7 +103,7 @@ function Layout() {
                       nav("/profile");
                     }}
                   >
-                    <img id="profile-pic" src={pfp} alt="PFP"></img>
+                    <img id="profile-pic" src={pfp || pfp_placeholder} alt="PFP"></img>
                     <div className="profile-text">
                       <p id="profile-username">{name}</p>
                       <p id="profile-small">Profile</p>
