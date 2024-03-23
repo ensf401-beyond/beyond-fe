@@ -35,7 +35,10 @@ type ThemeContextType = {
 function Layout() {
   const [theme, setTheme] = useState("dark");
   const nav = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(sessionStorage.getItem("isLoggedIn"));
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    sessionStorage.getItem("isLoggedIn")
+  );
+  const [isGuest, setIsGuest] = useState(false);
 
   // Toggles the current theme between 'light' and 'dark' modes and updates the application state accordingly.
   const toggleTheme = () => {
@@ -63,6 +66,10 @@ function Layout() {
     }
   };
 
+  const handleGuestUser = () => {
+    setIsGuest(true);
+  };
+
   const [name, setName] = useState<string>("");
   const [pfp, setPfp] = useState<string>("");
 
@@ -77,8 +84,8 @@ function Layout() {
 
   return (
     <>
-      {!isLoggedIn ? (
-        <StartPage />
+      {!isLoggedIn && !isGuest ? (
+        <StartPage handleGuestUser={handleGuestUser} />
       ) : (
         <ThemeContext.Provider value={{ theme, toggleTheme }}>
           <div id={theme} className="app">
@@ -93,20 +100,32 @@ function Layout() {
               ></img>
               <Navbar />
               <div className="button-group">
-                <div id="profile">
+                {isLoggedIn ? (
+                  <div id="profile">
+                    <button
+                      className="profile-button"
+                      onClick={() => {
+                        nav("/profile");
+                      }}
+                    >
+                      <img id="profile-pic" src={pfp} alt="PFP" />
+                      <div className="profile-text">
+                        <p id="profile-username">{name}</p>
+                        <p id="profile-small">Profile</p>
+                      </div>
+                    </button>
+                  </div>
+                ) : (
                   <button
+                    id="guest-login-button"
                     className="profile-button"
                     onClick={() => {
-                      nav("/profile");
+                      nav("/login");
                     }}
                   >
-                    <img id="profile-pic" src={pfp} alt="PFP"></img>
-                    <div className="profile-text">
-                      <p id="profile-username">{name}</p>
-                      <p id="profile-small">Profile</p>
-                    </div>
+                    Log In
                   </button>
-                </div>
+                )}
                 <button className="mode-button" onClick={toggleTheme}>
                   {theme === "light" ? <DarkModeIcon /> : <LightModeIcon />}
                 </button>
@@ -144,6 +163,11 @@ function Layout() {
                 >
                   Favourites
                 </p>
+              </div>
+              <div className="footer-features">
+                Contact
+                <p className="feature">About</p>
+                <p className="feature">Contact Us</p>
               </div>
             </footer>
           </div>
