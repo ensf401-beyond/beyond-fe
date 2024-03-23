@@ -48,7 +48,7 @@ function Profile() {
   const getInfo = () => {
     setEmail(localStorage.getItem("Email") || "");
     const storedName = localStorage.getItem("Name") || "";
-    const storedPfp = localStorage.getItem("PFP") || pfp_placeholder;
+    const storedPfp = localStorage.getItem("PFP") || "";
     setName(storedName);
     setPfp(storedPfp);
     setConfirmedName(storedName);
@@ -106,7 +106,7 @@ function Profile() {
                     <label htmlFor="pfp">Profile Picture URL: </label>
                     <input
                       type="text"
-                      placeholder="New profile pic URL"
+                      placeholder="Enter a new image address"
                       value={pfp}
                       onChange={(e) => setPfp(e.target.value)}
                     />
