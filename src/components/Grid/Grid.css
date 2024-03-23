@@ -21,8 +21,8 @@
 }
 
 .overlay-content {
-  width: 60%;
-  height: 75%;
+  width: 40%;
+  height: 25%;
   background-color: lightgray;
   padding: 20px;
   border-radius: 10px;
@@ -71,4 +71,28 @@
   .sky-object-overlay-image {
     min-width: 50%;
   }
+}
+
+.search-bar {
+  margin: 32px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  width: 350px;
+  gap: 8px;
+}
+
+.object-route {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  border-radius: 6px;
+  background-color: #767676;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.object-route:hover {
+  background-color: #a1a1a1;
+  box-shadow: 0 2px 3px 0, 0 1px 5px 0;
 }

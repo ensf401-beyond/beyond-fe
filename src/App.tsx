@@ -13,6 +13,7 @@ import Register from "./pages/UserAuthentication/Registration/Register";
 import Login from "./pages/UserAuthentication/Login/Login";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import ObjectPage from "./pages/ObjectPage/ObjectPage";
+import CreateObj from "./pages/CreateObj/CreateObj";
 
 interface userRegisterData {
   firstName: string;
@@ -81,6 +82,7 @@ function App() {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/favourites" element={<Favourites />} />
                 <Route path="/object/:id" element={<ObjectPage />} />
+                <Route path="/create" element={<CreateObj />} />
               </Route>
 
               <Route path="*" element={<h1>Not Found</h1>} />
