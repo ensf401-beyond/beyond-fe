@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { userLoginData } from "../../../utils/dataClasses";
 import { loginUser } from "../../../utils/userController";
 import "./Login.css";
-import pfp_placeholder from "../../../assets/images/pfp_placeholder.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -27,7 +26,7 @@ const Login = () => {
     let userData : userLoginData = {
       email: email,
       password: password,
-      isGoogle: false
+      isGoogle: false,
     }
 
     const res = await loginUser(userData);
@@ -38,7 +37,7 @@ const Login = () => {
 
     localStorage.setItem("Email", email);
     localStorage.setItem("Name", res["username"]);
-    localStorage.setItem("PFP", pfp_placeholder);
+    localStorage.setItem("PFP", res["profilePic"]);
     sessionStorage.setItem("isLoggedIn", 'true');
 
     navigate('/');

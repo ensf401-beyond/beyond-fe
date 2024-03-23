@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import LogoutButton from "../UserAuthentication/Login/LogoutButton";
 import { editUser } from "../../utils/userController";
+import pfp_placeholder from "../../assets/images/pfp_placeholder.png";
 import "./Profile.css";
 
 function Profile() {
@@ -19,7 +20,7 @@ function Profile() {
   const getInfo = () => {
     setEmail(localStorage.getItem("Email") || "");
     const storedName = localStorage.getItem("Name") || "";
-    const storedPfp = localStorage.getItem("PFP") || "";
+    const storedPfp = localStorage.getItem("PFP") || pfp_placeholder;
     setName(storedName);
     setPfp(storedPfp);
     setConfirmedName(storedName);
