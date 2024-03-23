@@ -70,53 +70,62 @@ function Profile() {
             )}
         </div>
         <div className="profile-fields">
-          {editMode ? (
-              <form className="profile-form" onSubmit={handleSubmit}>
-                <h1>Edit Profile</h1>
-                <div className="profile-field">
-                  <label htmlFor="pfp">Profile Picture URL: </label>
-                  <input
-                    type="text"
-                    placeholder="New profile pic URL"
-                    value={pfp}
-                    onChange={(e) => setPfp(e.target.value)}
-                  />
+          <div className="profile-form">
+            {editMode ? (
+                <form onSubmit={handleSubmit}>
+                  <h1>Edit Profile</h1>
+                  <div className="profile-field">
+                    <label htmlFor="pfp">Profile Picture URL: </label>
+                    <input
+                      type="text"
+                      placeholder="New profile pic URL"
+                      value={pfp}
+                      onChange={(e) => setPfp(e.target.value)}
+                    />
+                  </div>
+                  <div className="profile-field">
+                    <label htmlFor="username">Username:</label>
+                    <input
+                      id="username"
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
+                  </div>
+                  <div className="profile-field">
+                    <label>Email:</label>
+                    <span>{email}</span>
+                  </div>
+                  <div className="button-pair">
+                    <button type="submit" className="small-button">Save Changes</button>
+                    <button onClick={handleCancel} className="small-button">Cancel</button>
+                  </div>
+                </form>
+              ) : (
+                <div>
+                  <>
+                  <h1>Profile</h1>
+                  <div className="profile-field">
+                    <span>Name: </span>
+                    {confirmedName}
+                  </div>
+                  <div className="profile-field">
+                  <span>Email: </span>
+                    {email}
+                  </div>
+                  <button onClick={() => setEditMode(true)} className="small-button">Edit Profile</button>
+                  </>
                 </div>
-                <div className="profile-field">
-                  <label htmlFor="username">Username:</label>
-                  <input
-                    id="username"
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </div>
-                <div className="profile-field">
-                  <label>Email:</label>
-                  <span>{email}</span>
-                </div>
-                <button type="submit" className="small-button">Save Changes</button>
-                <button onClick={handleCancel} className="small-button">Cancel</button>
-              </form>
-            ) : (
-              <>
-              <div className="profile-field">
-                <span>Name: </span>
-                {confirmedName}
-              </div>
-              <div className="profile-field">
-              <span>Email: </span>
-                {email}
-              </div>
-              <button onClick={() => setEditMode(true)} className="small-button">Edit Profile</button>
-              </>
-            )}
-          <button className="small-button">
-            <Link to="/favourites" className="profile-link">
-              Go to Favorites
-            </Link>
-          </button>
-          <LogoutButton handleLogout={handleLogout} />
+              )}
+            <div>
+              <button className="small-button">
+                <Link to="/favourites" className="profile-link">
+                  Go to Favorites
+                </Link>
+              </button>
+              <LogoutButton handleLogout={handleLogout} />
+            </div>
+          </div>
         </div>
       </div>
     </>
