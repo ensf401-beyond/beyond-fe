@@ -1,4 +1,4 @@
-import { userRegisterData, userLoginData } from './dataClasses';
+import { userRegisterData, userLoginData, userEditData } from './dataClasses';
 
 function loginUser(data : userLoginData) : Promise<any> {
 
@@ -51,4 +51,26 @@ function registerUser(userData: userRegisterData) : Promise<any> {
             });
 }
 
-export { loginUser, registerUser };
+async function editUser(data: userEditData): Promise<any> {
+    console.log(data);
+    console.log('edit user');
+
+    return fetch('https://myembg75opgf4gylftxdq2uwba0ghbxb.lambda-url.ca-central-1.on.aws/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        return data;
+    })
+    .catch(error => {
+        console.error(error);
+        throw error;
+    });
+}
+
+export { loginUser, registerUser, editUser };
