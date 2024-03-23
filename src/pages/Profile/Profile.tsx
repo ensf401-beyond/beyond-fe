@@ -6,6 +6,34 @@ import { editUser } from "../../utils/userController";
 import pfp_placeholder from "../../assets/images/pfp_placeholder.png";
 import "./Profile.css";
 
+/**
+ * Profile Component
+ *
+ * This component is used to display the user's profile, including their name, email, and profile picture,
+ * and also edit the profile's username and profile picture.
+ *
+ * State:
+ * - name (string): Stores the user's name.
+ * - email (string): Stores the user's email.
+ * - pfp (string): Stores the URL of the user's profile picture.
+ * - editMode (boolean): Indicates whether the user is in edit mode.
+ * - confirmedName (string): Stores the user's name that is confirmed after editing.
+ * - confirmedPfp (string): Stores the URL of the user's profile picture that is confirmed after editing.
+ *
+ * Components:
+ * - useAuth: A custom React hook from the AuthContext that manages authentication.
+ * - LogoutButton: A component that renders a logout button.
+ * - editUser: A function from userController that handles updating the user's profile.
+ * - pfp_placeholder: A placeholder image URL for the user's profile picture.
+ *
+ * Functions:
+ * - getInfo(): Fetches and sets the user's profile information from local storage.
+ * - handleSubmit(e: React.FormEvent<HTMLFormElement>): Handles the form submission for editing the user's profile.
+ * - handleCancel(): Handles the cancellation of profile editing.
+ * 
+ * @returns the view for the profile page of the website
+ *
+ */
 function Profile() {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
