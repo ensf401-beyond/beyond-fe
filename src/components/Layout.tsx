@@ -111,7 +111,7 @@ function Layout() {
                         nav("/profile");
                       }}
                     >
-                      <img id="profile-pic" src={pfp} alt="PFP" />
+                      <img id="profile-pic" src={pfp || pfp_placeholder} alt="PFP" />
                       <div className="profile-text">
                         <p id="profile-username">{name}</p>
                         <p id="profile-small">Profile</p>

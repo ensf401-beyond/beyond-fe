@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import LogoutButton from "../UserAuthentication/Login/LogoutButton";
-import { editUser } from "../../utils/userController";
+import { editUser, deleteUser } from "../../utils/userController";
 import pfp_placeholder from "../../assets/images/pfp_placeholder.png";
 import "./Profile.css";
 
@@ -44,6 +45,7 @@ function Profile() {
   const [confirmedPfp, setConfirmedPfp] = useState<string>("");
 
   const { handleLogout } = useAuth();
+  const navigate = useNavigate();
 
   const getInfo = () => {
     setEmail(localStorage.getItem("Email") || "");
@@ -87,6 +89,25 @@ function Profile() {
     setPfp(confirmedPfp);
   }
 
+  const handleDeleteProfile = async () => {
+    const isConfirmed = window.confirm('Are you sure you want to delete your profile? This cannot be undone.');
+    if (isConfirmed) {
+      setEditMode(false);
+      const response = await deleteUser({ email });
+      if (response && response.message === 'User deleted successfully') {
+        alert('Your profile has been successfully deleted.');
+        window.localStorage.setItem("Email", "");
+        localStorage.removeItem("Favourites");
+        sessionStorage.removeItem("isLoggedIn");
+        handleLogout();
+        window.dispatchEvent(new Event("loginEvent"));
+        navigate("/");
+      } else {
+        alert('There was an error deleting your profile.');
+      }
+    }
+  };
+
   return (
     <>
       <div className="profile-page">
@@ -127,6 +148,7 @@ function Profile() {
                   <div className="button-pair">
                     <button type="submit" className="small-button">Save Changes</button>
                     <button onClick={handleCancel} className="small-button">Cancel</button>
+                    <button onClick={handleDeleteProfile} className="small-button delete-button">Delete Profile</button>
                   </div>
                 </form>
               ) : (

@@ -73,4 +73,29 @@ async function editUser(data: userEditData): Promise<any> {
     });
 }
 
-export { loginUser, registerUser, editUser };
+async function deleteUser(data: { email: string }): Promise<any> {
+    console.log('delete user', data);
+
+    return fetch('https://pqzthzbhkepcvdwlrx7zvpgsaa0mjfqq.lambda-url.ca-central-1.on.aws/?email=' + encodeURIComponent(data.email), {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('User deleted:', data);
+        return data;
+    })
+    .catch(error => {
+        console.error('Error deleting user:', error);
+        throw error;
+    });
+}
+
+export { loginUser, registerUser, editUser, deleteUser };
