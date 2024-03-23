@@ -47,6 +47,8 @@ function Profile() {
       setConfirmedName(name);
       setConfirmedPfp(pfp);
       setEditMode(false);
+      const event = new Event('storage');
+      window.dispatchEvent(event);
       alert('Profile updated successfully');
     }
   };
@@ -72,7 +74,7 @@ function Profile() {
               <form className="profile-form" onSubmit={handleSubmit}>
                 <h1>Edit Profile</h1>
                 <div className="profile-field">
-                  <label htmlFor="pfp">Profile Picture: </label>
+                  <label htmlFor="pfp">Profile Picture URL: </label>
                   <input
                     type="text"
                     placeholder="New profile pic URL"

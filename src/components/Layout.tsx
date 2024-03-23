@@ -45,6 +45,8 @@ function Layout() {
   useEffect(() => {
     const handleStorageChange = () => {
       setIsLoggedIn(sessionStorage.getItem("isLoggedIn"));
+      setName(localStorage.getItem("Name") || "");
+      setPfp(localStorage.getItem("PFP") || "");
     };
 
     window.addEventListener("storage", handleStorageChange); // This will catch changes in sessionStorage across tabs.
