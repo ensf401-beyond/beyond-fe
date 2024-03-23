@@ -1,16 +1,22 @@
+import { useState } from "react";
 import "./CreateObj.css";
 
-/**
- * Clusters Component
- *
- * This component is in charge of displaying a grid consisting of all the cluster sky objects
- *
- * @returns a display of all the sky objects that are a cluster(s)
- */
 function CreateObj() {
+    const [name, setName] = useState("");
+    const [type, setType] = useState("");
+    const [mag, setMag] = useState("");
+    const [constellation, setConstellation] = useState("");
+    const [RA, setRA] = useState("");
+    const [DEC, setDEC] = useState("");
+    const [collection, setCollection] = useState("");
+    const [ngc, setNGC] = useState("");
+
+    
   return (
     <>
-      Create
+      <div className="creating-form">
+        
+      </div>
     </>
   );
 }
