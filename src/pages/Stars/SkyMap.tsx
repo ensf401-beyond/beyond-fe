@@ -86,7 +86,7 @@ function SkyMap() {
       star.ra = (star.ra / 360) * context.canvas.width;
       let mag = (Math.abs(star.magnitude)/ 5);
       mag += 0.5;
-      if (star.constellation === selected) {
+      if (star.constellation === selected || chosenNGC === star.ngc) {
         context.fillStyle = 'yellow';
         mag += 1;
       } else {
@@ -151,8 +151,8 @@ function SkyMap() {
             </select>
           </div>
           <p className="element">
-            <span>Name: </span>
-            {chosenObject}
+            <span>NGC: </span>
+            {chosenNGC}
           </p>
           {chosenObject === "" ? (
             <><span></span></>
