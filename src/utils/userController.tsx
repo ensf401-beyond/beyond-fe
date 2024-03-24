@@ -1,4 +1,4 @@
-import { userRegisterData, userLoginData, userEditData } from './dataClasses';
+import { userRegisterData, userLoginData, userEditData, userDeleteData } from './dataClasses';
 
 function loginUser(data : userLoginData) : Promise<any> {
 
@@ -73,14 +73,28 @@ async function editUser(data: userEditData): Promise<any> {
     });
 }
 
-async function deleteUser(data: { email: string }): Promise<any> {
+async function deleteUser(data: userDeleteData ) {
     console.log('delete user', data);
 
-    return fetch('https://pqzthzbhkepcvdwlrx7zvpgsaa0mjfqq.lambda-url.ca-central-1.on.aws/?email=' + encodeURIComponent(data.email), {
+    let headers = new Headers({
+        'Content-Type': 'application/json'
+    });
+
+    if (data.isGoogle) {
+        headers.append('Authorization', `Bearer ${data.access_token}`);
+    } else {
+        headers.append('Password', data.password);
+    }
+
+    const url = new URL('https://pqzthzbhkepcvdwlrx7zvpgsaa0mjfqq.lambda-url.ca-central-1.on.aws/');
+    url.searchParams.append('email', data.email);
+    if (!data.isGoogle) {
+        url.searchParams.append('password', data.password);
+    }
+
+    return fetch(url, {
         method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: headers
     })
     .then(response => {
         if (!response.ok) {

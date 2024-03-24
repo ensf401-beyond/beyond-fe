@@ -35,6 +35,11 @@ const Login = () => {
       return;
     }
 
+    localStorage.setItem("userData", JSON.stringify({
+      email: email,
+      password: password,
+      isGoogle: false,
+  }));
     localStorage.setItem("Email", email);
     localStorage.setItem("Name", res["username"]);
     localStorage.setItem("PFP", res["profilePic"]);

@@ -19,6 +19,13 @@ interface userEditData {
     profilePic: string;
 }
 
+interface userDeleteData {
+    email: string;
+    password: string;
+    isGoogle: boolean;
+    access_token: string;
+}
+
 interface objectMapData {
     ngc: number;
     constellation: string;
@@ -38,4 +45,4 @@ interface objectData {
     collection: string;
 }
 
-export type { userRegisterData, userLoginData, userEditData, objectMapData, objectData};
+export type { userRegisterData, userLoginData, userEditData, userDeleteData, objectMapData, objectData};
