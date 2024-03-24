@@ -126,9 +126,10 @@ function Grid({ isFavPage = false}) {
         <label htmlFor="constellation">Constellation:</label>
         <input type="text" id="constellation" name="constellation" />
 
+        <div>
         <button type="submit" onClick={search}>Search</button>
-        <div></div>
         <button type="reset" onClick={() => setFilteredData(data)}>Reset</button>
+        </div>
       </div>
       {overlayInfo.isVisible && (
         <div className="overlay" onClick={() => setOverlayInfo({ ...overlayInfo, isVisible: false })}>

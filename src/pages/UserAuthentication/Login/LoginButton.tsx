@@ -37,7 +37,7 @@ function LoginButton({ handleLogin }: LoginButtonProps) {
         }
 
 
-        let apiRes: String = await loginUser(userData);
+        let apiRes: String = await loginUser(userData, accessToken);
         console.log(apiRes);
 
         handleLogin();
