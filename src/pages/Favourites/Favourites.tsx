@@ -1,4 +1,5 @@
 import Grid from "../../components/Grid/Grid";
+import "./Favorites.css";
 
 /**
  * Favourites Component
@@ -11,7 +12,8 @@ import Grid from "../../components/Grid/Grid";
 function Favourites() {
   return (
     <>
-      <h1>Favourites</h1>
+      <h1 className="fav-header">Favourites</h1>
+      <Grid isFavPage={true}/>
     </>
   );
 }

@@ -4,6 +4,7 @@
     margin: 16px;
     border-radius: 8px;
     height: calc(100vh - 32px);
+    cursor: pointer;
 }
 
 .map-header {

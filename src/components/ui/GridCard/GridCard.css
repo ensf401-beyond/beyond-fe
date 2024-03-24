@@ -4,27 +4,29 @@
   justify-content: center;
   background-color: lightgray;
   min-height: 200px;
-  max-height: 400px;
-  border-radius: 10px;
+  max-height: 300px;
+  border-radius: 16px;
   transition: 0.3s ease-in-out;
   cursor: pointer;
 }
 
 .grid-card:hover {
-  box-shadow: 8px 8px 8px gray;
-  translate: -10px -10px;
+  box-shadow: 2px 2px 6px gray ;
+  translate: -4px -4px;
 }
 
 .sky-object-image {
   min-height: 80%;
   max-height: 80%;
   translate: 0 -12px;
+  border-radius: 16px 16px 0 0;
 }
 
 .grid-card-text {
   color: #1b1b1b;
   text-align: center;
-  padding-bottom: 5px;
+  padding-bottom: 16px;
+  height: auto;
 }
 
 .sky-object-name {

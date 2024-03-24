@@ -37,7 +37,7 @@ function getObjectData(id: string) : Promise<objectData> {
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            data = data[0];
+            data = data;
             let obj : objectData = {
                 ngc: data.ngc,
                 name: data.name,
