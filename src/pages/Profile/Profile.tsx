@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import LogoutButton from "../UserAuthentication/Login/LogoutButton";
-import { editUser } from "../../utils/userController";
+import { editUser, deleteUser } from "../../utils/userController";
 import pfp_placeholder from "../../assets/images/pfp_placeholder.png";
 import "./Profile.css";
 
@@ -30,6 +31,7 @@ import "./Profile.css";
  * - getInfo(): Fetches and sets the user's profile information from local storage.
  * - handleSubmit(e: React.FormEvent<HTMLFormElement>): Handles the form submission for editing the user's profile.
  * - handleCancel(): Handles the cancellation of profile editing.
+ * - handleDeleteProfile(): Handles the deletion of the user's profile.
  * 
  * @returns the view for the profile page of the website
  *
@@ -38,12 +40,19 @@ function Profile() {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [pfp, setPfp] = useState<string>("");
+  const userDataString = localStorage.getItem('userData');
+  const userData = userDataString ? JSON.parse(userDataString) : null;
+  const password = userData ? userData.password : "";
+  const isGoogle = userData ? userData.isGoogle : false;
+  const googleAccessToken = userData ? userData.googleAccessToken : "";
+  
   const [editMode, setEditMode] = useState(false);
 
   const [confirmedName, setConfirmedName] = useState<string>("");
   const [confirmedPfp, setConfirmedPfp] = useState<string>("");
 
   const { handleLogout } = useAuth();
+  const navigate = useNavigate();
 
   const getInfo = () => {
     setEmail(localStorage.getItem("Email") || "");
@@ -65,6 +74,9 @@ function Profile() {
       email,
       username: name,
       profilePic: pfp,
+      password: password,
+      isGoogle: isGoogle,
+      access_token: googleAccessToken
     };
     const response = await editUser(userData);
     if (response.error) {
@@ -86,6 +98,31 @@ function Profile() {
     setName(confirmedName);
     setPfp(confirmedPfp);
   }
+
+  const handleDeleteProfile = async () => {
+    const isConfirmed = window.confirm('Are you sure you want to delete your profile? This cannot be undone.');
+    if (isConfirmed) {
+      setEditMode(false);
+      const response = await deleteUser({ 
+        email, 
+        password: password, 
+        isGoogle: isGoogle, 
+        access_token: googleAccessToken 
+      });
+      if (response && response.message === 'User deleted successfully') {
+        alert('Your profile has been successfully deleted.');
+        window.localStorage.setItem("Email", "");
+        localStorage.removeItem("Favourites");
+        localStorage.removeItem("userData");
+        sessionStorage.removeItem("isLoggedIn");
+        handleLogout();
+        window.dispatchEvent(new Event("loginEvent"));
+        navigate("/");
+      } else {
+        alert('There was an error deleting your profile.');
+      }
+    }
+  };
 
   return (
     <>
@@ -127,6 +164,7 @@ function Profile() {
                   <div className="button-pair">
                     <button type="submit" className="small-button">Save Changes</button>
                     <button onClick={handleCancel} className="small-button">Cancel</button>
+                    <button onClick={handleDeleteProfile} className="small-button delete-button">Delete Profile</button>
                   </div>
                 </form>
               ) : (

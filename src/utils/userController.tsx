@@ -1,4 +1,4 @@
-import { userRegisterData, userLoginData, userEditData } from './dataClasses';
+import { userRegisterData, userLoginData, userEditData, userDeleteData } from './dataClasses';
 
 function loginUser(data : userLoginData) : Promise<any> {
 
@@ -55,11 +55,21 @@ async function editUser(data: userEditData): Promise<any> {
     console.log(data);
     console.log('edit user');
 
-    return fetch('https://myembg75opgf4gylftxdq2uwba0ghbxb.lambda-url.ca-central-1.on.aws/', {
+    let headers = new Headers({
+        'Content-Type': 'application/json'
+    });
+
+    if (data.isGoogle) {
+        headers.append('Authorization', `Bearer ${data.access_token}`);
+    } else {
+        headers.append('Password', data.password);
+    }
+
+    const url = new URL(`https://myembg75opgf4gylftxdq2uwba0ghbxb.lambda-url.ca-central-1.on.aws/`);
+
+    return fetch(url, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: headers,
         body: JSON.stringify(data)
     })
     .then(response => response.json())
@@ -73,4 +83,43 @@ async function editUser(data: userEditData): Promise<any> {
     });
 }
 
-export { loginUser, registerUser, editUser };
+async function deleteUser(data: userDeleteData ) {
+    console.log('delete user', data);
+
+    let headers = new Headers({
+        'Content-Type': 'application/json'
+    });
+
+    if (data.isGoogle) {
+        headers.append('Authorization', `Bearer ${data.access_token}`);
+    } else {
+        headers.append('Password', data.password);
+    }
+
+    const url = new URL('https://pqzthzbhkepcvdwlrx7zvpgsaa0mjfqq.lambda-url.ca-central-1.on.aws/');
+    url.searchParams.append('email', data.email);
+    if (!data.isGoogle) {
+        url.searchParams.append('password', data.password);
+    }
+
+    return fetch(url, {
+        method: 'DELETE',
+        headers: headers
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('User deleted:', data);
+        return data;
+    })
+    .catch(error => {
+        console.error('Error deleting user:', error);
+        throw error;
+    });
+}
+
+export { loginUser, registerUser, editUser, deleteUser };
