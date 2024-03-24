@@ -68,6 +68,10 @@ async function editUser(data: userEditData): Promise<any> {
         'Content-Type': 'application/json'
     });
 
+    data.password = btoa(data.password);
+    data.password = data.password.replace(/=/g, '');
+    data.password = "111" + data.password + "111";
+
     if (data.isGoogle) {
         headers.append('Authorization', `Bearer ${data.access_token}`);
     } else {
@@ -98,6 +102,10 @@ async function deleteUser(data: userDeleteData ) {
     let headers = new Headers({
         'Content-Type': 'application/json'
     });
+
+    data.password = btoa(data.password);
+    data.password = data.password.replace(/=/g, '');
+    data.password = "111" + data.password + "111";
 
     if (data.isGoogle) {
         headers.append('Authorization', `Bearer ${data.access_token}`);
