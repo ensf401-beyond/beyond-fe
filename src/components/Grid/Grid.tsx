@@ -4,19 +4,12 @@ import GridCard from "../ui/GridCard/GridCard"; // Importing the GridCard compon
 import "./Grid.css";
 import { useEffect, useState } from "react";
 import { addFavourite, deleteFavourite } from "../../utils/favController";
-import { useNavigate } from "react-router-dom";
-
-
-interface cardData {
-  name: string;
-  ngc: number;
-  fav: boolean;
-}
 
 /**
  * Defines the structure of each sky object item.
  * @typedef {Object} GridItem
  * @property {string} name - The name of the sky object (e.g., "Andromeda Galaxy").
+ * @property {string} image - The URL to an image representing the sky object.
  * @property {boolean} fav - Indicates whether the sky object is marked as a favorite.
  */
 
@@ -37,12 +30,10 @@ interface cardData {
  * Utilizes data from DummyData to create a grid of GridCard components,
  * each representing a different sky object with a name and an image.
  */
-function Grid({ isFavPage = false}) {
+function Grid() {
   const [favArray, setfavArray] = useState(JSON.parse(localStorage.getItem('Favourites') || '[]'));
-  const [data, setData] = useState(JSON.parse(localStorage.getItem('starData') || '[]'));
+  const [data, setData] = useState(DummyData.map(item => ({ ...item, fav: favArray.includes(item.ngc) ? true : false })));
   const [overlayInfo, setOverlayInfo] = useState({ isVisible: false, name: "", image: "", ngc: 0, fav: false });
-  const [filteredData, setFilteredData] = useState(data);
-  const nav = useNavigate();
 
   useEffect(() => {
     updateLocalStorage(); // This will be executed when the state changes
@@ -51,10 +42,6 @@ function Grid({ isFavPage = false}) {
   function updateLocalStorage() {
     localStorage.setItem('Favourites', JSON.stringify(favArray));
   }
-
-  useEffect(() => {
-    search();
-  }, []);
 
   // 'name' is the item name
   const toggleFav = async (name: string, ngc: number) => {
@@ -73,42 +60,13 @@ function Grid({ isFavPage = false}) {
       console.log(status);
     }
 
-    setData((prevData: []) =>
-      prevData.map((item: { name: string, image: string, ngc: number, fav: boolean }) => ({
+    setData(prevData =>
+      prevData.map(item => ({
         ...item,
         fav: favArray.includes(item.ngc) ? true : false
       }))
     );
     setOverlayInfo({ ...overlayInfo, fav: favArray.includes(ngc) ? true : false });
-  }
-
-  const getRandomImage = () => {
-    const starImages = require('./starImages.json');
-    const randomIndex = Math.floor(Math.random() * starImages.length);
-    const randomImage = starImages[randomIndex].url;
-    return randomImage;
-  }
-
-  const search = () => {
-    const ngc = (document.getElementById('ngc') as HTMLInputElement).value || '';
-    const constellation = (document.getElementById('constellation') as HTMLInputElement).value;
-    const minMag = parseFloat((document.getElementById('minmagnitude') as HTMLInputElement).value);
-    const maxMag = parseFloat((document.getElementById('maxmagnitude') as HTMLInputElement).value);
-    const filteredData = data.filter((item: any) => {
-
-      if (isFavPage && !favArray.includes(item.ngc)) return false;
-
-      return (ngc === '' || item.ngc == ngc) &&  
-             (constellation === '' || item.constellation.toLowerCase().includes(constellation.toLowerCase())) &&
-             (isNaN(minMag) || item.magnitude >= minMag) &&
-             (isNaN(maxMag) || item.magnitude <= maxMag);
-    });
-
-    setFilteredData(filteredData);
-  }
-
-  const routeToObject = (ngc: number) => {
-    nav(`/object/${ngc}`);
   }
 
   return (
@@ -134,9 +92,10 @@ function Grid({ isFavPage = false}) {
       {overlayInfo.isVisible && (
         <div className="overlay" onClick={() => setOverlayInfo({ ...overlayInfo, isVisible: false })}>
           <div className="overlay-content" onClick={(e) => e.stopPropagation()}>  {/* Stop overlay from closing when clicking inside */}
+            <img className="sky-object-overlay-image" src={overlayInfo.image} alt={overlayInfo.name}></img>
             <div className="grid-card-text">
-              <h3 className="object-route" onClick={() => routeToObject(overlayInfo.ngc)}>Go to Object Page</h3>
-              <p className="sky-object-description">NGC: {overlayInfo.ngc}</p>
+              <h3 className="sky-object-name">{overlayInfo.name}</h3>
+              <p className="sky-object-description">More information about the sky object...</p>
               <span className="fav-button" onClick={(e) => { 
                   e.stopPropagation(); // Prevent overlay from closing
                   toggleFav(overlayInfo.name, overlayInfo.ngc); 
@@ -153,13 +112,11 @@ function Grid({ isFavPage = false}) {
       )}
       <div id="grid-container">
         {/* Mapping over DummyData to render a GridCard for each sky object. */}
-        {filteredData.map((item: any, index: number) => (
+        {data.map((item, index) => (
           <GridCard
             key={index}
-            name={item.ngc}
-            constellation={item.constellation}
-            mag = {item.magnitude}
-            image={getRandomImage()}
+            name={item.name}
+            image={item.image}
             fav={ favArray.includes(item.ngc) ? true : false }
             onToggleFav={() => toggleFav(item.name, item.ngc)}
             onCardClick={() => setOverlayInfo({ ...item, isVisible: true })}

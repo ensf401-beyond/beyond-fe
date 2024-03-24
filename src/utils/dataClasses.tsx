@@ -17,6 +17,16 @@ interface userEditData {
     email: string;
     username: string;
     profilePic: string;
+    password: string;
+    isGoogle: boolean;
+    access_token: string;
+}
+
+interface userDeleteData {
+    email: string;
+    password: string;
+    isGoogle: boolean;
+    access_token: string;
 }
 
 interface objectMapData {
@@ -38,4 +48,4 @@ interface objectData {
     collection: string;
 }
 
-export type { userRegisterData, userLoginData, userEditData, objectMapData, objectData};
+export type { userRegisterData, userLoginData, userEditData, userDeleteData, objectMapData, objectData};

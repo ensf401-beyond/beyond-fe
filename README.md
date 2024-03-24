@@ -1,14 +1,26 @@
-# Beyond Frontend Repository
+<h1 align="center">
+	<img
+		width="300"
+		alt="BEYOND logo with planet as the O"
+		src="src/assets/images/BEYOND%20Light%20Mode.png"
+  >
+</h1>
 
-frontend for beyond sky catalog web app
+<h3 align="center">
+	Frontend repository for the BEYOND space catalog web application
+</h3>
+
+<p align="center">
+	View our deployed site at <a href="https://beyond-the-stars.netlify.app/">https://beyond-the-stars.netlify.app/</a>
+</p>
 
 ## Features
 
-Users are able to browse sky objects such as stars and nebulae, users can favourite sky objects to add to their own personal collection, users can view a sky map that shows the locations of the sky objects.
+Users are able to browse sky objects such as stars and nebulae. Users can favourite sky objects to add to their own personal collection. Users can view a sky map that shows the locations of the sky objects.
 
-## How to run
+## How to run the site locally
 
-1. clone the repo
-2. run `cd beyond-frontend`
-3. run `npm install`
-4. then finally, `npm start`
+1. Clone the repo
+2. Run `cd src`
+3. Run `npm install`
+4. Finally, run `npm start` to view the site at http://localhost:3000

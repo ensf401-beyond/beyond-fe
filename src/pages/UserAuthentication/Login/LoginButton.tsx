@@ -26,6 +26,11 @@ function LoginButton({ handleLogin }: LoginButtonProps) {
         });
 
         const userProfile = res.data;
+        localStorage.setItem("userData", JSON.stringify({
+          email: userProfile.email,
+          isGoogle: true,
+          googleAccessToken: accessToken,
+        }));
         window.localStorage.setItem("Email", userProfile.email);
         window.localStorage.setItem("Name", userProfile.name);
         window.localStorage.setItem("PFP", userProfile.picture);

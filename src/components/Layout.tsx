@@ -9,7 +9,6 @@ import Navbar from "./Navbar/Navbar";
 import { useAuth } from "../contexts/AuthContext";
 import StartPage from "../pages/StartPage/StartPage";
 import pfp_placeholder from "../assets/images/pfp_placeholder.png";
-import { getMappedData } from "../utils/starMapController";
 
 export const ThemeContext = createContext<ThemeContextType | null>(null);
 
@@ -36,30 +35,16 @@ type ThemeContextType = {
  */
 function Layout() {
   const [theme, setTheme] = useState("dark");
-  const [starData, setStarData] = useState(localStorage.getItem("starData") || "");
   const nav = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(
     sessionStorage.getItem("isLoggedIn")
   );
   const [isGuest, setIsGuest] = useState(false);
 
-
-  
   // Toggles the current theme between 'light' and 'dark' modes and updates the application state accordingly.
   const toggleTheme = () => {
     setTheme((curr) => (curr === "light" ? "dark" : "light"));
   };
-
-  const loadData = async () => {
-    if(starData === "") {
-      console.log('getting data');
-      await getMappedData().then((data) => {
-        localStorage.setItem("starData", JSON.stringify(data));
-        setStarData(JSON.stringify(data));
-      });
-      window.location.reload();
-    }
-  }
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -70,8 +55,6 @@ function Layout() {
 
     window.addEventListener("storage", handleStorageChange); // This will catch changes in sessionStorage across tabs.
     window.addEventListener("loginEvent", handleStorageChange); // This will catch our custom login/logout events.
-
-    loadData();
 
     return () => {
       window.removeEventListener("storage", handleStorageChange);
@@ -128,7 +111,7 @@ function Layout() {
                         nav("/profile");
                       }}
                     >
-                      <img id="profile-pic" src={pfp} alt="PFP" />
+                      <img id="profile-pic" src={pfp || pfp_placeholder} alt="PFP" />
                       <div className="profile-text">
                         <p id="profile-username">{name}</p>
                         <p id="profile-small">Profile</p>
