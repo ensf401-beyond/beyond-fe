@@ -17,6 +17,9 @@ interface userEditData {
     email: string;
     username: string;
     profilePic: string;
+    password: string;
+    isGoogle: boolean;
+    access_token: string;
 }
 
 interface userDeleteData {

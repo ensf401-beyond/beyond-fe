@@ -74,6 +74,9 @@ function Profile() {
       email,
       username: name,
       profilePic: pfp,
+      password: password,
+      isGoogle: isGoogle,
+      access_token: googleAccessToken
     };
     const response = await editUser(userData);
     if (response.error) {

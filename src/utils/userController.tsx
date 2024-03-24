@@ -55,11 +55,21 @@ async function editUser(data: userEditData): Promise<any> {
     console.log(data);
     console.log('edit user');
 
-    return fetch('https://myembg75opgf4gylftxdq2uwba0ghbxb.lambda-url.ca-central-1.on.aws/', {
+    let headers = new Headers({
+        'Content-Type': 'application/json'
+    });
+
+    if (data.isGoogle) {
+        headers.append('Authorization', `Bearer ${data.access_token}`);
+    } else {
+        headers.append('Password', data.password);
+    }
+
+    const url = new URL(`https://myembg75opgf4gylftxdq2uwba0ghbxb.lambda-url.ca-central-1.on.aws/`);
+
+    return fetch(url, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: headers,
         body: JSON.stringify(data)
     })
     .then(response => response.json())
