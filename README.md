@@ -16,7 +16,8 @@
 
 ## Features
 
-Users are able to browse sky objects such as stars and nebulae. Users can favourite sky objects to add to their own personal collection. Users can view a sky map that shows the locations of the sky objects.
+Users are able to browse sky objects such as stars and nebulae. Users can favourite sky objects to add to their own personal collection. Users can view a sky map that shows the locations of the sky objects. 
+Users are also able to create new sky objects that are not already in the system.
 
 ## How to run the site locally
 
