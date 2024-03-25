@@ -4,6 +4,8 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #1b1b1b;
+  color: #f8fafd;
 }
 
 body {
@@ -11,26 +13,11 @@ body {
   padding: 0;
 }
 
-#light {
-  background: #f8fafd;
-  color: #1b1b1b;
-}
-
-#dark {
-  background-color: #1b1b1b;
-  color: #f8fafd;
-}
-
-#light,
-#dark {
-  transition: background-color 0.3s ease;
-}
-
 #header {
   display: flex;
   align-items: center;
   padding: 10px;
-  background-color: #171717;
+  background-color: #101010;
 }
 
 #logo {
@@ -53,22 +40,6 @@ body {
   width: 100px;
   height: 100px;
   right: 92%;
-}
-
-.mode-button {
-  background: none;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  margin-left: auto;
-}
-
-#light .mode-button {
-  color: #1b1b1b;
-}
-
-#dark .mode-button {
-  color: #f8fafd;
 }
 
 #guest-login-button {
@@ -95,14 +66,7 @@ body {
 .page-title {
   padding-left: 30px;
   padding-right: 30px;
-}
-
-#dark .page-title {
   color: #f8fafd;
-}
-
-#light .page-title {
-  color: #1b1b1b;
 }
 
 .profile-button {
@@ -162,7 +126,7 @@ main {
 }
 
 footer {
-  background-color: #171717;
+  background-color: #101010;
   display: flex;
   align-items: center;
   width: 100%;
@@ -187,8 +151,4 @@ footer {
   font-size: small;
   font-weight: normal;
   cursor: pointer;
-}
-
-#light .footer-features {
-  color: #f8fafd;
 }

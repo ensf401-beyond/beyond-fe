@@ -12,11 +12,9 @@ function SkyObjects() {
     <>
       <div className="page-header">
         <h1 className="page-title">SkyObjects</h1>
-        <div className="search-bar-container">
-          
-        </div>
+        <div className="search-bar-container"></div>
       </div>
-      <Grid isFavPage={false}/>
+      <Grid isFavPage={false} />
     </>
   );
 }

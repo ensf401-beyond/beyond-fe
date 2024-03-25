@@ -8,9 +8,11 @@ import React, {
 
 // Define the shape of the context's value
 interface AuthContextType {
+  isGuest: boolean;
   isLoggedIn: boolean;
   handleLogin: () => void;
   handleLogout: () => void;
+  handleGuestUser: () => void;
 }
 
 // Create the context with a default undefined value
@@ -26,12 +28,27 @@ export const AuthProvider: FunctionComponent<AuthProviderProps> = ({
   children,
 }) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isGuest, setIsGuest] = useState<boolean>(false);
 
-  const handleLogin = () => setIsLoggedIn(true);
+  const handleLogin = () => {
+    if (isGuest) {
+      setIsGuest(false);
+    }
+    setIsLoggedIn(true);
+  };
   const handleLogout = () => setIsLoggedIn(false);
+  const handleGuestUser = () => setIsGuest(true);
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, handleLogin, handleLogout }}>
+    <AuthContext.Provider
+      value={{
+        isGuest,
+        isLoggedIn,
+        handleLogin,
+        handleLogout,
+        handleGuestUser,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
