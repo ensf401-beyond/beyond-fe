@@ -33,20 +33,9 @@
   cursor: pointer;
   padding: 10px;
   border-radius: 20px;
+  color: #f8fafd;
 }
 
 .row:hover {
   background-color: #2d3139;
-}
-
-#dark .row {
-  color: #f8fafd;
-}
-
-#light .row {
-  color: #1b1b1b;
-}
-
-#light .row:hover {
-  background-color: #e1895f;
 }

@@ -36,30 +36,31 @@ type ThemeContextType = {
  */
 function Layout() {
   const [theme, setTheme] = useState("dark");
-  const [starData, setStarData] = useState(localStorage.getItem("starData") || "");
+  const [starData, setStarData] = useState(
+    localStorage.getItem("starData") || ""
+  );
   const nav = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(
     sessionStorage.getItem("isLoggedIn")
   );
-  const [isGuest, setIsGuest] = useState(false);
 
+  const { isGuest, handleGuestUser } = useAuth();
 
-  
   // Toggles the current theme between 'light' and 'dark' modes and updates the application state accordingly.
   const toggleTheme = () => {
     setTheme((curr) => (curr === "light" ? "dark" : "light"));
   };
 
   const loadData = async () => {
-    if(starData === "") {
-      console.log('getting data');
+    if (starData === "") {
+      console.log("getting data");
       await getMappedData().then((data) => {
         localStorage.setItem("starData", JSON.stringify(data));
         setStarData(JSON.stringify(data));
       });
       window.location.reload();
     }
-  }
+  };
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -86,10 +87,6 @@ function Layout() {
     }
   };
 
-  const handleGuestUser = () => {
-    setIsGuest(true);
-  };
-
   const [name, setName] = useState<string>("");
   const [pfp, setPfp] = useState<string>("");
 
@@ -107,91 +104,81 @@ function Layout() {
       {!isLoggedIn && !isGuest ? (
         <StartPage handleGuestUser={handleGuestUser} />
       ) : (
-        <ThemeContext.Provider value={{ theme, toggleTheme }}>
-          <div id={theme} className="app">
-            <div id="header">
-              <img
-                id="logo"
-                src={theme === "light" ? lightLogo : darkLogo}
-                alt="logo"
-                onClick={() => {
-                  nav("/");
-                }}
-              ></img>
-              <Navbar />
-              <div className="button-group">
-                {isLoggedIn ? (
-                  <div id="profile">
-                    <button
-                      className="profile-button"
-                      onClick={() => {
-                        nav("/profile");
-                      }}
-                    >
-                      <img id="profile-pic" src={pfp || pfp_placeholder} alt="PFP" />
-                      <div className="profile-text">
-                        <p id="profile-username">{name}</p>
-                        <p id="profile-small">Profile</p>
-                      </div>
-                    </button>
-                  </div>
-                ) : (
+        <div className="app">
+          <div id="header">
+            <img
+              id="logo"
+              src={darkLogo}
+              alt="logo"
+              onClick={() => {
+                nav("/");
+              }}
+            ></img>
+            <Navbar />
+            <div className="button-group">
+              {isLoggedIn ? (
+                <div id="profile">
                   <button
-                    id="guest-login-button"
                     className="profile-button"
                     onClick={() => {
-                      nav("/login");
+                      nav("/profile");
                     }}
                   >
-                    Log In
+                    <img
+                      id="profile-pic"
+                      src={pfp || pfp_placeholder}
+                      alt="PFP"
+                    />
+                    <div className="profile-text">
+                      <p id="profile-username">{name}</p>
+                      <p id="profile-small">Profile</p>
+                    </div>
                   </button>
-                )}
-                <button className="mode-button" onClick={toggleTheme}>
-                  {theme === "light" ? <DarkModeIcon /> : <LightModeIcon />}
+                </div>
+              ) : (
+                <button
+                  id="guest-login-button"
+                  className="profile-button"
+                  onClick={() => {
+                    nav("/login");
+                  }}
+                >
+                  Log In
                 </button>
-              </div>
+              )}
             </div>
-            <main>
-              <Outlet />
-            </main>
-            <footer>
-              <img id="footer-logo" src={darkLogo} alt="logo" />
-              <p id="copyright-logo">&#169;</p>
-              <div className="footer-features">
-                Discover
-                <p className="feature" onClick={handleClick} data-path="/">
-                  Home
-                </p>
-                <p
-                  className="feature"
-                  onClick={handleClick}
-                  data-path="/sky-objects"
-                >
-                  Sky Objects
-                </p>
-                <p
-                  className="feature"
-                  onClick={handleClick}
-                  data-path="/sky-map"
-                >
-                  Sky Map
-                </p>
-                <p
-                  className="feature"
-                  onClick={handleClick}
-                  data-path="/favourites"
-                >
-                  Favourites
-                </p>
-              </div>
-              <div className="footer-features">
-                
-                <p className="feature"></p>
-                <p className="feature"></p>
-              </div>
-            </footer>
           </div>
-        </ThemeContext.Provider>
+          <main>
+            <Outlet />
+          </main>
+          <footer>
+            <img id="footer-logo" src={darkLogo} alt="logo" />
+            <p id="copyright-logo">&#169;</p>
+            <div className="footer-features">
+              Discover
+              <p className="feature" onClick={handleClick} data-path="/">
+                Home
+              </p>
+              <p
+                className="feature"
+                onClick={handleClick}
+                data-path="/sky-objects"
+              >
+                Sky Objects
+              </p>
+              <p className="feature" onClick={handleClick} data-path="/sky-map">
+                Sky Map
+              </p>
+              <p
+                className="feature"
+                onClick={handleClick}
+                data-path="/favourites"
+              >
+                Favourites
+              </p>
+            </div>
+          </footer>
+        </div>
       )}
     </>
   );

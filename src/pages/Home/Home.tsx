@@ -6,6 +6,7 @@ import astronaut from "../../assets/images/astronaut.jpg";
 import skyMap from "../../assets/images/sky-map.jpg";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
+import { useAuth } from "../../contexts/AuthContext";
 
 /**
  * Home Component
@@ -20,6 +21,8 @@ import "./Home.css";
  */
 function Home() {
   const navigate = useNavigate();
+
+  const { isGuest } = useAuth();
 
   const handleClick = () => {
     navigate("/register");
@@ -131,22 +134,24 @@ function Home() {
             </button>
           </div>
         </section>
-        <section id="call-to-action" className="section-container">
-          <div id="call-to-action-container">
-            <p id="call-to-action-text">Create an account today</p>
-            <p id="call-to-action-subtext">
-              and start your adventure into space, saving all your favourite sky
-              objects into your own personal collection
-            </p>
-            <button
-              id="call-to-action-button"
-              className="home-button"
-              onClick={handleClick}
-            >
-              Begin Your Journey Today
-            </button>
-          </div>
-        </section>
+        {isGuest && (
+          <section id="call-to-action" className="section-container">
+            <div id="call-to-action-container">
+              <p id="call-to-action-text">Create an account today</p>
+              <p id="call-to-action-subtext">
+                and start your adventure into space, saving all your favourite
+                sky objects into your own personal collection
+              </p>
+              <button
+                id="call-to-action-button"
+                className="home-button"
+                onClick={handleClick}
+              >
+                Begin Your Journey Today
+              </button>
+            </div>
+          </section>
+        )}
       </div>
     </>
   );
