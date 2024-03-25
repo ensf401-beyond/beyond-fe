@@ -27,12 +27,6 @@ function LoginButton({ handleLogin, setErrMessage }: LoginButtonProps) {
         });
 
         const userProfile = res.data;
-        localStorage.setItem("userData", JSON.stringify({
-          email: userProfile.email,
-          isGoogle: true,
-          googleAccessToken: accessToken,
-        }));
-        window.localStorage.setItem("Email", userProfile.email);
 
         let userData : userLoginData = {
           email: userProfile.email,
@@ -50,6 +44,14 @@ function LoginButton({ handleLogin, setErrMessage }: LoginButtonProps) {
           }
           return;
         }
+
+        localStorage.setItem("userData", JSON.stringify({
+          email: userProfile.email,
+          isGoogle: true,
+          googleAccessToken: accessToken,
+        }));
+        window.localStorage.setItem("Email", userProfile.email);
+
         localStorage.setItem("Name", apiRes["username"] ? apiRes["username"] : userProfile.name);
         localStorage.setItem("PFP", apiRes["profilePic"] ? apiRes["profilePic"] : userProfile.picture);
 
