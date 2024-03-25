@@ -32,8 +32,6 @@ function LoginButton({ handleLogin }: LoginButtonProps) {
           googleAccessToken: accessToken,
         }));
         window.localStorage.setItem("Email", userProfile.email);
-        window.localStorage.setItem("Name", userProfile.name);
-        window.localStorage.setItem("PFP", userProfile.picture);
 
         let userData : userLoginData = {
           email: userProfile.email,
@@ -41,9 +39,10 @@ function LoginButton({ handleLogin }: LoginButtonProps) {
           isGoogle: true
         }
 
-
-        let apiRes: String = await loginUser(userData, accessToken);
+        const apiRes = await loginUser(userData, accessToken);
         console.log(apiRes);
+        localStorage.setItem("Name", apiRes["username"] ? apiRes["username"] : userProfile.name);
+        localStorage.setItem("PFP", apiRes["profilePic"] ? apiRes["profilePic"] : userProfile.picture);
 
         handleLogin();
         sessionStorage.setItem("isLoggedIn", 'true');
