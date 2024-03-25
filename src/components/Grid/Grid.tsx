@@ -39,8 +39,26 @@ interface cardData {
  */
 function Grid({ isFavPage = false}) {
   const [favArray, setfavArray] = useState(JSON.parse(localStorage.getItem('Favourites') || '[]'));
-  const [data, setData] = useState(JSON.parse(localStorage.getItem('starData') || '[]'));
+
+  const getRandomImage = () => {
+    const starImages = require('./starImages.json');
+    const randomIndex = Math.floor(Math.random() * starImages.length);
+    const randomImage = starImages[randomIndex].url;
+    return randomImage;
+  }
+
+  const addImages = (data: any) => {
+    return data.map((item: any) => {
+      let url = getRandomImage();
+      return { ...item, image: url};
+    });
+  }
+  const [data, setData] = useState(addImages(JSON.parse(localStorage.getItem('starData') || '[]')));
   const [overlayInfo, setOverlayInfo] = useState({ isVisible: false, name: "", image: "", ngc: 0, fav: false });
+
+  
+
+
   const [filteredData, setFilteredData] = useState(data);
   const nav = useNavigate();
 
@@ -82,12 +100,7 @@ function Grid({ isFavPage = false}) {
     setOverlayInfo({ ...overlayInfo, fav: favArray.includes(ngc) ? true : false });
   }
 
-  const getRandomImage = () => {
-    const starImages = require('./starImages.json');
-    const randomIndex = Math.floor(Math.random() * starImages.length);
-    const randomImage = starImages[randomIndex].url;
-    return randomImage;
-  }
+  
 
   const search = () => {
     const ngc = (document.getElementById('ngc') as HTMLInputElement).value || '';
@@ -159,7 +172,7 @@ function Grid({ isFavPage = false}) {
             name={item.ngc}
             constellation={item.constellation}
             mag = {item.magnitude}
-            image={getRandomImage()}
+            image={item.image}
             fav={ favArray.includes(item.ngc) ? true : false }
             onToggleFav={() => toggleFav(item.name, item.ngc)}
             onCardClick={() => setOverlayInfo({ ...item, isVisible: true })}

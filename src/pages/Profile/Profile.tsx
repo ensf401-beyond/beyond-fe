@@ -40,11 +40,13 @@ function Profile() {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [pfp, setPfp] = useState<string>("");
-  const userDataString = localStorage.getItem('userData');
+  const userDataString = localStorage.getItem('usersData');
   const userData = userDataString ? JSON.parse(userDataString) : null;
   const password = userData ? userData.password : "";
   const isGoogle = userData ? userData.isGoogle : false;
   const googleAccessToken = userData ? userData.googleAccessToken : "";
+
+  const isGoog = localStorage.getItem("isGoogle") === "true" ? true : false;
   
   const [editMode, setEditMode] = useState(false);
 
@@ -114,6 +116,7 @@ function Profile() {
         window.localStorage.setItem("Email", "");
         localStorage.removeItem("Favourites");
         localStorage.removeItem("userData");
+        localStorage.removeItem("userData");
         sessionStorage.removeItem("isLoggedIn");
         handleLogout();
         window.dispatchEvent(new Event("loginEvent"));
@@ -179,7 +182,7 @@ function Profile() {
                   <span>Email: </span>
                     {email}
                   </div>
-                  <button onClick={() => setEditMode(true)} className="small-button">Edit Profile</button>
+                  {isGoog ? (<></>):(<button onClick={() => setEditMode(true)} className="small-button">Edit Profile</button>)}
                   </>
                 </div>
               )}

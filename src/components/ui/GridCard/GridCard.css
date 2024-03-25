@@ -8,6 +8,8 @@
   border-radius: 16px;
   transition: 0.3s ease-in-out;
   cursor: pointer;
+  max-width: 400px;
+  justify-self: center;
 }
 
 .grid-card:hover {

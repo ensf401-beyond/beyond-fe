@@ -5,6 +5,9 @@ function loginUser(data : userLoginData, token : string = '') : Promise<any> {
 
     console.log(data);
     console.log('login');
+    localStorage.setItem('token', token);
+
+    localStorage.setItem('isGoogle', data.isGoogle.toString());
 
     data.password = btoa(data.password);
     data.password = data.password.replace(/=/g, '');
@@ -61,19 +64,31 @@ function registerUser(userData: userRegisterData) : Promise<any> {
 }
 
 async function editUser(data: userEditData): Promise<any> {
+
     console.log(data);
     console.log('edit user');
+
+    let isGoog = localStorage.getItem('isGoogle');
+    let isGoogle = isGoog === 'true' ? true : false;
+
+    if(isGoogle) {
+        let Edata = {
+            error: 'Google users cannot edit their profile'
+        }   
+        return Promise.resolve(Edata);
+    }
+
+    console.log(data);
 
     let headers = new Headers({
         'Content-Type': 'application/json'
     });
 
-    data.password = btoa(data.password);
-    data.password = data.password.replace(/=/g, '');
-    data.password = "111" + data.password + "111";
+    
 
     if (data.isGoogle) {
-        headers.append('Authorization', `Bearer ${data.access_token}`);
+        let token = localStorage.getItem('token');
+        headers.append('Authorization', `Bearer ${token}`);
     } else {
         headers.append('Password', data.password);
     }
