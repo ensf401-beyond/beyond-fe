@@ -5,9 +5,9 @@ import "./Favorites.css";
  * Favourites Component
  *
  * This component is in charge of rendering the view for all 'favourited' sky objects in the data.
- * It manages the sky object data in the model and handles user input/interaction in the UI.
+ * It displays the grid of sky objects that have been marked as 'favourites'.
  *
- * @returns The view of all the 'favourited''sky objects
+ * @returns The view of all the 'favourited' sky objects
  */
 function Favourites() {
   return (

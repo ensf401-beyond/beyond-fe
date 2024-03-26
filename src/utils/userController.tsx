@@ -1,7 +1,9 @@
 import { userRegisterData, userLoginData, userEditData, userDeleteData } from './dataClasses';
 
-function loginUser(data : userLoginData, token : string = '') : Promise<any> {
+// This controller component is in charge of handling all user related requests to the backend.
 
+// Function to log in a user
+function loginUser(data : userLoginData, token : string = '') : Promise<any> {
 
     console.log(data);
     console.log('login');
@@ -33,6 +35,7 @@ function loginUser(data : userLoginData, token : string = '') : Promise<any> {
             });
 }
 
+// Function to register a user
 function registerUser(userData: userRegisterData) : Promise<any> {
 
     console.log(userData);
@@ -63,6 +66,7 @@ function registerUser(userData: userRegisterData) : Promise<any> {
             });
 }
 
+// Function to edit a user
 async function editUser(data: userEditData): Promise<any> {
     console.log(data);
     console.log('edit user');
@@ -99,6 +103,7 @@ async function editUser(data: userEditData): Promise<any> {
     });
 }
 
+// Function to delete a user
 async function deleteUser(data: userDeleteData ) {
     console.log('delete user', data);
 

@@ -1,3 +1,6 @@
+// This file contains the functions that interact with the AWS Lambda functions for the favourites
+
+// Function to get the favourites from the database
 function getFavourites(email : string) : Promise<any> {
     console.log('getting favourites');
 
@@ -20,6 +23,7 @@ function getFavourites(email : string) : Promise<any> {
         });
 }
 
+// Function to add a favourite to the database
 function addFavourite(email : string, ngc : number) : Promise<any> {
     console.log('adding favourite');
 
@@ -44,6 +48,7 @@ function addFavourite(email : string, ngc : number) : Promise<any> {
         });
 }
 
+// Function to delete a favourite from the database
 function deleteFavourite(email : string, ngc : number) : Promise<any> {
     console.log('deleting favourite');
 
@@ -64,5 +69,4 @@ function deleteFavourite(email : string, ngc : number) : Promise<any> {
         });
 }
  
-
 export { getFavourites, addFavourite, deleteFavourite };

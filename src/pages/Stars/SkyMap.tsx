@@ -1,9 +1,28 @@
-import Grid from "../../components/Grid/Grid";
 import "./SkyMap.css";
 import React, { useEffect, useRef, useState } from "react";
 import { getMappedData } from "../../utils/starMapController";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
+/**
+ * SkyMap Component
+ *
+ * This component displays a sky map with stars and constellations.
+ * Users can click on stars to view more details about them.
+ *
+ * State:
+ * - starData (string): The JSON string representation of the star data retrieved from the API.
+ * - chosenObject (string): The name of the selected star object.
+ * - chosenNGC (string): The NGC code of the selected star object.
+ * - constellations (string[]): The list of constellations present in the star data.
+ *
+ * Functions:
+ * - getConstellations: () => string[] - Retrieves the list of constellations from the star data.
+ * - redraw: () => void - Redraws the sky map with updated star data.
+ * - openFullscreen: () => void - Opens the sky map in fullscreen mode.
+ * - navToPage: () => void - Navigates to the object page for the selected star object.
+ *
+ * @returns the view for the sky map page
+ */
 function SkyMap() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [starData, setStarData] = useState(localStorage.getItem("starData") || "");
@@ -11,7 +30,7 @@ function SkyMap() {
   const [chosenNGC, setChosenNGC] = useState("");
   const nav = useNavigate();
 
-
+  // Function to retrieve the list of constellations from the star data
   let getConstellations = () => {
     if (starData === "") return ["None"];
     let temp = ["None"] as any[];
@@ -24,7 +43,7 @@ function SkyMap() {
   }
   const [constellations, setConstellations] = useState(getConstellations());
 
-
+  // Function to redraw the sky map with updated star data
   let redraw = async () => {
     console.log('redrawing');
 
@@ -53,11 +72,11 @@ function SkyMap() {
     // Normalize coordinate system to use css pixels.
     context.scale(scale, scale);
     
-
+    // Clear the canvas
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.fillStyle = 'white';
 
-    
+    // Draw stars
     while (starData === "") {
       await new Promise(r => setTimeout(r, 1000));
     }
@@ -96,6 +115,7 @@ function SkyMap() {
       context.fill();
     })
 
+    // Draw constellations
     canvas.addEventListener('mousedown', (event) => {
       const rect = canvas.getBoundingClientRect();
       const x = event.clientX - rect.left;
@@ -125,6 +145,7 @@ function SkyMap() {
     redraw();
   }, [starData]);
 
+  // Function to open the sky map in fullscreen mode
   function openFullscreen() {
     let elem = document.getElementById("skyMap");
     if (!elem) return;
@@ -133,10 +154,10 @@ function SkyMap() {
     }
   }
 
+  // Function to navigate to the object page for the selected star object
   const navToPage = () => {
     nav(`/object/${chosenNGC}`);
   }
-
 
   return (
     <>

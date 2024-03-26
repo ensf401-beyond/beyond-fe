@@ -3,6 +3,33 @@ import "./CreateObj.css";
 import { objectData } from "../../utils/dataClasses";
 import { addObject } from "../../utils/creationController";
 
+/**
+ * CreateObj Component
+ *
+ * This component provides a form for users to create a new sky object.
+ * The form includes fields for the object's name, type, magnitude, constellation,
+ * right ascension (RA), declination (DEC), collection, and NGC number.
+ * 
+ * State:
+ * - name (string): The name of the sky object.
+ * - type (string): The type of the sky object.
+ * - mag (string): The magnitude of the sky object.
+ * - constellation (string): The constellation of the sky object.
+ * - RA (string): The right ascension of the sky object.
+ * - DEC (string): The declination of the sky object.
+ * - collection (string): The collection to which the sky object belongs.
+ * - ngc (string): The NGC number of the sky object.
+ * 
+ * Functions:
+ * - sub: (e: FormEvent<HTMLFormElement>) => void - Submits the form data to create a new sky object.
+ * 
+ * Usage:
+ * This component is used to allow users to create new sky objects by entering the
+ * required information into the form fields.
+ *
+ * @returns {JSX.Element}
+ * - Returns a form for users to create a new sky object.
+ */
 function CreateObj() {
     const [name, setName] = useState("");
     const [type, setType] = useState("");
@@ -13,6 +40,7 @@ function CreateObj() {
     const [collection, setCollection] = useState("");
     const [ngc, setNGC] = useState("");
 
+    // Function to submit the form data to create a new sky object
     const sub = async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       let obj : objectData = {

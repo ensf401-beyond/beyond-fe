@@ -6,12 +6,6 @@ import { addFavourite, deleteFavourite } from "../../utils/favController";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 
-interface cardData {
-  name: string;
-  ngc: number;
-  fav: boolean;
-}
-
 /**
  * Defines the structure of each sky object item.
  * @typedef {Object} GridItem
@@ -25,16 +19,23 @@ interface cardData {
  * State:
  * - data (Array of {name: string, image: string, fav: boolean}): Holds the list of sky object data, each with a name, image URL, and favorite status.
  * - overlayInfo ({isVisible: boolean, name: string, image: string, fav: boolean}): Manages the visibility of the overlay and information about the currently selected sky object.
+ * - favArray: Tracks user's favourites based on local storage data.
+ * - filteredData: Data filtered based on user search input.
+ * 
+ * Props:
+ * - isFavPage (boolean): Indicates whether the grid is displayed on the favorites page.
  *
  * Functions:
  * - toggleFav: (name: string) => void - Toggles the theme between true and false.
- * - overlayInfo if the changed item is currently displayed in the overlay.
  * - setOverlayInfo({ isVisible, name, image, fav }): Sets the information to be displayed in the overlay, including visibility, name, image, and favorite status of the sky object.
+ * - updateLocalStorage: () => void - Updates the local storage with the current list of favorite sky objects.
+ * - addImages: (data: any) => any - Adds random images to the sky object data.
+ * - getRandomImage: () => string - Returns a random image URL from the list of star images.
+ * - search: () => void - Filters the sky object data based on user search input.
+ * - routeToObject: (ngc: number) => void - Navigates to the object page for the selected sky object.
  *
  * @returns {void}
- *
- * Utilizes data from DummyData to create a grid of GridCard components,
- * each representing a different sky object with a name and an image.
+ * - Returns a dynamic, interactive grid of sky objects allowing users to explore and mark their favourites.
  */
 function Grid({ isFavPage = false }) {
   const [favArray, setfavArray] = useState(
@@ -42,6 +43,7 @@ function Grid({ isFavPage = false }) {
   );
   const { isGuest } = useAuth();
 
+  // Function to get a random image from the starImages.json file
   const getRandomImage = () => {
     const starImages = require("./starImages.json");
     const randomIndex = Math.floor(Math.random() * starImages.length);
@@ -49,15 +51,18 @@ function Grid({ isFavPage = false }) {
     return randomImage;
   };
 
+  // Function to add random images to the sky object data
   const addImages = (data: any) => {
     return data.map((item: any) => {
       let url = getRandomImage();
       return { ...item, image: url };
     });
   };
+
   const [data, setData] = useState(
     addImages(JSON.parse(localStorage.getItem("starData") || "[]"))
   );
+  
   const [overlayInfo, setOverlayInfo] = useState({
     isVisible: false,
     name: "",
@@ -81,7 +86,7 @@ function Grid({ isFavPage = false }) {
     search();
   }, []);
 
-  // 'name' is the item name
+  // 'name' is the object name
   const toggleFav = async (name: string, ngc: number) => {
     if (isGuest) {
       window.alert("You must have an account to favourite an object.");
@@ -91,6 +96,7 @@ function Grid({ isFavPage = false }) {
         throw new Error("No email in localStorage");
       }
 
+      // Update the fav status of the object in the overlay
       setOverlayInfo({
         ...overlayInfo,
         fav: !overlayInfo.fav,
@@ -108,6 +114,7 @@ function Grid({ isFavPage = false }) {
         console.log(status);
       }
 
+      // Update the fav status of the object in the grid
       setData((prevData: []) =>
         prevData.map(
           (item: {
@@ -124,6 +131,7 @@ function Grid({ isFavPage = false }) {
     }
   };
   
+  // Function to filter the data based on user search input
   const search = () => {
     const ngc = (document.getElementById('ngc') as HTMLInputElement).value || '';
     const constellation = (document.getElementById('constellation') as HTMLInputElement).value;
@@ -146,6 +154,7 @@ function Grid({ isFavPage = false }) {
     setFilteredData(filteredData);
   };
 
+  // Function to navigate to the object page for the selected sky object
   const routeToObject = (ngc: number) => {
     nav(`/object/${ngc}`);
   };
@@ -207,7 +216,7 @@ function Grid({ isFavPage = false }) {
         </div>
       )}
       <div id="grid-container">
-        {/* Mapping over DummyData to render a GridCard for each sky object. */}
+        {/* Mapping over star data to render a GridCard for each sky object. */}
         {filteredData.map((item: any, index: number) => (
           <GridCard
             key={index}

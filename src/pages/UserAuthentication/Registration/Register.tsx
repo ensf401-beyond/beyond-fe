@@ -6,11 +6,23 @@ import { userRegisterData } from "../../../utils/dataClasses";
 import { registerUser } from "../../../utils/userController";
 import GoogleButton from "./GoogleButton";
 
-interface RegisterProps {
-  onRegister: (userRegisterData: userRegisterData) => void;
-}
-
-function RegistrationForm({ onRegister }: RegisterProps) {
+/**
+ * RegistrationForm Component
+ *
+ * This component is in charge of controlling the UI for the registration form.
+ * 
+ * State:
+ * - username (string): The username entered by the user.
+ * - email (string): The email entered by the user.
+ * - password (string): The password entered by the user.
+ * - firstName (string): The first name entered by the user.
+ * - lastName (string): The last name entered by the user.
+ *
+ * The registration form allows users to create an account by entering their first name, last name, username, email, and password.
+ *
+ * @returns the view for the registration form
+ */
+function RegistrationForm() {
   const { handleLogin } = useAuth();
 
   const navigate = useNavigate();
@@ -20,6 +32,7 @@ function RegistrationForm({ onRegister }: RegisterProps) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
+  // Function to handle the form submission for registering
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const userData: userRegisterData = {
@@ -39,12 +52,11 @@ function RegistrationForm({ onRegister }: RegisterProps) {
       return;
     }
 
-    onRegister(userData);
     handleLogin();
-
     navigateToHome();
   };
 
+  // Function to navigate to the home page
   const navigateToHome = () => {
     navigate("/login");
   };

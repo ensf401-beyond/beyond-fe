@@ -11,7 +11,7 @@ function SkyObjects() {
   return (
     <>
       <div className="page-header">
-        <h1 className="page-title">SkyObjects</h1>
+        <h1 className="page-title">Sky Objects</h1>
         <div className="search-bar-container"></div>
       </div>
       <Grid isFavPage={false} />

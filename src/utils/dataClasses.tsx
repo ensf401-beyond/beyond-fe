@@ -1,3 +1,5 @@
+// Definition of the data classes used in the application
+
 interface userRegisterData {
     firstName: string;
     lastName: string;

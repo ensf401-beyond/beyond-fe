@@ -6,6 +6,21 @@ import { userLoginData } from "../../../utils/dataClasses";
 import { loginUser } from "../../../utils/userController";
 import "./Login.css";
 
+/**
+ * Login Component
+ *
+ * This component is in charge of controlling the UI for the login page.
+ *
+ * State:
+ * - email (string): The email entered by the user.
+ * - password (string): The password entered by the user.
+ * - errMessage (string): The error message to display if login fails.
+ *
+ * Functions:
+ * - handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void - Handles the form submission for logging in.
+ * 
+ * @returns the view for the login page
+ */
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,13 +30,14 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  // Clear error message when email or password changes
   useEffect(() => {
     setErrMessage("");
   }, [email, password]);
 
+  // Function to handle the form submission for logging in
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
 
     let userData : userLoginData = {
       email: email,

@@ -4,15 +4,30 @@ import { loginUser} from '../../../utils/userController';
 import { userLoginData } from '../../../utils/dataClasses';
 import { useNavigate } from "react-router-dom";
 
+// LoginButtonProps is an interface that defines the props for the LoginButton component
 interface LoginButtonProps {
   handleLogin: () => void;
   setErrMessage: (errMessage : string) => void;
 }
 
+/**
+ * LoginButton Component
+ *
+ * This component is in charge of controlling the UI for the login button.
+ *
+ * Props:
+ * - handleLogin: () => void - Function to handle the login process.
+ * - setErrMessage: (errMessage : string) => void - Function to set the error message.
+ *
+ * The login button allows users to log in using their Google account.
+ *
+ * @returns the view for the login button
+ */
 function LoginButton({ handleLogin, setErrMessage }: LoginButtonProps) {
 
   const navigate = useNavigate();
 
+  // Function to log in using Google
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       console.log('Successfully Logged In!', tokenResponse);
