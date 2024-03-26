@@ -7,6 +7,8 @@ import skyMap from "../../assets/images/sky-map.jpg";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import { useAuth } from "../../contexts/AuthContext";
+import { useEffect } from "react";
+import { getFavourites } from "../../utils/favController";
 
 /**
  * Home Component
@@ -23,6 +25,22 @@ import { useAuth } from "../../contexts/AuthContext";
  * @returns the view for the main page of the website
  */
 function Home() {
+
+  // Load favourites and save them to local storage
+  useEffect(() => {
+    async function loadFavs() {
+      if (!localStorage.hasOwnProperty('Favourites')) {
+        const email = localStorage.getItem("Email") || '{}';
+        if (email == '{}') {
+          throw new Error("No email in localStorage");
+        }
+        const fav_res = await getFavourites(email);
+        localStorage.setItem("Favourites", JSON.stringify(fav_res['favourites']));
+      }
+    }
+    loadFavs();
+  }, []);
+
   const navigate = useNavigate();
 
   const { isGuest } = useAuth();
