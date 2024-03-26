@@ -37,6 +37,7 @@ function CreateObj() {
   return (
     <>
       <div className="creating-form">
+      <h1 className="page-title">Create an Object</h1>
         <form onSubmit={(e) => {sub(e)}} className="obj-form">
           <label>
             Name:

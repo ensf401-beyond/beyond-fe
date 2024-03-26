@@ -49,7 +49,7 @@ function Home() {
               Explore the Cosmos
             </button>
           </div>
-          <img id="hero-image" src={astronaut2} alt="astronaut image" />
+          <img id="hero-image" src={astronaut2} alt="astronaut" />
         </section>
         <section id="info-section" className="section-container">
           <h1 id="info-section-header">
