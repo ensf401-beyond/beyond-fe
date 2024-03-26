@@ -176,6 +176,13 @@ function Layout() {
               >
                 Favourites
               </p>
+              <p
+                className="feature"
+                onClick={handleClick}
+                data-path="/create"
+              >
+                Create
+              </p>
             </div>
           </footer>
         </div>
