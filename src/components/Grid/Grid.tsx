@@ -67,7 +67,7 @@ function Grid({ isFavPage = false}) {
   // 'name' is the item name
   const toggleFav = async (name: string, ngc: number) => {
     const email = localStorage.getItem("Email") || '{}';
-    if (email === '{}') {
+    if (email == '{}') {
       throw new Error("No email in localStorage");
     }
     setOverlayInfo({ ...overlayInfo, fav: !overlayInfo.fav });
@@ -100,7 +100,7 @@ function Grid({ isFavPage = false}) {
 
       if (isFavPage && !favArray.includes(item.ngc)) return false;
 
-      return (ngc === '' || item.ngc === ngc) &&  
+      return (ngc === '' || item.ngc == ngc) &&  
              (constellation === '' || item.constellation.toLowerCase().includes(constellation.toLowerCase())) &&
              (isNaN(minMag) || item.magnitude >= minMag) &&
              (isNaN(maxMag) || item.magnitude <= maxMag);

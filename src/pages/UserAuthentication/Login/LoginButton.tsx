@@ -37,7 +37,7 @@ function LoginButton({ handleLogin, setErrMessage }: LoginButtonProps) {
         const apiRes = await loginUser(userData, accessToken);
         // Prevent login if there's an erro
         if (apiRes["error"]) {
-          if (apiRes["error"] === "not a user") {
+          if (apiRes["error"] == "not a user") {
             setErrMessage("Login invalid; Please register first!");
           } else {
             setErrMessage(apiRes["error"]);
