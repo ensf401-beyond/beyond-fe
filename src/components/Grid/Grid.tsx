@@ -122,18 +122,6 @@ function Grid({ isFavPage = false }) {
       });
     }
   };
-
-  const search = () => {
-    const ngc =
-      (document.getElementById("ngc") as HTMLInputElement).value || "";
-    const constellation = (
-      document.getElementById("constellation") as HTMLInputElement
-    ).value;
-    const minMag = parseFloat(
-      (document.getElementById("minmagnitude") as HTMLInputElement).value
-    );
-  }
-
   
   const search = () => {
     const ngc = (document.getElementById('ngc') as HTMLInputElement).value || '';
