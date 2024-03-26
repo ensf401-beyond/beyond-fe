@@ -20,6 +20,7 @@
 .sky-object-image {
   min-height: 80%;
   max-height: 80%;
+  width: 100%;
   translate: 0 -12px;
   border-radius: 16px 16px 0 0;
 }

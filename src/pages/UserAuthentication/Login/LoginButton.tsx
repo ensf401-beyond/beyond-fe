@@ -6,9 +6,10 @@ import { useNavigate } from "react-router-dom";
 
 interface LoginButtonProps {
   handleLogin: () => void;
+  setErrMessage: (errMessage : string) => void;
 }
 
-function LoginButton({ handleLogin }: LoginButtonProps) {
+function LoginButton({ handleLogin, setErrMessage }: LoginButtonProps) {
 
   const navigate = useNavigate();
 
@@ -26,12 +27,6 @@ function LoginButton({ handleLogin }: LoginButtonProps) {
         });
 
         const userProfile = res.data;
-        localStorage.setItem("userData", JSON.stringify({
-          email: userProfile.email,
-          isGoogle: true,
-          googleAccessToken: accessToken,
-        }));
-        window.localStorage.setItem("Email", userProfile.email);
 
         let userData : userLoginData = {
           email: userProfile.email,
@@ -40,7 +35,23 @@ function LoginButton({ handleLogin }: LoginButtonProps) {
         }
 
         const apiRes = await loginUser(userData, accessToken);
-        console.log(apiRes);
+        // Prevent login if there's an erro
+        if (apiRes["error"]) {
+          if (apiRes["error"] == "not a user") {
+            setErrMessage("Login invalid; Please register first!");
+          } else {
+            setErrMessage(apiRes["error"]);
+          }
+          return;
+        }
+
+        localStorage.setItem("userData", JSON.stringify({
+          email: userProfile.email,
+          isGoogle: true,
+          googleAccessToken: accessToken,
+        }));
+        window.localStorage.setItem("Email", userProfile.email);
+
         localStorage.setItem("Name", apiRes["username"] ? apiRes["username"] : userProfile.name);
         localStorage.setItem("PFP", apiRes["profilePic"] ? apiRes["profilePic"] : userProfile.picture);
 

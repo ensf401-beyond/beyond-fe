@@ -51,12 +51,6 @@ const Login = () => {
   return (
     <div className="mainbg">
       <section className="login-form-content">
-        <p
-          className={errMessage ? "errmsg" : "offscreen"}
-          aria-live="assertive"
-        >
-          {errMessage}
-        </p>
         <form className="login-form" onSubmit={handleSubmit}>
           <h1 className="login-header">Login</h1>
           <label className="login-form-label" htmlFor="username">
@@ -92,8 +86,14 @@ const Login = () => {
             >
               Log In
             </button>
-            <LoginButton handleLogin={handleLogin} />
+            <LoginButton handleLogin={handleLogin} setErrMessage={setErrMessage} />
           </div>
+          <p
+          className={errMessage ? "errmsg" : "offscreen"}
+          aria-live="assertive"
+        >
+          {errMessage}
+        </p>
           <div className="register-links">
             <p>Don't have an account?</p>
             <Link className="register-route" to="/register">

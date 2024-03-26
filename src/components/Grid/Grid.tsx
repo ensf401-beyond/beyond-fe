@@ -1,5 +1,4 @@
 // Import statements to include necessary data and components.
-import { DummyData } from "../../data/DummyData"; // Importing the dataset that contains information about sky objects.
 import GridCard from "../ui/GridCard/GridCard"; // Importing the GridCard component used to display each sky object.
 import "./Grid.css";
 import { useEffect, useState } from "react";
@@ -133,9 +132,14 @@ function Grid({ isFavPage = false }) {
     const minMag = parseFloat(
       (document.getElementById("minmagnitude") as HTMLInputElement).value
     );
-    const maxMag = parseFloat(
-      (document.getElementById("maxmagnitude") as HTMLInputElement).value
-    );
+  }
+
+  
+  const search = () => {
+    const ngc = (document.getElementById('ngc') as HTMLInputElement).value || '';
+    const constellation = (document.getElementById('constellation') as HTMLInputElement).value;
+    const minMag = parseFloat((document.getElementById('minmagnitude') as HTMLInputElement).value);
+    const maxMag = parseFloat((document.getElementById('maxmagnitude') as HTMLInputElement).value);
     const filteredData = data.filter((item: any) => {
       if (isFavPage && !favArray.includes(item.ngc)) return false;
 
@@ -182,13 +186,8 @@ function Grid({ isFavPage = false }) {
         </div>
       </div>
       {overlayInfo.isVisible && (
-        <div
-          className="overlay"
-          onClick={() => setOverlayInfo({ ...overlayInfo, isVisible: false })}
-        >
-          <div className="overlay-content" onClick={(e) => e.stopPropagation()}>
-            {" "}
-            {/* Stop overlay from closing when clicking inside */}
+        <div className="overlay" onClick={() => setOverlayInfo({ ...overlayInfo, isVisible: false, fav: favArray.includes(overlayInfo.ngc) })}>
+          <div className="overlay-content" onClick={(e) => e.stopPropagation()}>  {/* Stop overlay from closing when clicking inside */}
             <div className="grid-card-text">
               <h3
                 className="object-route"
@@ -201,10 +200,9 @@ function Grid({ isFavPage = false }) {
                 className="fav-button"
                 onClick={(e) => {
                   e.stopPropagation(); // Prevent overlay from closing
-                  toggleFav(overlayInfo.name, overlayInfo.ngc);
-                }}
-              >
-                {overlayInfo.fav ? "\u2606" : "\u2605"}
+                  toggleFav(overlayInfo.name, overlayInfo.ngc); 
+              }}>
+                {overlayInfo.fav ? '\u2605' : '\u2606'} 
               </span>
             </div>
             <button
@@ -230,7 +228,7 @@ function Grid({ isFavPage = false }) {
             image={item.image}
             fav={favArray.includes(item.ngc) ? true : false}
             onToggleFav={() => toggleFav(item.name, item.ngc)}
-            onCardClick={() => setOverlayInfo({ ...item, isVisible: true })}
+            onCardClick={() => setOverlayInfo({ ...item, isVisible: true, fav: favArray.includes(item.ngc) ? true : false })}
           />
         ))}
       </div>
