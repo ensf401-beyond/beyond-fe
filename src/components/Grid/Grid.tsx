@@ -56,9 +56,6 @@ function Grid({ isFavPage = false}) {
   const [data, setData] = useState(addImages(JSON.parse(localStorage.getItem('starData') || '[]')));
   const [overlayInfo, setOverlayInfo] = useState({ isVisible: false, name: "", image: "", ngc: 0, fav: false });
 
-  
-
-
   const [filteredData, setFilteredData] = useState(data);
   const nav = useNavigate();
 
@@ -80,6 +77,7 @@ function Grid({ isFavPage = false}) {
     if (email == '{}') {
       throw new Error("No email in localStorage");
     }
+    setOverlayInfo({ ...overlayInfo, fav: !overlayInfo.fav });
 
     if (!(favArray.includes(ngc))) {   // Add ngc to the favourite array
       setfavArray( [ ...favArray, ngc  ] );
@@ -97,11 +95,9 @@ function Grid({ isFavPage = false}) {
         fav: favArray.includes(item.ngc) ? true : false
       }))
     );
-    setOverlayInfo({ ...overlayInfo, fav: favArray.includes(ngc) ? true : false });
   }
 
   
-
   const search = () => {
     const ngc = (document.getElementById('ngc') as HTMLInputElement).value || '';
     const constellation = (document.getElementById('constellation') as HTMLInputElement).value;
@@ -145,7 +141,7 @@ function Grid({ isFavPage = false}) {
         </div>
       </div>
       {overlayInfo.isVisible && (
-        <div className="overlay" onClick={() => setOverlayInfo({ ...overlayInfo, isVisible: false })}>
+        <div className="overlay" onClick={() => setOverlayInfo({ ...overlayInfo, isVisible: false, fav: favArray.includes(overlayInfo.ngc) })}>
           <div className="overlay-content" onClick={(e) => e.stopPropagation()}>  {/* Stop overlay from closing when clicking inside */}
             <div className="grid-card-text">
               <h3 className="object-route" onClick={() => routeToObject(overlayInfo.ngc)}>Go to Object Page</h3>
@@ -154,7 +150,7 @@ function Grid({ isFavPage = false}) {
                   e.stopPropagation(); // Prevent overlay from closing
                   toggleFav(overlayInfo.name, overlayInfo.ngc); 
               }}>
-                {overlayInfo.fav ? '\u2606' : '\u2605'} 
+                {overlayInfo.fav ? '\u2605' : '\u2606'} 
               </span>
             </div>
             <button className="overlay-button" onClick={(e) => { 
@@ -175,7 +171,7 @@ function Grid({ isFavPage = false}) {
             image={item.image}
             fav={ favArray.includes(item.ngc) ? true : false }
             onToggleFav={() => toggleFav(item.name, item.ngc)}
-            onCardClick={() => setOverlayInfo({ ...item, isVisible: true })}
+            onCardClick={() => setOverlayInfo({ ...item, isVisible: true, fav: favArray.includes(item.ngc) ? true : false })}
           />
         ))}
       </div>
