@@ -2,7 +2,7 @@
 	<img
 		width="300"
 		alt="BEYOND logo with planet as the O"
-		src="src/assets/images/BEYOND%20Light%20Mode.png"
+		src="src/assets/images/BEYOND%20Dark%20Mode.png"
   >
 </h1>
 
