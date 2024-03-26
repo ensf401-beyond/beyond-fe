@@ -1,17 +1,10 @@
 // Import statements to include necessary data and components.
-import { DummyData } from "../../data/DummyData"; // Importing the dataset that contains information about sky objects.
 import GridCard from "../ui/GridCard/GridCard"; // Importing the GridCard component used to display each sky object.
 import "./Grid.css";
 import { useEffect, useState } from "react";
 import { addFavourite, deleteFavourite } from "../../utils/favController";
 import { useNavigate } from "react-router-dom";
 
-
-interface cardData {
-  name: string;
-  ngc: number;
-  fav: boolean;
-}
 
 /**
  * Defines the structure of each sky object item.
@@ -74,7 +67,7 @@ function Grid({ isFavPage = false}) {
   // 'name' is the item name
   const toggleFav = async (name: string, ngc: number) => {
     const email = localStorage.getItem("Email") || '{}';
-    if (email == '{}') {
+    if (email === '{}') {
       throw new Error("No email in localStorage");
     }
     setOverlayInfo({ ...overlayInfo, fav: !overlayInfo.fav });
@@ -107,7 +100,7 @@ function Grid({ isFavPage = false}) {
 
       if (isFavPage && !favArray.includes(item.ngc)) return false;
 
-      return (ngc === '' || item.ngc == ngc) &&  
+      return (ngc === '' || item.ngc === ngc) &&  
              (constellation === '' || item.constellation.toLowerCase().includes(constellation.toLowerCase())) &&
              (isNaN(minMag) || item.magnitude >= minMag) &&
              (isNaN(maxMag) || item.magnitude <= maxMag);

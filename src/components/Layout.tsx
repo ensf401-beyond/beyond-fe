@@ -1,8 +1,5 @@
 import "../assets/App.css";
-import lightLogo from "../assets/images/BEYOND Light Mode.png";
 import darkLogo from "../assets/images/BEYOND Dark Mode.png";
-import LightModeIcon from "@mui/icons-material/LightMode"; // Material UI icon for light mode
-import DarkModeIcon from "@mui/icons-material/DarkMode"; // Material UI icon for dark mode
 import React, { useState, createContext, useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import Navbar from "./Navbar/Navbar";
@@ -35,7 +32,6 @@ type ThemeContextType = {
  * - toggleTheme: () => void - Toggles the theme between 'light' and 'dark' modes.
  */
 function Layout() {
-  const [theme, setTheme] = useState("dark");
   const [starData, setStarData] = useState(
     localStorage.getItem("starData") || ""
   );
@@ -45,11 +41,6 @@ function Layout() {
   );
 
   const { isGuest, handleGuestUser } = useAuth();
-
-  // Toggles the current theme between 'light' and 'dark' modes and updates the application state accordingly.
-  const toggleTheme = () => {
-    setTheme((curr) => (curr === "light" ? "dark" : "light"));
-  };
 
   const loadData = async () => {
     if (starData === "") {
