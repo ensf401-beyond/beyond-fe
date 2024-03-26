@@ -115,3 +115,7 @@
   background-color: #a1a1a1;
   box-shadow: 0 2px 3px 0, 0 1px 5px 0;
 }
+
+.fav-button {
+  cursor: pointer;
+}

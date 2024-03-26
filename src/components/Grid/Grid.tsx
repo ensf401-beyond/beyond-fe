@@ -91,6 +91,11 @@ function Grid({ isFavPage = false }) {
         throw new Error("No email in localStorage");
       }
 
+      setOverlayInfo({
+        ...overlayInfo,
+        fav: !overlayInfo.fav,
+      });
+
       if (!favArray.includes(ngc)) {
         // Add ngc to the favourite array
         setfavArray([...favArray, ngc]);
@@ -116,10 +121,6 @@ function Grid({ isFavPage = false }) {
           })
         )
       );
-      setOverlayInfo({
-        ...overlayInfo,
-        fav: favArray.includes(ngc) ? true : false,
-      });
     }
   };
   
