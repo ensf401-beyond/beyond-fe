@@ -54,6 +54,7 @@ function Profile() {
   const { handleLogout } = useAuth();
   const navigate = useNavigate();
 
+  // Function to fetch and set the user's profile information from local storage
   const getInfo = () => {
     setEmail(localStorage.getItem("Email") || "");
     const storedName = localStorage.getItem("Name") || "";
@@ -68,6 +69,7 @@ function Profile() {
     getInfo();
   }, []);
 
+  // Function to handle the form submission for editing the user's profile
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const userData = {
@@ -93,12 +95,14 @@ function Profile() {
     }
   };
 
+  // Function to handle the cancellation of profile editing
   const handleCancel = () => {
     setEditMode(false);
     setName(confirmedName);
     setPfp(confirmedPfp);
   }
 
+  // Function to handle the deletion of the user's profile
   const handleDeleteProfile = async () => {
     const isConfirmed = window.confirm('Are you sure you want to delete your profile? This cannot be undone.');
     if (isConfirmed) {

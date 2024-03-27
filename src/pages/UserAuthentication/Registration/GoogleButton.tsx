@@ -4,14 +4,28 @@ import { useNavigate } from "react-router-dom";
 import { userRegisterData } from '../../../utils/dataClasses';
 import { registerUser } from '../../../utils/userController';
 
+// LoginButtonProps is an interface that defines the props for the LoginButton component
 interface LoginButtonProps {
   handleRegister: () => void;
 }
 
+/**
+ * GoogleButton Component
+ *
+ * This component is in charge of controlling the UI for the Google registration button.
+ *
+ * Props:
+ * - handleRegister: () => void - Function to handle the registration process.
+ *
+ * The Google registration button allows users to register using their Google account.
+ *
+ * @returns the view for the Google registration button
+ */
 function GoogleButton({ handleRegister }: LoginButtonProps) {
 
   const navigate = useNavigate();
 
+  // Function to register using Google
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       console.log('Successfully Logged In!', tokenResponse);
@@ -35,7 +49,6 @@ function GoogleButton({ handleRegister }: LoginButtonProps) {
           isGoogle: true
         }
 
-
         let apiRes = await registerUser(userData);
 
         if (apiRes["error"]) {
@@ -46,8 +59,6 @@ function GoogleButton({ handleRegister }: LoginButtonProps) {
         window.localStorage.setItem("Email", userProfile.email);
         window.localStorage.setItem("Name", userProfile.name);
         window.localStorage.setItem("PFP", userProfile.picture);
-
-
 
         handleRegister();
         navigate('/login');

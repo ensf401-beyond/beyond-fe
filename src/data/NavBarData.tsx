@@ -1,4 +1,4 @@
-// array used to organize navigation data used by the navbar.
+// Array used to organize navigation data used by the navbar.
 // Data is exported to the navbar and each object is displayed as a button.
 export const NavbarData = [
   {

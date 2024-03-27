@@ -1,6 +1,6 @@
 import "../assets/App.css";
 import darkLogo from "../assets/images/BEYOND Dark Mode.png";
-import React, { useState, createContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import Navbar from "./Navbar/Navbar";
 import { useAuth } from "../contexts/AuthContext";
@@ -8,40 +8,41 @@ import StartPage from "../pages/StartPage/StartPage";
 import pfp_placeholder from "../assets/images/pfp_placeholder.png";
 import { getMappedData } from "../utils/starMapController";
 
-export const ThemeContext = createContext<ThemeContextType | null>(null);
-
-// Defines the structure of the context object for theme management, including the current theme and a method to toggle the theme.
-type ThemeContextType = {
-  theme: string; // The current theme ('light' or 'dark').
-  toggleTheme: () => void; // Function to toggle the application's theme.
-};
-
 /**
  * Layout Component
  *
  * This component acts as the main layout wrapper for the application, providing a consistent structure
- * that includes a header with theme toggling, navigation bar, and a content area for child components.
+ * that includes a header with a navigation bar and a content area for child components.
  *
  * Props:
  * - children: ReactNode - The content to be displayed within the main content area of the layout.
  *
  * State:
- * - theme: string - Tracks the current theme ('light' or 'dark') and adjusts the application's appearance accordingly.
+ * - starData (string): The JSON string representation of the star data retrieved from the API.
+ * - isLoggedIn (string): The current login status of the user.
+ * - name (string): The name of the user currently logged in.
+ * - pfp (string): The profile picture URL of the user currently logged in.
  *
  * Functions:
- * - toggleTheme: () => void - Toggles the theme between 'light' and 'dark' modes.
+ * - loadData: () => void - Loads the star data from the API and stores it in local storage.
+ * - handleClick: (event: React.MouseEvent<HTMLParagraphElement>) => void - Handles click events on footer features.
+ * - getInfo: () => void - Retrieves the user information from local storage.
+ * 
  */
 function Layout() {
   const [starData, setStarData] = useState(
     localStorage.getItem("starData") || ""
   );
   const nav = useNavigate();
+
+  // Check if the user is logged in
   const [isLoggedIn, setIsLoggedIn] = useState(
     sessionStorage.getItem("isLoggedIn")
   );
 
   const { isGuest, handleGuestUser } = useAuth();
 
+  // Load star data into local storage
   const loadData = async () => {
     if (starData === "") {
       console.log("getting data");
@@ -53,6 +54,7 @@ function Layout() {
     }
   };
 
+  // Load user information from local storage
   useEffect(() => {
     const handleStorageChange = () => {
       setIsLoggedIn(sessionStorage.getItem("isLoggedIn"));
@@ -71,6 +73,7 @@ function Layout() {
     };
   }, []);
 
+  // Handle click events on footer features
   const handleClick = (event: React.MouseEvent<HTMLParagraphElement>) => {
     const path = event.currentTarget.getAttribute("data-path");
     if (path) {
@@ -81,6 +84,7 @@ function Layout() {
   const [name, setName] = useState<string>("");
   const [pfp, setPfp] = useState<string>("");
 
+  // Get user information from local storage
   const getInfo = () => {
     setName(localStorage.getItem("Name") || "");
     setPfp(localStorage.getItem("PFP") || "");

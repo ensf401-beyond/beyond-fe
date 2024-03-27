@@ -30,6 +30,7 @@ export const AuthProvider: FunctionComponent<AuthProviderProps> = ({
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [isGuest, setIsGuest] = useState<boolean>(false);
 
+  // Define the functions to handle login, logout, and guest user
   const handleLogin = () => {
     if (isGuest) {
       setIsGuest(false);

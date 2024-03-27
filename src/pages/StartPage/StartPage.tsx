@@ -1,10 +1,24 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./StartPage.css";
 
+// StartPageProps is an interface that defines the props for the StartPage component
 interface StartPageProps {
   handleGuestUser: () => void;
 }
 
+/**
+ * StartPage Component
+ *
+ * This component is in charge of controlling the UI for the start page.
+ * 
+ * Props:
+ * - handleGuestUser: () => void - Function to handle the guest user login.
+ *
+ * The start page consists of the main page of the website where users can
+ * choose to login, register, or continue as a guest.
+ *
+ * @returns the view for the start page
+ */
 function StartPage({ handleGuestUser }: StartPageProps) {
   const nav = useNavigate();
 

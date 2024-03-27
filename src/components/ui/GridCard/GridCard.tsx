@@ -1,5 +1,4 @@
 import "./GridCard.css";
-import { useState } from "react";
 
 /**
  * Type definition for the properties accepted by the GridCard component.
@@ -29,9 +28,10 @@ type GridItem = {
  * - name: The name of the sky object.
  * - image: URL to the image of the sky object.
  * - fav (boolean): The current favorite status of the sky object.
+ * - mag: The magnitude of the sky object.
+ * - constellation: The constellation of the sky object.
  * - onToggleFav (() => void): Function to toggle the favorite status of the sky object.
- * - onCardClick (() => void): Function to handle the click event on the grid card, 
- *   typically used to display the overlay with more information.
+ * - onCardClick (() => void): Function to handle the click event on the grid card.
  * 
  * Usage:
  * This component is designed to be used within a grid layout where multiple instances

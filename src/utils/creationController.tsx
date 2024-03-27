@@ -1,5 +1,6 @@
 import { objectData } from "./dataClasses";
 
+// Function to add a new object to the database
 function addObject(newObject: objectData) {
     console.log(newObject);
     let obj = {
