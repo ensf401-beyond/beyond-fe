@@ -29,3 +29,8 @@ Users are also able to create new sky objects that are not already in the system
 2. Run `cd src`
 3. Run `npm install`
 4. Finally, run `npm start` to view the site at http://localhost:3000
+
+## How to run tests
+
+- You must have the Selenium IDE extension installed on your browser.
+- Open the `/tests/BEYOND.side` file in Selenium IDE as a new project, then you can run the tests.
